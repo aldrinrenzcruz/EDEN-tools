@@ -1,0 +1,57 @@
+.nbtn {
+	border: 1px solid;
+	border-color: #555;
+	border-radius: 3px;
+	padding: 3px 7px;
+	font-size: 16px;
+	text-align: center;
+	cursor: pointer;
+	color: #333333;
+	background-color: #e0f2f1;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.nbtn:hover {
+	background-color: #fafafa;
+	border-color: #555;
+}
+
+.nbtn:active {
+	background-color: #e0f7fa;
+	transform: translateY(1px);
+	outline: none !important;
+	box-shadow: 1px #666666;
+	border-color: #555;
+}
+
+.card {
+	background: #fafafa;
+}
+
+.download-btn {
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.4rem;
+	text-align: center;
+	padding: 7px;
+	color: #222;
+	text-decoration: none;
+    width: 90%;
+}
+
+.download-btn:hover{
+    background-color: #81c784 !important;
+    color: #111 !important;
+    outline: 1px solid #111;
+    box-shadow: none !important;
+	text-decoration: none !important;
+}
+
+.download-btn:active {
+    background-color: #81c784 !important;
+    color: #111 !important;
+	-ms-transform: scale(0.97);
+	-webkit-transform: scale(0.97);
+	transform: scale(0.97);
+}

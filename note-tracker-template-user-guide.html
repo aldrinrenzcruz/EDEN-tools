@@ -1,0 +1,1386 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Note Tracker Template 2.0 User Guide</title>
+  <link rel="stylesheet" href="_global-externals/stylesheets/bootstrap5.min.css">
+  <link rel="stylesheet" href="_global-externals/icons/bootstrap/bootstrap-icons.css" />
+  <link rel="stylesheet" href="_global-externals/stylesheets/user-guides/_standard-documentation.css">
+  <link rel="stylesheet" href="_externals/stylesheets/user-guides/note-tracker-template-user-guide.css">
+  <script src="_global-externals/scripts/personalization.js"></script>
+  <script src="_global-externals/scripts/jquery-3.5.1.min.js"></script>
+  <script src="_global-externals/scripts/bs5-lightbox.min.js"></script>
+  <link rel="shortcut icon" type="image/png" href="_global-externals/favicons/builder-2.png" />
+</head>
+
+<body>
+  <a class="cd-top js-cd-top cd-top--is-visible cd-top--fade-out navbar-bg" href="#" id="toTopBtn" alt="Back to top button" data-abc="true"><i class="bi bi-chevron-up" style="font-size: 1.3rem; color: #fafafa;"></i></a>
+  <div class="container my-3">
+    <div class="col-lg-8 mx-auto">
+      <nav class="navbar navbar-expand-sm navbar-dark navbar-bg">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item dropdown ms-2">
+              <a class="nav-link historybutton" onclick="goBack()"><i class="bi bi-arrow-left" style="font-size: 1.200rem; color: #fafafa;"></i></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link historybutton" onclick="goNext()"><i class="bi bi-arrow-right" style="font-size: 1.200rem; color: #fafafa;"></i></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link historybutton" href="index.html"><i class="bi bi-house" style="font-size: 1.200rem; color: #fafafa;"></i></a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-end me-2">
+            <div class="collapse show" id="digitalClock">
+              <li><small><a class="nav-link clock nobluelink2 disabled" tabindex="-1" id="digital-clock"></a></small></li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="card main-card border-0">
+        <section class="mx-3 mt-3">
+          <h1 class="mb-3">Note Tracker Template 2.0 User Guide</h1>
+          <a href="_externals/imgs/note-tracker-template/note-tracker-template-1.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/note-tracker-template-1.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+        </section>
+        <section class="heading-bg navbar-bg mt-5">
+          <h3 class="heading-bg-text fw-bold mx-2"><i class="bi bi-box"></i> Getting Started</h3>
+        </section>
+        <section class="mx-3 mt-3">
+          <h3 class="fw-bold">Introduction</h3>
+          <p>The <em>Note Tracker Template 2.0</em> added new features such as the data connection from the <em>TOSA</em> to <em>Note Tracker</em> and the <em>auto-generated introductory language</em> and notes placement <em>XML</em> tags.</p>
+          <h6>It aims to reduce the following:</h6>
+          <ul style="list-style-type:none; padding-left:0">
+            <li><i class="bi bi-x-circle" style="color:#e57373;"></i> Manual transfer of data from the <em>TOSA</em> to <em>Note Tracker</em></li>
+            <li><i class="bi bi-x-circle" style="color:#e57373;"></i> Manual writing of introductory language</li>
+            <li><i class="bi bi-x-circle" style="color:#e57373;"></i> Manual transfer of written notes from <em>Note Tracker</em> to <em>Note Creator</em> / <em>EDEN Editor</em></li>
+          </ul>
+          <h6>In order to achieve the following:</h6>
+          <ul style="list-style-type:none; padding-left:0">
+            <li><i class="bi bi-check-circle" style="color:#81c784;"></i> More accurate data and output</li>
+            <li><i class="bi bi-check-circle" style="color:#81c784;"></i> Faster processing time</li>
+            <li><i class="bi bi-check-circle" style="color:#81c784;"></i> Less manual tasks for POCs and editors</li>
+          </ul>
+          <h6>You will need to set up the following:</h6>
+          <ol>
+            <li><a href="#anchor-data-connection" title="Data Connection & Extractor" type="button">Extractor - Data Connection and Power Query</a></li>
+            <li><a class="mt-2" href="#anchor-intro-language" title="Introductory Language Formulas" type="button">Introductory Language Formulas</a></li>
+            <li><a class="mt-2" href="#anchor-notes-placement" title="Notes Placement Formulas" type="button">Notes Placement Formulas</a></li>
+          </ol>
+        </section>
+
+        <section class="mx-3">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Get started</h3>
+              <p>Download the template from <a href="index.html">the Menu</a>, under <em>CI Projects</em>, select <em>Note Tracker Template 2.0</em> then click the download button.</p>
+              <p>Or you can download it from here:</p>
+              <a class="btn btn-lg btn-outline-dark download-btn" href="#" role="button">Download Template</a>
+              <p class="mt-4">Or copy this link to your browser's address bar:</p>
+              <a title="Copy to clipboard" class="text-muted float-end" onclick="ready41()"><small>Copy</small></a>
+              <input type="text" class="form-control form-control-sm mb-4" value="#" id="Copy41" readonly />
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/note-tracker-template-2.gif" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/note-tracker-template-2.gif" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="heading-bg navbar-bg mt-4">
+          <h3 class="heading-bg-text fw-bold mx-2"><i class="bi bi-files"></i> Components</h3>
+        </section>
+        <section class="mx-3 mt-3">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Sheets</h3>
+              <p>The default sheets available in this template are the following:</p>
+              <ul>
+                <li><em>XML</em> - contains the <em>XML</em> tags for notes placement; hidden by default</li>
+                <li>Summary - contains a summary of note writing-related tasks</li>
+                <li><em>Note Tracker</em> - the main repository for written notes</li>
+              </ul>
+            </div>
+            <div class="col-5">
+              <div class="alert alert-danger" role="alert">
+                Deleting or renaming the default sheets might cause an error in the formulas.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Columns</h3>
+              <p>If one of the default columns is not needed for your respective jurisdiction, you can:</p>
+              <ul>
+                <li>Hide the column</li>
+                <li>Rename and reuse the column</li>
+              </ul>
+              <p><strong>Heads up!</strong> Do not transfer an existing column to an unused column. (<em>e.g.</em> Transferring the <em>Effective Date</em> column to <em>column H - Extra</em>.) That might cause problems with the formulas.</p>
+              <p>The <em>column H - Extra</em> column is an extra column that can be reused.</p>
+              <p>Before adding a new column, see if there's an unused column you can reuse. If none is available, start in <em>column Q</em>.</p>
+
+            </div>
+            <div class="col-5">
+              <div class="alert alert-danger" role="alert">
+                Deleting or reordering the default columns might cause an error in the formulas.
+              </div>
+              <ul class="list-group list-group-flush section-overflow">
+                <li class="list-group-item"><strong>A.</strong> Session</li>
+                <li class="list-group-item"><strong>B.</strong> HB/SB</li>
+                <li class="list-group-item"><strong>C.</strong> Act Chap</li>
+                <li class="list-group-item"><strong>D.</strong> Act Sec</li>
+                <li class="list-group-item"><strong>E.</strong> Effect</li>
+                <li class="list-group-item"><strong>F.</strong> Effective Date</li>
+                <li class="list-group-item"><strong>G.</strong> Normcite</li>
+                <li class="list-group-item"><strong>H.</strong> Extra</li>
+                <li class="list-group-item"><strong>I.</strong> Intro Language</li>
+                <li class="list-group-item"><strong>J.</strong> Note Text</li>
+                <li class="list-group-item"><strong>K.</strong> Note Writer</li>
+                <li class="list-group-item"><strong>L.</strong> Date</li>
+                <li class="list-group-item"><strong>M</strong>. Validated</li>
+                <li class="list-group-item"><strong>N.</strong> Note Placed</li>
+                <li class="list-group-item"><strong>O.</strong> Date Placed</li>
+                <li class="list-group-item"><strong>P.</strong> XML-Notes</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Formulas</h3>
+              <div class="section-overflow">
+                <p>The formulas you need to add are the following:</p>
+                <ul>
+                  <li><a href="#anchor-intro-language"><em>Introductory language</em></a> for <em>cell I2</em></li>
+                  <li><a href="#anchor-notes-placement">Notes Placement <em>XML</em> tags</a> for <em>cell P2</em></li>
+                </ul>
+                <p>To easily apply the formula to an entire column, you can do any of the following:</p>
+                <ul>
+                  <li>drag the <em>fill handle</em> to as many rows as possible</li>
+                  <li>double click the <em>fill handle</em> (this won't work if adjacent cells are blank)</li>
+                  <li>press the following shortcut keys:</li>
+                  <ul>
+                    <li>Click on <em>cell I2</em> or <em>P2</em></li>
+                    <li><kbd>Ctrl</kbd> + <kbd>C</kbd></li>
+                    <li><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd><i class="bi bi-caret-down-fill"></i></kbd></li>
+                    <li><kbd>Ctrl</kbd> + <kbd>V</kbd></li>
+                  </ul>
+                </ul>
+                <p>Check the formula bar to verify if the formula is applied correctly.</p>
+                <p>For example, this is the content of <em>cell I2</em>:</p>
+                <input type="text" class="form-control form-control-sm mb-4" value='=$A$2&" Amendment (ch "&C2&"):"'' readonly/>
+                                <p>If you click on <em>cell I3</em>, it should be</p>
+                                <input type="text" class="form-control form-control-sm mb-4" value='=$A$2&" Amendment (ch "&C3&" ):"'' readonly />
+                <p>Notice that <em>$A$2</em> didn't change. That's because it's an absolute value and a reference to the <em>session year</em> in <em>cell A2</em>.</p>
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="alert alert-secondary" role="alert">
+                The formula for the <em>introductory language</em> goes to <em>cell I2</em> and the formula for <em>XML</em> tags goes to <em>cell P2</em>.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Session Year</h3>
+              <p>The <em>session year</em> in <em>A2</em> determines the year that would be generated in the <em>auto-generated intro language</em>.</p>
+              <p>Be sure to replace the default <em>2022</em> for succeeding years.</p>
+            </div>
+            <div class="col-5">
+              <div class="alert alert-secondary" role="alert">
+                There's no need to fill the entire column with the session year. Only <em>A2</em> will be referenced by the formulas. This helps reduce the volume of data in the tracker.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="heading-bg navbar-bg mt-4">
+          <h3 class="heading-bg-text fw-bold mx-2" id="anchor-data-connection"><i class="bi bi-file-earmark-excel"></i> Extractor - Data Connection and Power Query</h3>
+        </section>
+        <section class="mx-3 mt-3">
+          <p>Before getting started, make sure that the source document <em>(TOSA)</em> is uploaded to the <em>Sharepoint</em> folder. We won’t be able to establish the data connection if the source document is not in the <em>Sharepoint</em> folder.</p>
+          <p>From the <em>JX Note Tracker template</em>, see below steps:</p>
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 1.</h3>
+              <p>Click <em>Get Data</em>-><em>From File</em>-><em>From <em>Sharepoint</em> Folder</em>.</p>
+              <div class="alert alert-secondary" role="alert">
+                If a <em>pop-up window</em> appears regarding the use of access for <em>Sharepoint</em> content, please select <em>Microsoft account</em> and log in with your <em>legal ID</em> and <em>password</em>.
+              </div>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot1.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot1.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 2.</h3>
+              <p>*Copy and paste the Site URL below then click OK.</p>
+              <a title="Copy to clipboard" class="text-muted float-end" onclick="ready37()"><small>Copy</small></a>
+              <input type="text" class="form-control form-control-sm mb-4" value="#" id="Copy37" readonly />
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot2.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot2.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 3.</h3>
+              <p>Click <em>Transform Data</em>.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot3.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot3.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 4.</h3>
+
+              <p><em>Power Query Editor</em> window will open. In the <em>Extension</em> column, select only <em>.xlsb</em> or <em>.xlsx</em> to narrow our search.</p>
+
+              <p><em>Power Query Editor</em> – <em>Extension</em> column: as our data source gets bigger, we need to click on <em>“Load more”</em> to make sure we can see all available formats since the <em>.xlsb</em> and <em>.xlsx</em> files are usually at the end.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot4.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot4.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 5.</h3>
+              <p>From the <em>Name</em> column, select the <em>JX TOSA</em>, then click <em>OK</em>.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot5.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot5.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 6.</h3>
+              <p>In the <em>Content</em> column, <em>Row 1</em>, hover on the word <em>“Binary”</em> until you see a <em>pointing finger cursor</em> and left-click on it.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot6.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot6.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 7.</h3>
+              <p>Look for the <em>TOSA</em> under <em>Name</em> Column and in the <em>Data</em> column, hover on the word <em>“Table”</em>.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot7.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot7.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 8.</h3>
+              <p>Click the <em>Table icon</em>, from the dropdown menu, click on <em>Use First Row as Headers</em>.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot8.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot8.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 9.</h3>
+              <p><em>Select the necessary columns</em> (may differ for other JXs): <em>HB/SB, Act Ch, Act Sec, Effect, Effective Date, Normcite, and As Entered Order</em>. Then click on <em>Remove Other Columns</em> to keep only the selected columns.</p>
+              <div class="alert alert-secondary" role="alert">
+                <em>“As Entered order”</em> column is only applicable to <em>CA</em> and <em>NV</em>. For standard JX, the TOSA is updated by chapter number.
+
+                The columns you select will be extracted by the PowerQuery Editor, so make sure to apply the necessary filters before closing and loading.
+              </div>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot9.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot9.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 10.</h3>
+              <p>In the <em>Effect</em> column, we will filter and select only <em>amended</em> and/or <em>amendedAndRenumbered</em>.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot10.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot10.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 11.</h3>
+              <p><em>As Entered Order</em> should be automatically arranged from lowest to highest.</p>
+              <p>Click <em>Close and Load</em></p>
+              <div class="alert alert-secondary" role="alert">
+                Once you click <em>Close and Load</em>, a separate sheet will be created with the extracted data from the TOSA. Use this as a separate sheet just for data connection and extraction purposes. Use the note tracker sheet for writing and updating notes.
+              </div>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot11.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot11.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 12.</h3>
+              <p>The data connection will be established, and the selected columns will be extracted from the <em>TOSA</em>.</p>
+              <p>Rename the sheet and <em>Query1</em> as <em>AmNotes Extractor</em>.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot12.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot12.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 13.</h3>
+              <p>Get the latest data by clicking on <em>Refresh</em>. The latest data should appear after the last row.</p>
+              <div class="alert alert-secondary" role="alert">
+                Changes in data entries will also be updated when you click <em>Refresh</em>.
+              </div>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot13.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot13.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+        <section class="mx-3 mt-5">
+          <div class="row">
+            <div class="col-7">
+              <h3 class="fw-bold">Step 14.</h3>
+              <p>Copy the latest data from the <em>AmNotes Extractor</em> sheet to the <em>Note Tracker</em>.</p>
+            </div>
+            <div class="col-5">
+              <a href="_externals/imgs/note-tracker-template/screenshot14.png" data-toggle="lightbox"><img src="_externals/imgs/note-tracker-template/screenshot14.png" class="img-fluid rounded shadow-sm" loading="lazy"></a>
+              <p class="text-center text-muted"><small><em>Click to enlarge</em></small></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="heading-bg navbar-bg mt-4">
+          <h3 class="heading-bg-text fw-bold mx-2" id="anchor-intro-language"><i class="bi bi-card-text"></i> JX-specific intro language</h3>
+        </section>
+        <section class="mx-3 mt-3">
+
+          <p>For the introductory language, copy the formula for your respective jurisdiction then paste it in <em>I2</em>.</p>
+
+          <div class="card-group 1 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">AK
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready32()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(F2>0,"The "&$A$2&" amendment, effective "&TEXT(F2,"mmmm d, yyyy")&",","The "&$A$2&" amendment by Act "&C2&", effective __________,")' id="Copy32" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">AL
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready23()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment"' id="Copy23" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">AZ
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready24()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(G2>0,IF(COUNTIF($G:$G,G2)>1,"The "&$A$2&" amendment by ch. "&(C2)&", § "&D2&",","The "&$A$2&" amendment"),"")' id="Copy24" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 2 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">CA
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready2()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=$A$2&" Amendment (ch "&C2&"):"' id="Copy2" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">CT
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready33()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(F2>0,$A$2&" amendment, by P.A. "&C2&", effective "&TEXT(F2,"mmmm d, yyyy")&",",$A$2&" amendment, by P.A. "&C2&", effective  __________,")' id="Copy33" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">FL
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready3()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" by s. "&D2&", ch. "&$A$2&"-"&C2&","' id="Copy3" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 3 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">HI
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready25()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(G2>0,IF(COUNTIF($G:$G,G2)>1,$A$2&" Haw. Sess. Laws, Act "&C2&" § "&D2&",","The "&$A$2&" amendment"))' id="Copy25" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">IA
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready1()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment to this section by ch. "&C2' id="Copy1" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">IL
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready38()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(G2>0,IF(COUNTIF($G:$G,G2)>1,IF(F2>0,"The "&$A$2&" amendment by P.A. 102-"&(C2)&", § "&(D2)&", effective "&TEXT(F2,"mmmm d, yyyy")&",","The "&$A$2&" amendment by P.A. 102-"&(C2)&", § "&(D2)&", effective  __________,"),IF(F2>0,"The "&$A$2&" amendment by P.A. 102-"&(C2)&", effective "&TEXT(F2,"mmmm d, yyyy")&",","The "&$A$2&" amendment by P.A. 102-"&(C2)&", effective  __________,")),"")' id="Copy38" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 4 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">IN
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready5()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment by P.L."&C2&"-"&$A$2' id="Copy5" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">KS
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready26()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment"' id="Copy26" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">LA
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready6()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(G2>0,IF(COUNTIF($G:$G,G2)>1,"The "&$A$2&" amendment by ch. "&(C2)&", § "&D2&",","The "&$A$2&" amendment"),"")' id="Copy6" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 5 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">ME
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready4()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment to this section by ch. "&C2' id="Copy4" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">MI
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready7()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment by PA "&C2' id="Copy7" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">MN
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready27()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment"' id="Copy27" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 6 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">MO
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready8()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(LEFT(B2,2)="SB","The "&$A$2&" amendment to this section by S.B. "&RIGHT(B2,LEN(B2)-FIND(" ",B2)),"The "&$A$2&" amendment to this section by H.B. "&RIGHT(B2,LEN(B2)-FIND(" ",B2)))' id="Copy8" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">MT
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready31()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment by ch. "&C2' id="Copy31" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">NE
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready28()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment"' id="Copy28" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 7 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">NH
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready10()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendments to this section by Ch. "&C2' id="Copy10" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">NJ
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready11()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=$A$2&" amendment, by chapter "&C2&","' id="Copy11" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">NM
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready29()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="<emphasis style=""bold"">The "&$A$2&" amendment</emphasis>"' id="Copy29" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 8 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">NV
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready12()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(F2>0,"The "&$A$2&" amendment, by ch. "&C2&", effective "&TEXT(F2,"mmmm d, yyyy")&",","The "&$A$2&" amendment, by ch. "&C2&", effective __________,")' id="Copy12" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">NY
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready13()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="<emphasis style=""bold"">The "&$A$2&" amendment by ch "&C2&", § "&D2&",</emphasis>"' id="Copy13" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">OH
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready14()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment by "&B2' id="Copy14" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 9 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">OK
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready9()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment by ch. "&C2' id="Copy9" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">OR
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready15()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(H2>0,"The "&$A$2&" amendment by c. "&C2&" § "&D2&", effective "& TEXT(F2,"mmmm d, yyyy")&", operative "& TEXT(H2,"mmmm d, yyyy")&",","The "&$A$2&" amendment by c. "&C2&" § "&D2&", effective "& TEXT(F2,"mmmm d, yyyy")&",")' id="Copy15" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">PA
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready30()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment"' id="Copy30" readonly />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card-group 10 text-center">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">SC
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready16()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='="The "&$A$2&" amendment to this section by Act. No. "&C2&","' id="Copy16" readonly />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">TX
+                  <button title="Copy to clipboard" class="nbtn" onclick="ready34()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                </h5>
+                <input type="text" class="form-control form-control-sm" value='=IF(G2>0,IF(COUNTIF($G:$G,G2)>1,IF(LEFT(B2,2)="SB","<emphasis style=""bold"">The "&$A$2&" amendment by S.B. "&RIGHT(B2,LEN(B2)-FIND(" ",B2))&", § "&D2&",</emphasis>","<emphasis style=""bold"">The 2020 amendment by H.B. "&RIGHT(B2,LEN(B2)-FIND(" ",B2))&", § "&D2&",</emphasis>"),"<emphasis style=""bold"">The "&$A$2&" amendment</emphasis>"),"")' id="Copy34" readonly />
+              </div>
+            </div>
+
+            <div class="card"">
+                            <div class=" card-body">
+              <h5 class="card-title">UT
+                <button title="Copy to clipboard" class="nbtn" onclick="ready17()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+              </h5>
+              <input type="text" class="form-control form-control-sm" value='=IF(G2>0,IF(COUNTIF($G:$G,G2)>1,IF(F2>0,"The "&$A$2&" amendment by ch. "&(C2)&", effective "&TEXT(F2,"mmmm d, yyyy")&",","The "&$A$2&" amendment by ch. "&(C2)&", effective  __________,"),IF(F2>0,"The "&$A$2&" amendment, effective "&TEXT(F2,"mmmm d, yyyy")&",","The "&$A$2&" amendment, effective  __________,")),"")' id="Copy17" readonly />
+            </div>
+          </div>
+
+      </div>
+
+      <div class="card-group 11 text-center">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">WA
+              <button title="Copy to clipboard" class="nbtn" onclick="ready18()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+            </h5>
+            <input type="text" class="form-control form-control-sm" value='=IF(F2>0,$A$2&" c "&C2&" § "&D2&", effective "&TEXT(F2,"mmmm d, yyyy")&",",$A$2&" c "&C2&" § "&D2&", effective ________,")' id="Copy18" readonly />
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">WI
+              <button title="Copy to clipboard" class="nbtn" onclick="ready19()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+            </h5>
+            <input type="text" class="form-control form-control-sm" value='=IF(F2>0,"The "&$A$2&" amendment by Act "&C2&", effective "&TEXT(F2,"mmm. d, yyyy")&",","The "&$A$2&" amendment by Act "&C2&", effective __________,")' id="Copy19" readonly />
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">WV
+              <button title="Copy to clipboard" class="nbtn" onclick="ready20()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+            </h5>
+            <input type="text" class="form-control form-control-sm" value='=IF(F2>0,"Acts "&$A$2&", c. ["&B2&"], effective "&TEXT(F2,"mmmm d, yyyy")&",","Acts "&$A$2&", c. ["&B2&"], effective ________,")' id="Copy20" readonly />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-group 12 text-center">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">WY
+              <button title="Copy to clipboard" class="nbtn" onclick="ready35()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+            </h5>
+            <input type="text" class="form-control form-control-sm" value='=IF(F2>0,"The "&$A$2&" amendment, effective "&TEXT(F2,"mmmm d, yyyy")&",","The "&$A$2&" amendment by Act "&C2&", effective __________,")' id="Copy35" readonly />
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">RSV
+              <button title="Copy to clipboard" class="nbtn" onclick="ready39()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+            </h5>
+            <input type="text" class="form-control form-control-sm" value='' id="Copy39" readonly />
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">RSV
+              <button title="Copy to clipboard" class="nbtn" onclick="ready40()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+            </h5>
+            <input type="text" class="form-control form-control-sm" value='' id="Copy40" readonly />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="alert alert-secondary mt-4" role="alert">
+        If a jurisdiction isn't included in the list, it's because the intro language or note tracker of that jurisdiction is complex/non-standard (formatting is less predictable or there may be too many variations).
+      </div>
+      </section>
+
+      <section class="heading-bg navbar-bg mt-4">
+        <h3 class="heading-bg-text fw-bold mx-2" id="anchor-notes-placement"><i class="bi bi-code-square"></i> Notes Placement XML Tags</h3>
+      </section>
+      <section class="mx-3 mt-3">
+        <p>For notes placement, there are two options: <em>Standard</em> or <em>w/ SubType Heading</em>.</p>
+        <p>Most jurisdictions usually use the <em>Standard XML</em> tags. But if a jurisdiction (<em>e.g. CA</em>) needs a <em>SubType Heading</em>, copy <em>w/ SubType Heading</em> and paste it in <em>P2</em>.</p>
+        <div class="card-group text-center">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Standard
+                <button title="Copy to clipboard" class="nbtn" onclick="ready21()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                <input type="text" class="form-control form-control-sm" value="=IF(J2>0, IF(LEFT(J2,1)=&quot;,&quot;,CONCAT(XML!$A$2,'Note Tracker'!G2,XML!$B$2,'Note Tracker'!G2,XML!$C$2,'Note Tracker'!I2&J2,XML!$D$2&&quot; &quot;), IF(LEFT(J2,1)=&quot; &quot;,CONCAT(XML!$A$2,'Note Tracker'!G2,XML!$B$2,'Note Tracker'!G2,XML!$C$2,'Note Tracker'!I2&J2,XML!$D$2&&quot; &quot;),CONCAT(XML!$A$2,'Note Tracker'!G2,XML!$B$2,'Note Tracker'!G2,XML!$C$2,'Note Tracker'!I2&&quot; &quot;&J2,XML!$D$2&&quot; &quot;))),&quot;&quot;)" id="Copy21" readonly />
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">W/ SubType Heading
+                <button title="Copy to clipboard" class="nbtn" onclick="ready22()"><small><i class="bi bi-clipboard-check"></i> Copy</small></button>
+                <input type="text" class="form-control form-control-sm" value="=IF(J2>0,CONCAT(XML!$A$4,'Note Tracker'!G2,XML!$B$4,'Note Tracker'!G2,XML!$C$4,'Note Tracker'!I2,XML!$D$4,'Note Tracker'!J2,XML!$E$4&&quot;&nbsp;&quot;),&quot;&quot;)" id="Copy22" readonly />
+            </div>
+          </div>
+
+        </div>
+        <div class="alert alert-secondary mt-4" role="alert">
+          Before placing notes in an NCD job, make sure the formulas and data in the note tracker match the correct rows and are not misaligned.
+        </div>
+      </section>
+
+      <div class="row">
+        <div class="col-6">
+          <section class="heading-bg navbar-bg mt-4">
+            <h3 class="heading-bg-text fw-bold mx-2"><i class="bi bi-wrench"></i> Troubleshooting</h3>
+          </section>
+          <section class="mt-3 section-overflow">
+            <div class="mx-3">
+              <p>The following are the common errors during notes placement:</p>
+              <p><strong>Unable to complete an NCD job</strong>. Error message: <code>Missing LNI</code>. Fix by saving the changes to generate the <code>LNI</code> for newly placed notes.</p>
+              <p><strong>Unable to paste notes from the <em>Note Tracker</em> to <em>NCD job</em></strong>. Look for a line break or hard enter in the note/s <em>(Column J)</em> and delete it.</p>
+            </div>
+          </section>
+        </div>
+        <div class="col-6">
+          <section class="heading-bg navbar-bg mt-4">
+            <h3 class="heading-bg-text fw-bold mx-2"><i class="bi bi-lightbulb"></i> For note writers</h3>
+          </section>
+          <section class="mt-4 section-overflow">
+            <div class="mx-3">
+              <div id="carouselMoreTips" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselMoreTips" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselMoreTips" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselMoreTips" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="alert alert-secondary" role="alert">
+                      If the jurisdiction's <em>note tracker</em> already uses <em>auto-generated intro language</em>, then it should no longer be manually written as part of the note. Editors should start by describing the amendments.
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="alert alert-secondary" role="alert">
+                      Add a <em>comma</em> at the beginning of the note, as needed (<em>e.g. “..., in (a)(1),”</em>).
+                      <br>
+                      <strong>Heads up!</strong> If the <em>auto-generated intro language</em> already has a comma after it, then it shouldn't be added.
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="alert alert-secondary" role="alert">
+                      To place notes, copy the <em>XML</em> tags from <em>column O</em> for notes that you're going to place then paste it in a <em>Create Note Collection Job</em>.
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselMoreTips" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselMoreTips" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <section class="heading-bg navbar-bg mt-4">
+            <h3 class="heading-bg-text fw-bold mx-2" id="anchor-contact"><i class="bi bi-envelope"></i> Contact</h3>
+          </section>
+          <section class="mt-3 section-overflow">
+            <div class="mx-3">
+              <p>For any concerns regarding this project, kindly reach out to your respective supervisors, project coordinators, or POCs. Alternatively, you may directly reach out to us via <em>MS Teams</em> or Email:</p>
+              <ul class="mb-4">
+                <li><strong>Aldrin Renz Cruz</strong> | <em>---------------------------</em></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+        <div class="col-6">
+          <section class="heading-bg navbar-bg mt-4">
+            <h3 class="heading-bg-text fw-bold mx-2"><i class="bi bi-arrow-repeat"></i> Continuous Improvement</h3>
+          </section>
+          <section class="mt-3 section-overflow">
+            <div class="mx-3">
+              <p>This project is constantly being improved as we gather more information from user experience and feedback. If you've found any bugs or errors, it will help us immensely if you'd let us know about it. Suggestions are very much welcome!</p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section class="heading-bg navbar-bg mt-4">
+        <h3 class="heading-bg-text fw-bold mx-2"><i class="bi bi-clock-history"></i> Document History</h3>
+      </section>
+      <section class="mx-3 my-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Edited By</th>
+              <th scope="col">Date Edited</th>
+              <th scope="col">Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">3</th>
+              <td>Aldrin Renz Cruz</td>
+              <td>December 1, 2021</td>
+              <td>Revision of document content and structure</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Aldrin Renz Cruz, Roy Wilson Villafania</td>
+              <td>January 25, 2021</td>
+              <td>Addition of <em>Extractor</em>; updated formulas</td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>Aldrin Renz Cruz</td>
+              <td>September 12, 2020</td>
+              <td>Document created</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+
+    <footer class="py-3 bg-footercustom navbar-bg"></footer>
+
+  </div>
+
+  </div>
+
+  <script src="_global-externals/scripts/bootstrap5.min.js"></script>
+  <script src="_global-externals/scripts/bs5-lightbox.min.js"></script>
+
+  <script>
+    //Back to top
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 20) {
+          $('#toTopBtn').fadeIn();
+        } else {
+          $('#toTopBtn').fadeOut();
+        }
+      });
+
+      $('#toTopBtn').click(function () {
+        $("html, body").animate({
+          scrollTop: 0
+        }, 1000);
+        return false;
+      });
+    });
+  </script>
+
+  <script>
+    function getDateTime() {
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = now.getMonth() + 1;
+      var day = now.getDate();
+      var hour = now.getHours();
+      var minute = now.getMinutes();
+      var second = now.getSeconds();
+      if (month.toString().length == 1) {
+        month = '0' + month;
+      }
+      if (day.toString().length == 1) {
+        day = '0' + day;
+      }
+      if (hour.toString().length == 1) {
+        hour = '0' + hour;
+      }
+      if (minute.toString().length == 1) {
+        minute = '0' + minute;
+      }
+      if (second.toString().length == 1) {
+        second = '0' + second;
+      }
+      var dateTime = hour + ':' + minute + ':' + second + ' - ' + month + '/' + day + '/' + year;
+      return dateTime;
+    }
+
+    setInterval(function () {
+      currentTime = getDateTime();
+      document.getElementById("digital-clock").innerHTML = currentTime;
+    }, 1000);
+  </script>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+    function goNext() {
+      window.history.go(1);
+    }
+    //Prevent links from being dragged
+    $('a').mousedown(function (e) {
+      e.preventDefault();
+    });
+  </script>
+
+  <script>
+    function ready1() {
+      var copyText = document.getElementById("Copy1");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready2() {
+      var copyText = document.getElementById("Copy2");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready3() {
+      var copyText = document.getElementById("Copy3");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready4() {
+      var copyText = document.getElementById("Copy4");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready5() {
+      var copyText = document.getElementById("Copy5");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready6() {
+      var copyText = document.getElementById("Copy6");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready7() {
+      var copyText = document.getElementById("Copy7");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready8() {
+      var copyText = document.getElementById("Copy8");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready9() {
+      var copyText = document.getElementById("Copy9");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready10() {
+      var copyText = document.getElementById("Copy10");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready11() {
+      var copyText = document.getElementById("Copy11");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready12() {
+      var copyText = document.getElementById("Copy12");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready13() {
+      var copyText = document.getElementById("Copy13");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready14() {
+      var copyText = document.getElementById("Copy14");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready15() {
+      var copyText = document.getElementById("Copy15");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready16() {
+      var copyText = document.getElementById("Copy16");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready17() {
+      var copyText = document.getElementById("Copy17");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready18() {
+      var copyText = document.getElementById("Copy18");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready19() {
+      var copyText = document.getElementById("Copy19");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready20() {
+      var copyText = document.getElementById("Copy20");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready21() {
+      var copyText = document.getElementById("Copy21");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready22() {
+      var copyText = document.getElementById("Copy22");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready23() {
+      var copyText = document.getElementById("Copy23");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready24() {
+      var copyText = document.getElementById("Copy24");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready25() {
+      var copyText = document.getElementById("Copy25");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready26() {
+      var copyText = document.getElementById("Copy26");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready27() {
+      var copyText = document.getElementById("Copy27");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready28() {
+      var copyText = document.getElementById("Copy28");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready29() {
+      var copyText = document.getElementById("Copy29");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready30() {
+      var copyText = document.getElementById("Copy30");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready31() {
+      var copyText = document.getElementById("Copy31");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready32() {
+      var copyText = document.getElementById("Copy32");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready33() {
+      var copyText = document.getElementById("Copy33");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready34() {
+      var copyText = document.getElementById("Copy34");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready35() {
+      var copyText = document.getElementById("Copy35");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready36() {
+      var copyText = document.getElementById("Copy36");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready37() {
+      var copyText = document.getElementById("Copy37");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready38() {
+      var copyText = document.getElementById("Copy38");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready39() {
+      var copyText = document.getElementById("Copy39");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <script>
+    function ready40() {
+      var copyText = document.getElementById("Copy40");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+  <!-- Copy link from Get Started section -->
+  <script>
+    function ready41() {
+      var copyText = document.getElementById("Copy41");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999)
+      document.execCommand("copy");
+    }
+  </script>
+
+</body>
+
+</html>

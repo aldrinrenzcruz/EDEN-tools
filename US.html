@@ -1,0 +1,2010 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>US Notes & PDU Assist</title>
+	<link rel="stylesheet" href="_global-externals/stylesheets/bootstrap.min.css">
+	<link rel="stylesheet" href="_global-externals/stylesheets/bootstrap4-toggle.css">
+	<link rel="stylesheet" href="_global-externals/icons/bootstrap/bootstrap-icons.css" />
+	<link rel="stylesheet" href="_externals/stylesheets/assist/_assist-main.css">
+	<link rel="stylesheet" href="_externals/stylesheets/assist/US.css">
+	<script src="_global-externals/scripts/jquery-3.5.1.min.js"></script>
+	<script src="_global-externals/scripts/2.2.4.jquery.min.js"></script>
+	<link rel="shortcut icon" type="image/png" href="_global-externals/favicons/builder-2.png" />
+	<script src="_externals/scripts/core/z-text-fields-storage-session.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="col-lg-10">
+			<div class="bg-white shadow rounded collapse show popup main-textarea-container">
+				<nav class="navbar navbar-expand-sm navbar-bg">
+					<div class="collapse navbar-collapse">
+						<ul class="navbar-nav">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<input type="file" id="loadfile" name="loadfile" hidden />
+									<li><a class="dropdown-item"><label class="openfilelabel" for="loadfile">Open... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></a></li>
+									<li><a id="save" class="dropdown-item">Save As...</a></li>
+									<li><a class="dropdown-item" onClick="preview()">Preview &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+									<li><a class="dropdown-item" data-toggle="modal" data-target="#settingsModal">Settings &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-muted float-right">Alt + S</span></a></a></li>
+									<li><a href="index.html" class="dropdown-item">Exit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-link dropdown-toggle" id="dropdownedit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<li><a class="dropdown-item" onclick="javascript:eraseText1();javascript:eraseText2();resetallamnotes();">Clear All</a></li>
+									<hr />
+									<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Upper Text Editor</a>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" onclick="javascript:eraseText2();">Clear</a></li>
+											<li><a class="dropdown-item" onclick="copy2();">Copy</a></li>
+											<li><a class="dropdown-item" onclick="fixtext000()">Fixit</a></li>
+											<li><a class="dropdown-item" onclick="fixtext4()">Merge All Lines</a></li>
+											<li><a class="dropdown-item" onclick="fixtext13()">Remove XML Tags</a></li>
+											<hr />
+											<li><a class="dropdown-item" onclick="fixtext12()">Remove Empty Lines</a></li>
+											<li><a class="dropdown-item" onclick="fixtext16()">Trim All Tabs</a></li>
+											<li><a class="dropdown-item" onclick="fixtext14()">Trim Leading Space</a></li>
+											<li><a class="dropdown-item" onclick="fixtext15()">Trim Trailing Space</a></li>
+										</ul>
+									</li>
+									<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Lower Text Editor</a>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" onclick="javascript:eraseText1();">Clear</a></li>
+											<li><a class="dropdown-item" onclick="copy1();">Copy</a></li>
+											<li><a class="dropdown-item" onclick="fixtext()">Fixit</a></li>
+											<li><a class="dropdown-item" onclick="fixtext3()">Merge All Lines</a></li>
+											<li><a class="dropdown-item" onclick="fixtext10()">Remove XML Tags</a></li>
+											<hr />
+											<li><a class="dropdown-item" onclick="fixtext11()">Remove Empty Lines</a></li>
+											<li><a class="dropdown-item" onclick="fixtext19()">Trim All Tabs</a></li>
+											<li><a class="dropdown-item" onclick="fixtext17()">Trim Leading Space</a></li>
+											<li><a class="dropdown-item" onclick="fixtext18()">Trim Trailing Space</a></li>
+										</ul>
+									</li>
+									<hr />
+									<li><a accesskey="1" class="dropdown-item" onclick="return convertstring(stringbox, 'titlecase')">Title Case<span class="text-muted float-right">Alt + 1</span></a></li>
+									<li><a accesskey="2" class="dropdown-item" onclick="return convertstring(stringbox, 'sentencecase')">Sentence case&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-muted">Alt + 2</span></a></li>
+									<li><a accesskey="3" class="dropdown-item" onclick="return convertstring(stringbox, 'uppercase')">UPPER CASE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-muted">Alt + 3</span></a></li>
+									<li><a accesskey="4" class="dropdown-item" onclick="return convertstring(stringbox, 'lowercase')">lowercase&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-muted">Alt + 4</span></a></li>
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-link dropdown-toggle" id="dropdowninsert" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insert</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<li><a id="§" class="dropdown-item xbtn">Section Symbol <span class="float-right">§</span></a></li>
+									<li><a id="§§" class="dropdown-item xbtn">Double Section Symbol <span class="float-right">§§</span></a></li>
+									<li><a id="—" class="dropdown-item xbtn">Em-dash <span class="float-right">—</span></a></li>
+									<li><a id="–" class="dropdown-item xbtn">En-dash <span class="float-right">–</span></a></li>
+									<li><a id='‘' class="dropdown-item xbtn">Single Open Quote <span class="float-right">‘</span></a></li>
+									<li><a id='’' class="dropdown-item xbtn">Single Close Quote <span class="float-right">’</span></a></li>
+									<li><a id='‘’' class="dropdown-item xbtn">Single Quotes <span class="float-right">‘’</span></a></li>
+									<li><a id='“' class="dropdown-item xbtn">Double Open Quote <span class="float-right">“</span></a></li>
+									<li><a id='”' class="dropdown-item xbtn">Double Close Quote <span class="float-right">”</span></a></li>
+									<li><a id='“”' class="dropdown-item xbtn">Double Quotes <span class="float-right">“”</span></a></li>
+									<li><a id='”.' class="dropdown-item xbtn">Double Close Quote & Period <span class="float-right">”.</span></a></li>
+									<li><a id='’.”.' class="dropdown-item xbtn">Single & Double Close Quote & Period ’.”.</a></li>
+									<hr />
+									<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Emphasis tags...</a>
+										<ul class="dropdown-menu">
+											<li><a id='emphasisbold' class="dropdown-item xbtn">bold</a></li>
+											<li><a id='emphasisbolditalic' class="dropdown-item xbtn">bold-italic</a></li>
+											<li><a id='emphasisitalic' class="dropdown-item xbtn">italic</a></li>
+											<li><a id='emphasisunderline' class="dropdown-item xbtn">underline</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-link dropdown-toggle" id="dropdowntools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<li><a class="dropdown-item" onclick="openQuickSearch();">Quick Search</a></li>
+									<li><a class="dropdown-item" data-toggle="modal" data-target="#anchor-full-screen-highlighter">Highlighter</a></li>
+									<li><a class="dropdown-item" onclick="openUSAmnoteBuilder();">Amendment Note Builder &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+									<li><a class="dropdown-item" onclick="openBracketedMatterBuilder();">Bracketed Matter Builder</a></li>
+									<li><a class="dropdown-item" onclick="openHistoryCitationBuilder();">History Citation Builder</a></li>
+									<li><a class="dropdown-item" onclick="openNotedUnderBuilder();">Noted Under Builder</a></li>
+									<li><a class="dropdown-item" onclick="openSchemelineBuilder();">Schemeline Builder</a></li>
+									<li><a class="dropdown-item" onclick="openSectionBuilder();">Section Builder</a></li>
+									<li><a class="dropdown-item" data-toggle="modal" data-target="#anchor-text-compare">Text Compare</a></li>
+									<li><a class="dropdown-item" href="highlighters/xml-highlighter.html" target="_blank">XML Highlighter</a></li>
+									<li><a class="dropdown-item" onclick="openLexisPlusViewer();">Lexis+ Viewer</a></li>
+									<li><a class="dropdown-item" data-target="#anchor-dupe-notes-counter" data-toggle="modal">Dupe Notes Counter</a></li>
+									<li><a class="dropdown-item" onclick="openProofErrorsCounter();">Proof Errors Counter</a></li>
+									<hr />
+									<li><a class="dropdown-item" onclick="openStopwatch();">Stopwatch</a></li>
+									<li><a class="dropdown-item" onclick="openStickyNote1();">Sticky Note 1</a></li>
+									<li><a class="dropdown-item" onclick="openStickyNote2();">Sticky Note 2</a></li>
+									<li><a class="dropdown-item" onclick="openStickyNote3();">Sticky Note 3</a></li>
+								</ul>
+							</li>
+							<li class="popup-header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+						</ul>
+					</div>
+				</nav>
+
+				<div class="card border-0 maincard card-bg donothighlight">
+					<div class="row">
+						<div class="col-lg-12 mx-1">
+							<div class="collapse show" id="closeUpperNotepad">
+								<form class="mr-2">
+									<textarea class="form-control mt-1 textarea-bg annotation-wrap" id="textarea1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" rows="1" placeholder="Notes.."></textarea>
+									<input id="textarea-1-value" hidden />
+									<script>rescuefieldvalues1(['textarea-1-value', 'textarea1'])</script>
+								</form>
+							</div>
+							<div class="collapse show mb-1" id="closeLowerNotepad">
+								<form class="mr-2" name="editorial">
+									<textarea class="form-control mt-1 textarea-bg" id="textarea3" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" rows="10" placeholder="Write something.."></textarea>
+									<input id="textarea-3-value" hidden />
+									<script>rescuefieldvalues3(['textarea-3-value', 'textarea3'])</script>
+								</form>
+
+								<a class="ml-1 text-area-dock-btn" title="Fixit" onclick="fixtext();"><i class="bi bi-magic" style="font-size: 1.25rem;"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" title="Merge" onclick="fixtext3();"><i class="bi bi-intersect" style="font-size: 1.25rem;"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" data-target="#anchor-dupe-notes-counter" data-toggle="modal" tabindex="-1" title="Dupe Notes Counter"><i class="bi bi-list-ol" style="font-size: 1.25rem;"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" data-target="#anchor-text-compare" data-toggle="modal" tabindex="-1" title="Text Compare"><i class="bi bi-layout-split" style="font-size: 1.25rem;"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" data-target="#anchor-full-screen-highlighter" data-toggle="modal" tabindex="-1" title="Highlighter"><i class="bi bi-lightbulb" style="font-size: 1.25rem;" color: #bdbdbd;" onMouseOver="this.style.color='#f9a825'" onMouseOut="this.style.color='#bdbdbd'"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" title="Preview" onclick="preview();"><i class="bi bi-eye" style="font-size: 1.25rem;"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" title="Merge texts from Act without wrapping in XML tags" onclick="notedUnderMergeFixit();"><i class="bi bi-intersect" style="font-size: 1.25rem;color:#039be5;"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" title="Subsection Builder" onclick="processLawTextComponentWrap();"><i class="bi bi-wrench" style="font-size: 1.25rem;color:#039be5;"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" title="Noted Under Cleanups" onclick="cleanUps();"><i class="bi bi-magic" style="font-size: 1.25rem;color:#388e3c;"></i></a>
+								<a class="ml-1 text-area-dock-btn" title="Additional Cleanups (Alt + 5) *Will remove Annot tags wherever the caret is placed*" onclick="processNotedUnderAnnot();"><i class="bi bi-scissors" style="font-size: 1.25rem;color:#388e3c;" accesskey="5"></i></a>
+
+								<a class="ml-1 text-area-dock-btn" title="Noted Under Preview" onclick="preview2();"><i class="bi bi-eye" style="font-size: 1.25rem;color:#388e3c;"></i></a>
+
+								<div class="collapse show words-lines-chars-count-placeholder" id="closeWordCounter">
+									<a class="wordandcharcount text-dark text-muted" id="lines"></a>
+									<a class="wordandcharcount text-dark text-muted" id="counteroutput"></a>
+								</div>
+
+								<a class="text-area-dock-stopwatch-btn" data-target="#anchor-stopwatch-container" data-toggle="collapse"><i class="bi bi-stopwatch-fill" style="font-size: 1.25rem; color: #bdbdbd;" onMouseOver="this.style.color='#555'" onMouseOut="this.style.color='#bdbdbd'"></i></a>
+
+								<a class="text-area-dock-settings-btn" href="#settings" title="Settings" data-toggle="modal" data-target="#settingsModal" accesskey="s"><i class="bi bi-gear-fill" style="font-size: 1.25rem; color: #bdbdbd;" onMouseOver="this.style.color='#555'" onMouseOut="this.style.color='#bdbdbd'"></i></a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-5 quick-search-container donothighlight">
+		<div class="collapse show popup" id="anchor-quick-search">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm popup-header navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeQuickSearch();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<a class="navbar-brand">Quick search</a>
+				</nav>
+				<div class="card-body quick-search-container-overflow card-bg rounded-bottom-corners">
+					<div id="anchor-close-fetch-act-section" class="collapse show">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg">
+								<h6 class="card-title font-weight-bold">Fetch act or section</h6>
+								<p class="card-text my-1 text-muted"><small>Act from <a class="text-muted" href="#" rel="noopener noreferrer" target="_blank">OLRC (117-2)</a></small></p>
+								<form class="form-inline" autocomplete="off">
+									<input class="form-control form-control-sm mt-1 mr-1 no-enter textarea-bg" id="statewebacts" type="text" value="117-2" />
+									<input class="form-control form-control-sm mt-1 no-enter textarea-bg" id="statewebacts2" type="text" placeholder="e.g. 117-82" />
+									<a class="btn btn-sm utility-btn ml-2 mt-1" href="#" onClick="javascript: window.open('https://uscode.house.gov/download/bills/' + document.getElementById('statewebacts').value + '/' + document.getElementById('statewebacts2').value + '.pdf');"><i class="bi-arrow-right" style="font-size: 0.9rem;color: #555;" id="statewebactsbtn"></i></a>
+								</form>
+								<p class="card-text my-1 text-muted"><small>Find a section</small></p>
+								<form class="form-inline" autocomplete="off">
+									<input class="form-control form-control-sm mt-1 mr-1 no-enter textarea-bg" id="statewebsections" type="text" placeholder="Title" />
+									<input class="form-control form-control-sm mt-1 no-enter textarea-bg" id="statewebsections2" type="text" placeholder="Section" />
+									<a class="btn btn-sm utility-btn ml-2 mt-1" href="#" onClick="javascript: window.open('https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title' + document.getElementById('statewebsections').value + '-section' + document.getElementById('statewebsections2').value + '&num=0&edition=prelim');"><i class="bi-arrow-right" style="font-size: 0.9rem;color: #555;" id="statewebsectionsbtn"></i></a>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<div id="anchor-positive-or-non-positive" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg">
+								<h6 class="card-title font-weight-bold">Positive or Non-positive?</h6>
+								<p class="card-text my-1 text-muted"><small>Check if positive or non-positive law title:</small></p>
+								<form class="form-inline" autocomplete="off">
+									<input class="form-control form-control-sm no-enter textarea-bg" id="posvnonposinput" type="text" placeholder="Title (e.g. 26)" />
+									<a class="btn btn-sm utility-btn ml-2" href="#" onclick="positiveNonpositive();"><i class="bi-arrow-right" style="font-size: 0.9rem;color: #555;" id="posnonposbtn"></i></a>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<div id="anchor-search-us-code-table-3" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg">
+								<h6 class="card-title font-weight-bold">Search U.S. Code Table III</h6>
+								<p class="card-text my-1 text-muted"><small>Find enactment year</small></p>
+								<form class="form-inline" autocomplete="off">
+									<input class="form-control form-control-sm mt-1 no-enter textarea-bg" id="table3a" type="text" placeholder="Year" />
+									<a class="btn btn-sm utility-btn ml-2 mt-1" href="#" onClick="javascript: window.open('https://uscode.house.gov/table3/year' + document.getElementById('table3a').value + '.htm');"><i class="bi-arrow-right" style="font-size: 0.9rem;color: #555;" id="table3abtn"></i></a>
+								</form>
+
+								<p class="card-text my-1 text-muted"><small>Find Stat. Vols (P.L. 85 to 117)</small></p>
+								<form class="form-inline" autocomplete="off">
+									<input class="form-control form-control-sm mt-1 mr-1 no-enter textarea-bg" id="table3b1" type="text" placeholder="116" />
+									<input class="form-control form-control-sm mt-1 no-enter textarea-bg" id="table3b2" type="text" placeholder="214" />
+									<a class="btn btn-sm utility-btn ml-2 mt-1" href="#" onClick="javascript: window.open('https://uscode.house.gov/table3/' + document.getElementById('table3b1').value + '_' + document.getElementById('table3b2').value + '.htm');"><i class="bi-arrow-right" style="font-size: 0.9rem;color: #555;" id="table3b1btn"></i></a>
+								</form>
+								<p class="card-text my-1 text-muted"><small>For enacted years 1789 up to 1956,<br> use format: <em>year</em>_<em>chapter</em></small></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg">
+
+								<h6 class="card-title font-weight-bold">Add suppInclusion (Upper)</h6>
+								<form class="form-inline" autocomplete="off">
+									<input class="form-control form-control-sm no-enter quick-search-full-width textarea-bg" type="text" id="supp-inclusion-input-upper" placeholder="Paste suppInclusion tag only" />
+								</form>
+								<button class="btn btn-sm utility-btn quick-search-full-width my-2" onclick="addSuppInclusionTags();">Apply</button>
+							</div>
+						</div>
+					</div>
+
+					<div id="closeFindandreplace" class="collapse show">
+						<div id="close-find-and-replace-upper" class="collapse show mt-3">
+							<div class="card quick-search-section">
+								<div class="card-body card-bg side-tools-bg">
+									<h6 class="card-title font-weight-bold">Search Upper Text Editor</h6>
+									<p class="card-text my-1 text-muted"><small>Enter search term:</small></p>
+									<form class="form-inline" autocomplete="off">
+										<input class="form-control form-control-sm no-enter quick-search-full-width textarea-bg" type="text" id="termSearch1" onkeyup="disablBtnsIfBlank()" placeholder="Search" />
+									</form>
+									<button class="btn btn-sm utility-btn quick-search-full-width my-2" onclick="SAR1.find1();" id="find1" disabled>Find</button>
+									<form class="form-inline" autocomplete="off">
+										<input class="form-control form-control-sm no-enter quick-search-full-width textarea-bg" type="text" id="termReplace1" onkeyup="disablBtnsIfBlank()" placeholder="Replace with" />
+									</form>
+									<button class="btn btn-sm utility-btn quick-search-full-width mt-2" onclick="SAR1.findAndReplace1();" id="findAndReplace1" disabled>Find & Replace</button>
+									<button class="btn btn-sm utility-btn quick-search-full-width mt-2" onclick="SAR1.replaceAll1();" id="replaceAll1" disabled>Replace All</button>
+								</div>
+							</div>
+						</div>
+
+						<div id="close-find-and-replace-lower" class="collapse show mt-3">
+							<div class="card quick-search-section">
+								<div class="card-body card-bg side-tools-bg">
+									<h6 class="card-title font-weight-bold">Search Lower Text Editor</h6>
+									<p class="card-text my-1 text-muted"><small>Enter search term:</small></p>
+									<form class="form-inline" autocomplete="off">
+										<input class="form-control form-control-sm no-enter quick-search-full-width textarea-bg" type="text" id="termSearch3" onkeyup="disablBtnsIfBlank()" placeholder="Search" />
+									</form>
+									<button class="btn btn-sm utility-btn quick-search-full-width my-2" onclick="SAR3.find3();" id="find3" disabled>Find</button>
+									<form class="form-inline" autocomplete="off">
+										<input class="form-control form-control-sm no-enter quick-search-full-width textarea-bg" type="text" id="termReplace3" onkeyup="disablBtnsIfBlank()" placeholder="Replace with" />
+									</form>
+									<button class="btn btn-sm utility-btn quick-search-full-width mt-2" onclick="SAR3.findAndReplace3();" id="findAndReplace3" disabled>Find & Replace</button>
+									<button class="btn btn-sm utility-btn quick-search-full-width mt-2" onclick="SAR3.replaceAll3();" id="replaceAll3" disabled>Replace All</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-5 proof-error-counter-container">
+		<div class="collapse popup" id="anchor-proof-error-counter">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm popup-header navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeProofErrorsCounter();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<a class="navbar-brand">Proof Errors Counter</a>
+				</nav>
+				<div class="card-body proof-error-counter-container-overflow card-bg rounded-bottom-corners">
+
+					<!-- <div class="text-center"><button class="nbtn" onclick="counting();">Update Count</button></div> -->
+
+					<table class="table table-sm text-center proof-errors-table">
+						<thead class="thead-light donothighlight">
+							<tr>
+								<th><input type="checkbox" onclick="[...closest('table').querySelectorAll('tbody [type=checkbox]')].forEach(box=>box.checked=checked)"></th>
+								<th scope="col">Items</th>
+								<th scope="col">Count</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr title="double spaces">
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">ss</span></em></td>
+								<td><a id="search-double-spaces"></a></td>
+							</tr>
+							<tr title="replace with emdash/endash">
+								<td><input type="checkbox"></td>
+								<td><strong>--</strong></td>
+								<td><a id="search-double-dashes"></a></td>
+							</tr>
+							<tr title="double period">
+								<td><input type="checkbox"></td>
+								<td><strong>..</strong></td>
+								<td><a id="search-double-period"></a></td>
+							</tr>
+							<tr title="double comma">
+								<td><input type="checkbox"></td>
+								<td><strong>,,</strong></td>
+								<td><a id="search-double-comma"></a></td>
+							</tr>
+							<tr title="double semicolon">
+								<td><input type="checkbox"></td>
+								<td><strong>;;</strong></td>
+								<td><a id="search-double-semicolon"></a></td>
+							</tr>
+							<tr title="double colon">
+								<td><input type="checkbox"></td>
+								<td><strong>::</strong></td>
+								<td><a id="search-double-colon"></a></td>
+							</tr>
+							<tr title="double underscore">
+								<td><input type="checkbox"></td>
+								<td><strong>__</strong></td>
+								<td><a id="search-double-underscore"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">s</span></em><strong>;</strong></td>
+								<td><a id="search-space-semicolon"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">s</span></em><strong>,</strong></td>
+								<td><a id="search-space-comma"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">s</span></em><strong>.</strong></td>
+								<td><a id="search-space-period"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><strong>‘</strong><em><span class="span-space">s</span></em></td>
+								<td><a id="search-space-single-open-quote"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">s</span></em><strong>’</strong></td>
+								<td><a id="search-space-single-close-quote"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><strong>“</strong><em><span class="span-space">s</span></em></td>
+								<td><a id="search-space-double-open-quotes"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">s</span></em><strong>”</strong></td>
+								<td><a id="search-space-double-close-quotes"></a></td>
+							</tr>
+							<tr title="straight quotes">
+								<td><input type="checkbox"></td>
+								<td><strong>'</strong></td>
+								<td><a id="search-straight-single-quote"></a></td>
+							</tr>
+							<tr title="straight quotes">
+								<td><input type="checkbox"></td>
+								<td><strong>"</strong></td>
+								<td><a id="search-straight-double-quotes"></a></td>
+							</tr>
+							<tr title="Possibly missing quoted text">
+								<td><input type="checkbox"></td>
+								<td><strong>''</strong></td>
+								<td><a id="search-missing-quoted-text-in-single-straight-quote"></a></td>
+							</tr>
+							<tr title="Possibly missing quoted text">
+								<td><input type="checkbox"></td>
+								<td><strong>""</strong></td>
+								<td><a id="search-missing-quoted-text-in-double-straight-quotes"></a></td>
+							</tr>
+							<tr title="Possibly missing quoted text">
+								<td><input type="checkbox"></td>
+								<td><strong>‘’</strong></td>
+								<td><a id="search-missing-quoted-text-in-single-curly-quote"></a></td>
+							</tr>
+							<tr title="Possibly missing quoted text">
+								<td><input type="checkbox"></td>
+								<td><strong>“”</strong></td>
+								<td><a id="search-missing-quoted-text-in-double-curly-quotes"></a></td>
+							</tr>
+							<tr title="Duplicate quotes">
+								<td><input type="checkbox"></td>
+								<td><strong>‘‘</strong></td>
+								<td><a id="search-duplicate-curly-open-single-quote"></a></td>
+							</tr>
+							<tr title="Duplicate quotes">
+								<td><input type="checkbox"></td>
+								<td><strong>’’</strong></td>
+								<td><a id="search-duplicate-curly-close-single-quote"></a></td>
+							</tr>
+							<tr title="Duplicate quotes">
+								<td><input type="checkbox"></td>
+								<td><strong>““</strong></td>
+								<td><a id="search-duplicate-curly-open-double-quotes"></a></td>
+							</tr>
+							<tr title="Duplicate quotes">
+								<td><input type="checkbox"></td>
+								<td><strong>””</strong></td>
+								<td><a id="search-duplicate-curly-close-double-quotes"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><strong>(</strong><em><span class="span-space">s</span></em></td>
+								<td><a id="search-space-open-parenthesis"></a></td>
+							</tr>
+							<tr title="extra space">
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">s</span></em><strong>)</strong></td>
+								<td><a id="search-space-close-parenthesis"></a></td>
+							</tr>
+							<tr title="Delete if found in subsection headings and replace with a space">
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">s</span></em><strong>—</strong><em><span class="span-space">s</span></em></td>
+								<td><a id="search-space-emdash"></a></td>
+							</tr>
+							<tr title="extra space if pertaining to designators such as (a) (1)">
+								<td><input type="checkbox"></td>
+								<td><strong>)</strong><em><span class="span-space">s</span></em><strong>(</strong></td>
+								<td><a id="search-space-between-parenthesis"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>),(</strong></td>
+								<td><a id="search-missing-space-between-parenthesis"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS§</strong></td>
+								<td><a id="search-missing-space-uscs-section-symbol"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 1</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-1"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 2</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-2"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 3</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-3"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 4</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-4"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 5</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-5"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 6</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-6"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 7</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-7"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 8</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-8"></a></td>
+							</tr>
+							<tr title="missing section symbol">
+								<td><input type="checkbox"></td>
+								<td><strong>USCS 9</strong></td>
+								<td><a id="search-missing-section-symbol-uscs-9"></a></td>
+							</tr>
+							<tr title="capitalize if pertaining to a US state">
+								<td><input type="checkbox"></td>
+								<td><strong>state of</strong></td>
+								<td><a id="search-state-of"></a></td>
+							</tr>
+							<tr title="missing opening bracket">
+								<td><input type="checkbox"></td>
+								<td><strong>. Repealed]</strong></td>
+								<td><a id="search-repealed-missing-open-bracket"></a></td>
+							</tr>
+							<tr title="duplicate word">
+								<td><input type="checkbox"></td>
+								<td><strong>Act Act</strong></td>
+								<td><a id="search-duplicate-word-act"></a></td>
+							</tr>
+							<tr title="missing period before closing bracket">
+								<td><input type="checkbox"></td>
+								<td><strong>et seq]</strong></td>
+								<td><a id="search-missing-period-et-seq"></a></td>
+							</tr>
+							<tr title="missing period after et seq">
+								<td><input type="checkbox"></td>
+								<td><strong>et seq,</strong></td>
+								<td><a id="search-missing-period-before-comma-et-seq"></a></td>
+							</tr>
+							<tr title="missing period after et seq.">
+								<td><input type="checkbox"></td>
+								<td><strong>et seq;</strong></td>
+								<td><a id="search-missing-period-before-semicolon-et-seq"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§1</strong></td>
+								<td><a id="search-missing-space-section-1"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§2</strong></td>
+								<td><a id="search-missing-space-section-2"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§3</strong></td>
+								<td><a id="search-missing-space-section-3"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§4</strong></td>
+								<td><a id="search-missing-space-section-4"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§5</strong></td>
+								<td><a id="search-missing-space-section-5"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§6</strong></td>
+								<td><a id="search-missing-space-section-6"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§7</strong></td>
+								<td><a id="search-missing-space-section-7"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§8</strong></td>
+								<td><a id="search-missing-space-section-8"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>§9</strong></td>
+								<td><a id="search-missing-space-section-9"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶1</strong></td>
+								<td><a id="search-missing-space-paragraph-1"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶2</strong></td>
+								<td><a id="search-missing-space-paragraph-2"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶3</strong></td>
+								<td><a id="search-missing-space-paragraph-3"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶4</strong></td>
+								<td><a id="search-missing-space-paragraph-4"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶5</strong></td>
+								<td><a id="search-missing-space-paragraph-5"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶6</strong></td>
+								<td><a id="search-missing-space-paragraph-6"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶7</strong></td>
+								<td><a id="search-missing-space-paragraph-7"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶8</strong></td>
+								<td><a id="search-missing-space-paragraph-8"></a></td>
+							</tr>
+							<tr title="missing space">
+								<td><input type="checkbox"></td>
+								<td><strong>¶9</strong></td>
+								<td><a id="search-missing-space-paragraph-9"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>1C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-1"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>2C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-2"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>3C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-3"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>4C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-4"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>5C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-5"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>6C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-6"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>7C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-7"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>8C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-8"></a></td>
+							</tr>
+							<tr title="missing space before C.F.R.">
+								<td><input type="checkbox"></td>
+								<td><strong>9C.F.R.</strong></td>
+								<td><a id="search-missing-space-cfr-9"></a></td>
+							</tr>
+							<tr title="If located in catchline, check if emphasized in bold">
+								<td><input type="checkbox"></td>
+								<td><strong>[Caution</strong></td>
+								<td><a id="search-caution-if-bold"></a></td>
+							</tr>
+							<tr title="Missing values in case notes cite">
+								<td><input type="checkbox"></td>
+								<td><strong>_ U.S. _</strong></td>
+								<td><a id="search-missing-values-uscs-underscore-cite"></a></td>
+							</tr>
+							<tr title='Missing period after v in party names cite'>
+								<td><input type="checkbox"></td>
+								<td><em><span class="span-space">s</span></em><strong>v</strong><em><span class="span-space">s</span></em></td>
+								<td><a id="search-missing-period-in-versus-cite"></a></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		let textarea = $('#textarea3');
+		textarea.on('keyup', _ => counting());
+		function counting() {
+			var searchText = $('#textarea3').val();
+			let words = [];
+			words['  '] = '#search-double-spaces';
+			words['--'] = '#search-double-dashes';
+			words['..'] = '#search-double-period';
+			words[',,'] = '#search-double-comma';
+			words[';;'] = '#search-double-semicolon';
+			words['::'] = '#search-double-colon';
+			words['__'] = '#search-double-underscore';
+			words[' ;'] = '#search-space-semicolon';
+			words[' ,'] = '#search-space-comma';
+			words[' .'] = '#search-space-period';
+			words['‘ '] = '#search-space-single-open-quote';
+			words[' ’'] = '#search-space-single-close-quote';
+			words['“ '] = '#search-space-double-open-quotes';
+			words[' ”'] = '#search-space-double-close-quotes';
+			words["'"] = '#search-straight-single-quote';
+			words['"'] = '#search-straight-double-quotes';
+			words["''"] = '#search-missing-quoted-text-in-single-straight-quote';
+			words['""'] = '#search-missing-quoted-text-in-double-straight-quotes';
+			words["‘’"] = '#search-missing-quoted-text-in-single-curly-quote';
+			words['“”'] = '#search-missing-quoted-text-in-double-curly-quotes';
+			words["‘‘"] = '#search-duplicate-curly-open-single-quote';
+			words["’’"] = '#search-duplicate-curly-close-single-quote';
+			words['““'] = '#search-duplicate-curly-open-double-quotes';
+			words['””'] = '#search-duplicate-curly-close-double-quotes';
+			words['( '] = '#search-space-open-parenthesis';
+			words[' )'] = '#search-space-close-parenthesis';
+			words[' — '] = '#search-space-emdash';
+			words[') ('] = '#search-space-between-parenthesis';
+			words['),('] = '#search-missing-space-between-parenthesis';
+			words['USCS§'] = '#search-missing-space-uscs-section-symbol';
+			words['USCS 1'] = '#search-missing-section-symbol-uscs-1';
+			words['USCS 2'] = '#search-missing-section-symbol-uscs-2';
+			words['USCS 3'] = '#search-missing-section-symbol-uscs-3';
+			words['USCS 4'] = '#search-missing-section-symbol-uscs-4';
+			words['USCS 5'] = '#search-missing-section-symbol-uscs-5';
+			words['USCS 6'] = '#search-missing-section-symbol-uscs-6';
+			words['USCS 7'] = '#search-missing-section-symbol-uscs-7';
+			words['USCS 8'] = '#search-missing-section-symbol-uscs-8';
+			words['USCS 9'] = '#search-missing-section-symbol-uscs-9';
+			words['state of'] = '#search-state-of';
+			words['. Repealed]'] = '#search-repealed-missing-open-bracket';
+			words['Act Act'] = '#search-duplicate-word-act';
+			words['et seq]'] = '#search-missing-period-et-seq';
+			words['et seq,'] = '#search-missing-period-before-comma-et-seq';
+			words['et seq;'] = '#search-missing-period-before-semicolon-et-seq';
+			words['§1'] = '#search-missing-space-section-1';
+			words['§2'] = '#search-missing-space-section-2';
+			words['§3'] = '#search-missing-space-section-3';
+			words['§4'] = '#search-missing-space-section-4';
+			words['§5'] = '#search-missing-space-section-5';
+			words['§6'] = '#search-missing-space-section-6';
+			words['§7'] = '#search-missing-space-section-7';
+			words['§8'] = '#search-missing-space-section-8';
+			words['§9'] = '#search-missing-space-section-9';
+			words['¶1'] = '#search-missing-space-paragraph-1';
+			words['¶2'] = '#search-missing-space-paragraph-2';
+			words['¶3'] = '#search-missing-space-paragraph-3';
+			words['¶4'] = '#search-missing-space-paragraph-4';
+			words['¶5'] = '#search-missing-space-paragraph-5';
+			words['¶6'] = '#search-missing-space-paragraph-6';
+			words['¶7'] = '#search-missing-space-paragraph-7';
+			words['¶8'] = '#search-missing-space-paragraph-8';
+			words['¶9'] = '#search-missing-space-paragraph-9';
+			words['1C.F.R.'] = '#search-missing-space-cfr-1';
+			words['2C.F.R.'] = '#search-missing-space-cfr-2';
+			words['3C.F.R.'] = '#search-missing-space-cfr-3';
+			words['4C.F.R.'] = '#search-missing-space-cfr-4';
+			words['5C.F.R.'] = '#search-missing-space-cfr-5';
+			words['6C.F.R.'] = '#search-missing-space-cfr-6';
+			words['7C.F.R.'] = '#search-missing-space-cfr-7';
+			words['8C.F.R.'] = '#search-missing-space-cfr-8';
+			words['9C.F.R.'] = '#search-missing-space-cfr-9';
+			words['[Caution'] = '#search-caution-if-bold';
+			words['_ U.S. _'] = '#search-missing-values-uscs-underscore-cite';
+			words[' v '] = '#search-missing-period-in-versus-cite';
+
+			for (const word in words) {
+				var outputDiv = $(words[word]);
+				outputDiv.empty();
+				let count = searchText.split(word).length - 1;
+				outputDiv.append('<a>' + count + '</a>');
+			}
+		}
+	</script>
+
+	<div class="col-lg-3 sticky-note-1-container">
+		<div class="collapse popup" id="anchor-sticky-note-1">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm popup-header navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeStickyNote1();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<a class="navbar-brand">Note 1</a>
+				</nav>
+				<div class="card-body card-bg donothighlight rounded-bottom-corners">
+					<textarea class="py-0 sticky-note-textarea-1" id="sticky-note-textarea-1" rows="5" cols="32" placeholder="Take a note..."></textarea><br>
+					<input id="note-1-value" hidden />
+					<script>rescuefieldvalues3(['note-1-value', 'sticky-note-textarea-1'])</script>
+					<a id="save101" class="card-link nobluelink">Save</a>
+					<a class="card-link nobluelink" onclick="copy101();">Copy</a>
+					<a class="card-link nobluelink" onclick="javascript:eraseText101();">Clear</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-3 sticky-note-2-container">
+		<div class="collapse popup" id="anchor-sticky-note-2">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm popup-header navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeStickyNote2();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<a class="navbar-brand">Note 2</a>
+				</nav>
+				<div class="card-body card-bg donothighlight rounded-bottom-corners">
+					<textarea class="py-0 sticky-note-textarea-2" id="sticky-note-textarea-2" rows="5" cols="32" placeholder="Take a note..."></textarea><br>
+					<input id="note-2-value" hidden />
+					<script>rescuefieldvalues3(['note-2-value', 'sticky-note-textarea-2'])</script>
+					<a id="save102" class="card-link nobluelink">Save</a>
+					<a class="card-link nobluelink" onclick="copy102();">Copy</a>
+					<a class="card-link nobluelink" onclick="javascript:eraseText102();">Clear</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-3 sticky-note-3-container">
+		<div class="collapse popup" id="anchor-sticky-note-3">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm popup-header navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeStickyNote3();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<a class="navbar-brand">Note 3</a>
+				</nav>
+				<div class="card-body card-bg donothighlight rounded-bottom-corners">
+					<textarea class="py-0 sticky-note-textarea-3" id="sticky-note-textarea-3" rows="5" cols="32" placeholder="Take a note..."></textarea><br>
+					<input id="note-3-value" hidden />
+					<script>rescuefieldvalues3(['note-3-value', 'sticky-note-textarea-3'])</script>
+					<a id="save103" class="card-link nobluelink">Save</a>
+					<a class="card-link nobluelink" onclick="copy103();">Copy</a>
+					<a class="card-link nobluelink" onclick="javascript:eraseText103();">Clear</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-4 frame-container">
+		<div class="collapse popup" id="anchor-window-mode-highlighter">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm navbar-dark popup-header navbar-bg">
+					<a href="#anchor-window-mode-highlighter" class="window-close-btn" data-toggle="collapse" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<a class="navbar-brand">Highlighter</a>
+				</nav>
+				<div class="card-body text-center donothighlight card-bg rounded-bottom-corners">
+					<button class="cbtn" type="button" data-toggle="collapse" data-target="#NUwindowedcollapseOne" aria-expanded="true" aria-controls="NUwindowedcollapseOne">Bracketed Matter</button>
+					<button class="cbtn" type="button" data-toggle="collapse" data-target="#NUwindowedcollapseTwo" aria-expanded="false" aria-controls="NUwindowedcollapseTwo">Common Errors</button>
+					<button class="cbtn" type="button" data-toggle="collapse" data-target="#NUwindowedcollapseThree" aria-expanded="false" aria-controls="NUwindowedcollapseThree">Noted Under Common Errors</button>
+					<div class="accordion accordion-flush" id="BracketedHighlighterAssist2">
+						<div id="NUwindowedcollapseOne" class="collapse show" data-parent="#BracketedHighlighterAssist2">
+							<div>
+								<iframe class="highlighter-iframe" src="highlighters/bracketed-matter-highlighter-2.html" loading="lazy" width="100%" height="570" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+							</div>
+						</div>
+						<div id="NUwindowedcollapseTwo" class="collapse" data-parent="#BracketedHighlighterAssist2">
+							<div>
+								<iframe class="highlighter-iframe" src="highlighters/common-errors-highlighter-2.html" loading="lazy" width="100%" height="570" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+							</div>
+						</div>
+						<div id="NUwindowedcollapseThree" class="collapse" data-parent="#BracketedHighlighterAssist2">
+							<div>
+								<iframe class="highlighter-iframe" src="highlighters/noted-under-common-errors-highlighter-2.html" loading="lazy" width="100%" height="570" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-4 frame-container">
+		<div class="collapse popup" id="anchor-view-lexis-plus-text">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm popup-header navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeLexisPlusViewer();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<a class="navbar-brand">Lexis+ Viewer</a>
+				</nav>
+				<div class="card-bg rounded-bottom-corners">
+					<div contenteditable="true" class="view-lexis-plus-text-content-editable" placeholder="Copy and paste text from Lexis+"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="anchor-text-compare" tabindex="-1" role="dialog" aria-labelledby="TextCompareView" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-body card-bg">
+					<div class="form-group mx-3">
+						<iframe src="tools/text-compare.html" loading="lazy" width="1080" height="750" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="anchor-full-screen-highlighter" tabindex="-1" role="dialog" aria-labelledby="HighlighterView" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group mx-3">
+						<div class="text-center mt-2 donothighlight">
+							<a class="float-right mb-1" href="#anchor-window-mode-highlighter" data-toggle="collapse" data-dismiss="modal" title="Open in a smaller window">Pop-out <i class="bi bi-box-arrow-up-right" style="font-size:15px"></i></a>
+							<button class="cbtn" type="button" data-toggle="collapse" data-target="#NUcollapseOne" aria-expanded="true" aria-controls="NUcollapseOne">Bracketed Matter</button>
+							<button class="cbtn" type="button" data-toggle="collapse" data-target="#NUcollapseTwo" aria-expanded="false" aria-controls="NUcollapseTwo">Common Errors</button>
+							<button class="cbtn" type="button" data-toggle="collapse" data-target="#NUcollapseThree" aria-expanded="false" aria-controls="NUcollapseThree">Noted Under Common Errors</button>
+						</div>
+						<div class="accordion accordion-flush" id="BracketedHighlighterAssist">
+							<div id="NUcollapseOne" class="collapse show" data-parent="#BracketedHighlighterAssist">
+								<a class="highlighter-full-screen-link" href="highlighters/bracketed-matter-highlighter.html" target="_blank">Fullscreen in New Window <i class="bi bi-box-arrow-up-right" style="font-size:15px"></i></a>
+								<div class="mt-2">
+									<iframe src="highlighters/bracketed-matter-highlighter.html" loading="lazy" width="1080" height="750" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+								</div>
+							</div>
+							<div id="NUcollapseTwo" class="collapse" data-parent="#BracketedHighlighterAssist">
+								<a class="highlighter-full-screen-link" href="highlighters/common-errors-highlighter.html" target="_blank">Fullscreen in New Window <i class="bi bi-box-arrow-up-right" style="font-size:15px"></i></a>
+								<div class="mt-2">
+									<iframe src="highlighters/common-errors-highlighter.html" loading="lazy" width="1080" height="750" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+								</div>
+							</div>
+							<div id="NUcollapseThree" class="collapse" data-parent="#BracketedHighlighterAssist">
+								<a class="highlighter-full-screen-link" href="highlighters/noted-under-common-errors-highlighter.html" target="_blank">Fullscreen in New Window <i class="bi bi-box-arrow-up-right" style="font-size:15px"></i></a>
+								<div class="mt-2">
+									<iframe src="highlighters/noted-under-common-errors-highlighter.html" loading="lazy" width="1080" height="750" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="anchor-dupe-notes-counter" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group mx-3">
+						<a class="paragraph-counter-full-screen-link" href="tools/paragraph-counter.html" target="_blank">Fullscreen in New Window <i class="bi bi-box-arrow-up-right" style="font-size:15px"></i></a>
+						<div>
+							<iframe src="tools/paragraph-counter.html" loading="lazy" width="1080" height="750" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3 amendment-note-descriptors-container donothighlight">
+		<div class="popup" id="anchor-amendment-note-descriptors">
+			<div class="card border-0 side-tools-bg card-bg">
+				<nav class="navbar navbar-expand-sm popup-header navbar-bg"><a class="small-navbar-window-close-btn" onclick="closeUSAmnotesDescriptors();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a></nav>
+				<div class="card-body amendment-note-descriptors-container-overflow rounded-bottom-corners">
+
+					<script src="_externals/scripts/core/US-descriptors.js"></script>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-7 amendment-note-designators-container donothighlight">
+		<div class="popup" id="anchor-amendment-note-designators">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm popup-header navbar-bg"><a class="small-navbar-window-close-btn" onclick="closeUSAmnotesDesignators();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a></nav>
+				<div class="card-body text-center card-bg rounded-bottom-corners">
+					<div class="accordion accordion-flush" id="amnotemoredesignatorscontainer">
+						<div id="amnotebackdesignatorsbtn" class="collapse show" data-parent="#amnotemoredesignatorscontainer">
+
+							<script src="_externals/scripts/core/US-designators.js"></script>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12 bracketed-matter-builder-container donothighlight">
+		<div class="collapse popup" id="anchor-bracketed-matter-builder">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeBracketedMatterBuilder();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<div class="collapse navbar-collapse">
+
+						<ul class="navbar-nav mr-auto">
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-link dropdown-toggle" id="dropdownedit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bracketed Matter Builder</a>
+								<div class="dropdown-menu bracketed-matter-builder-dropdown-overflow" aria-labelledby="dropdownedit">
+									<a href="#anchor-bracketed-1" class="dropdown-item">Standard</a>
+									<a href="#anchor-bracketed-2" class="dropdown-item">Standard - 2 sections</a>
+									<a href="#anchor-bracketed-3" class="dropdown-item">Standard - 3 sections</a>
+									<a href="#anchor-bracketed-4" class="dropdown-item">Standard - et seq.</a>
+									<a href="#anchor-bracketed-5" class="dropdown-item">AND - 2 sections</a>
+									<a href="#anchor-bracketed-6" class="dropdown-item">AND - 3 sections</a>
+									<a href="#anchor-bracketed-7" class="dropdown-item">AND - et seq.</a>
+									<a href="#anchor-bracketed-8" class="dropdown-item">OR - 2 sections</a>
+									<a href="#anchor-bracketed-9" class="dropdown-item">OR - 3 sections</a>
+									<a href="#anchor-bracketed-10" class="dropdown-item">OR - et seq.</a>
+									<a href="#anchor-bracketed-11" class="dropdown-item">Date of enactment</a>
+									<a href="#anchor-bracketed-12" class="dropdown-item">[unclassified]</a>
+									<a href="#anchor-bracketed-12" class="dropdown-item">[Deleted]</a>
+									<a href="#anchor-bracketed-12" class="dropdown-item">[Repealed]</a>
+									<a href="#anchor-bracketed-12" class="dropdown-item">[Redesignated]</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown popup-header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+						</ul>
+					</div>
+				</nav>
+				<div class="card-body bracketed-matter-builder-overflow card-bg rounded-bottom-corners">
+					<div id="anchor-bracketed-matter-standard" class="collapse show">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-1">
+								<h6 class="card-title font-weight-bold">Standard</h6>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title1" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section1" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input1" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields1();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-standard-2-sections" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-2">
+								<h6 class="card-title font-weight-bold">Standard - 2 sections</h6>
+								<p class="card-text my-1 text-muted"><small>Follow “and” format from Act</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title10" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section10" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section10a" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input10" placeholder="Result" />
+									<a class="nobluelink ml-2" onclick="copyinput10()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields10();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-standard-3-sections" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-3">
+								<h6 class="card-title font-weight-bold">Standard - 3 sections</h6>
+								<p class="card-text my-1 text-muted"><small>Follow “and” format from Act</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title11" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section11" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section11a" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section11b" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input11" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput11()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields11();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-standard-et-seq" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-4">
+								<h6 class="card-title font-weight-bold">Standard - et seq.</h6>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title2gg" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section2gg" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input2" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput2()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields2();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-and-2-sections" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-5">
+								<h6 class="card-title font-weight-bold">AND - 2 sections</h6>
+								<p class="card-text my-1 text-muted"><small>Follow original placement of comma from Act</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title7" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section7" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section7a" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input7" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput7()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields7();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-and-3-sections" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-6">
+								<h6 class="card-title font-weight-bold">AND - 3 sections</h6>
+								<p class="card-text my-1 text-muted"><small>Follow original placement of comma from Act</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title8" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section8" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section8a" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section8b" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input8" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput8()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields8();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-and-et-seq" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-7">
+								<h6 class="card-title font-weight-bold">AND - et seq.</h6>
+								<p class="card-text my-1 text-muted"><small>Follow original placement of comma from Act</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title9" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section9" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section9a" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input9" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput9()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields9();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-or-2-sections" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-8">
+								<h6 class="card-title font-weight-bold">OR - 2 sections</h6>
+								<p class="card-text my-1 text-muted"><small>Follow original placement of comma from Act</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title4" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section4" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section4a" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input4" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput4()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields4();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-or-3-sections" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-9">
+								<h6 class="card-title font-weight-bold">OR - 3 sections</h6>
+								<p class="card-text my-1 text-muted"><small>Follow original placement of comma from Act</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title5" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section5" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section5a" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section5b" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input5" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput5()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields5();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-or-et-seq" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-10">
+								<h6 class="card-title font-weight-bold">OR - et seq.</h6>
+								<p class="card-text my-1 text-muted"><small>Follow original placement of comma from Act</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title6" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section6" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section6a" placeholder="Section" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input6" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput6()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields6();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-date-of-enactment" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-11">
+								<h6 class="card-title font-weight-bold">Date of enactment</h6>
+								<!-- <input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="month3" placeholder="Month (e.g. Jan.)" autocomplete="off"/> -->
+
+								<select class="mt-1 no-enter textarea-bg select-style" id="month3" data-width="auto">
+									<option selected>Select a month...</option>
+									<option value="Jan.">Jan.</option>
+									<option value="Feb.">Feb.</option>
+									<option value="March">March</option>
+									<option value="April">April</option>
+									<option value="May">May</option>
+									<option value="June">June</option>
+									<option value="July">July</option>
+									<option value="Aug.">Aug.</option>
+									<option value="Sept.">Sept.</option>
+									<option value="Oct.">Oct.</option>
+									<option value="Nov.">Nov</option>
+									<option value="Dec.">Dec.</option>
+								</select>
+
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="day3" placeholder="Day (e.g. 1)" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="year3" placeholder="Year (e.g. 2022)" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="input3" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput3()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields3();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-bracketed-matter-deleted-placeholders" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-12">
+								<h6 class="card-title font-weight-bold">Placeholders</h6>
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="input17" value=" [unclassified]" autocomplete="off" />
+									<a class="nobluelink2 ml-2" onclick="copyinput17()"><small>Copy</small></a>
+									<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="input14" value="[Deleted]" autocomplete="off" />
+									<a class="nobluelink2 ml-2" onclick="copyinput14()"><small>Copy</small></a>
+									<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="input15" value="[Repealed]" autocomplete="off" />
+									<a class="nobluelink2 ml-2" onclick="copyinput15()"><small>Copy</small></a>
+									<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="input16" value="[Redesignated]" autocomplete="off" />
+									<a class="nobluelink2 ml-2" onclick="copyinput16()"><small>Copy</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12 history-citation-builder-container donothighlight">
+		<div class="collapse popup" id="anchor-history-citation-builder">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeHistoryCitationBuilder();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<div class="collapse navbar-collapse">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-link dropdown-toggle" id="dropdownedit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">History Citation Builder</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownedit">
+									<a href="#anchor-bracketed-13" class="dropdown-item">Added HC - Positive</a>
+									<a href="#anchor-bracketed-14" class="dropdown-item">HC - Non-positive scenario 1</a>
+									<a href="#anchor-bracketed-15" class="dropdown-item">HC - Non-positive scenario 2</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown popup-header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+						</ul>
+					</div>
+				</nav>
+				<div class="card-body history-citation-builder-overflow card-bg rounded-bottom-corners">
+					<div id="anchor-added-history-citation-1" class="collapse show mt-1">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-13">
+								<h6 class="card-title font-weight-bold">Added HC - Positive</h6>
+								<p class="card-text my-1 text-muted"><small>HC must be unchunked; do not add period at the end</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="month004" placeholder="Month (new)" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="day004" placeholder="Day" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="year004" placeholder="Year" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl1004" placeholder="117" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl2004" placeholder="XXX" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="div004" placeholder="Div" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title004" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subtitle004" placeholder="Subtitle" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="part004" placeholder="Part" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="chapter004" placeholder="Chapter" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subchapter004" placeholder="Subchapter" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section004" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="stat004" placeholder="136" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="page004" placeholder="Page" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="added-hc-positive-result" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput004()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields004();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-added-history-citation-2" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-14">
+								<h6 class="card-title font-weight-bold">Added HC - Non-positive scenario 1</h6>
+								<p class="card-text my-1 text-muted"><small>HC must be unchunked; do not add period at the end</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="month005a" placeholder="Month (old)" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="day005a" placeholder="Day" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="year005a" placeholder="Year" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl1005a" placeholder="103" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl2005a" placeholder="XXX" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="div005a" placeholder="Div" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title005a" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subtitle005a" placeholder="Subtitle" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="part005a" placeholder="Part" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="chapter005a" placeholder="Chapter" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subchapter005a" placeholder="Subchapter" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section005a" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="month005b" placeholder="Month (new)" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="day005b" placeholder="Day" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="year005b" placeholder="Year" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl1005b" placeholder="117" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl2005b" placeholder="XXX" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="div005b" placeholder="Div" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title005b" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subtitle005b" placeholder="Subtitle" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="part005b" placeholder="Part" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="chapter005b" placeholder="Chapter" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subchapter005b" placeholder="Subchapter" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section005b" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="stat005b" placeholder="136" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="page005b" placeholder="Page" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="added-hc-scenario-1-result" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput005a()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields005a();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="anchor-added-history-citation-3" class="collapse show mt-3">
+						<div class="card quick-search-section">
+							<div class="card-body card-bg side-tools-bg" id="anchor-bracketed-15">
+								<h6 class="card-title font-weight-bold">Added HC - Non-positive scenario 2</h6>
+								<p class="card-text my-1 text-muted"><small>HC must be unchunked; do not add period at the end</small></p>
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="month006" placeholder="Month (new)" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="day006" placeholder="Day" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="year006" placeholder="Year" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl1006" placeholder="117-100" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl2006" placeholder="117-100" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="div006" placeholder="Div" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title006" placeholder="Title" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subtitle006" placeholder="Subtitle" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="part006" placeholder="Part" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="chapter006" placeholder="Chapter" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subchapter006" placeholder="Subchapter" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section006" placeholder="Section" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="stat006" placeholder="136" autocomplete="off" />
+								<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="page006" placeholder="Page" autocomplete="off" />
+								<form class="form-inline mt-3" autocomplete="off">
+									<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="added-hc-scenario-2-result" placeholder="Result" />
+									<a class="nobluelink2 ml-2" onclick="copyinput006()"><small>Copy</small></a>
+									<a class="nobluelink2 ml-2" onclick="ClearFields006();"><small>Clear</small></a>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div class="col-lg-5 amendment-note-annotation-builder-container donothighlight">
+		<div class="collapse popup" id="anchor-amendment-note-annotation">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm navbar-dark popup-header navbar-bg"><a class="small-navbar-window-close-btn" onclick="closeUSAmnotesAnnotation();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a></nav>
+				<div class="card-body amendment-note-annotation-builder-container-overflow card-bg rounded-bottom-corners">
+					<div class="accordion accordion-flush" id="amendment-note-annotation-act-intro-accordion">
+						<div id="amendment-note-annotation-act-intro-first-set" class="collapse show" data-parent="#amendment-note-annotation-act-intro-accordion">
+							<button class="cbtn" type="button" data-toggle="collapse" data-target="#amendment-note-annotation-act-intro-second-set" aria-expanded="false" aria-controls="amendment-note-annotation-act-intro-second-set">Show Act Intro <i class="bi bi-chevron-down"></i></button>
+							<br>
+							<button class="nbtngreen" onclick="fixtext();">Fixit</button>
+							<button class="nbtngreen" onclick="fixtext4()">Merge</button>
+							<button class="nbtnblue" onclick="copy1();">Copy</button>
+							<button class="nbtnred" onclick="javascript:eraseText1();">Clear</button>
+							<br>
+							<button id='pbothtags' class="cbtn">&#60;p&#62;&#60;/p&#62;</button>
+							<button id='pbothtagsspace' class="cbtn">&#60;p&#62;“ &#60;/p&#62;</button>
+							<br>
+							<div class="row">
+								<div class="col-lg-2">
+									<button id='<p>“(a)</p>' class="sbtnred">(a)</button>
+									<button id='<p>“(b)</p>' class="sbtnred">(b)</button>
+									<button id='<p>“(c)</p>' class="sbtnred">(c)</button>
+									<button id='<p>“(d)</p>' class="sbtnred">(d)</button>
+									<button id='<p>“(e)</p>' class="sbtnred">(e)</button>
+									<button id='<p>“(f)</p>' class="sbtnred">(f)</button>
+									<button id='<p>“(g)</p>' class="sbtnred">(g)</button>
+									<button id='<p>“(h)</p>' class="sbtnred">(h)</button>
+									<button id='<p>“(i)</p>' class="sbtnred">(i)</button>
+									<button id='<p>“(j)</p>' class="sbtnred">(j)</button>
+									<button id='extraannot1' class="sbtnred">(*)</button>
+								</div>
+								<div class="col-lg-2">
+									<button id='annot1' class="sbtngreen">(1)</button>
+									<button id='annot2' class="sbtngreen">(2)</button>
+									<button id='annot3' class="sbtngreen">(3)</button>
+									<button id='annot4' class="sbtngreen">(4)</button>
+									<button id='annot5' class="sbtngreen">(5)</button>
+									<button id='annot6' class="sbtngreen">(6)</button>
+									<button id='annot7' class="sbtngreen">(7)</button>
+									<button id='annot8' class="sbtngreen">(8)</button>
+									<button id='annot9' class="sbtngreen">(9)</button>
+									<button id='annot10' class="sbtngreen">(10)</button>
+									<button id='extraannot2' class="sbtngreen">(*)</button>
+								</div>
+								<div class="col-lg-2">
+									<button id='annotA' class="sbtnblue">(A)</button>
+									<button id='annotB' class="sbtnblue">(B)</button>
+									<button id='annotC' class="sbtnblue">(C)</button>
+									<button id='annotD' class="sbtnblue">(D)</button>
+									<button id='annotE' class="sbtnblue">(E)</button>
+									<button id='annotF' class="sbtnblue">(F)</button>
+									<button id='annotG' class="sbtnblue">(G)</button>
+									<button id='annotH' class="sbtnblue">(H)</button>
+									<button id='annotI' class="sbtnblue">(I)</button>
+									<button id='annotJ' class="sbtnblue">(J)</button>
+									<button id='extraannot3' class="sbtnblue">(*)</button>
+								</div>
+								<div class="col-lg-2">
+									<button id='annoti' class="sbtnyellow">(i)</button>
+									<button id='annotii' class="sbtnyellow">(ii)</button>
+									<button id='annotiii' class="sbtnyellow">(iii)</button>
+									<button id='annotiv' class="sbtnyellow">(iv)</button>
+									<button id='annotv' class="sbtnyellow">(v)</button>
+									<button id='annotvi' class="sbtnyellow">(vi)</button>
+									<button id='annotvii' class="sbtnyellow">(vii)</button>
+									<button id='annotviii' class="sbtnyellow">(viii)</button>
+									<button id='annotix' class="sbtnyellow">(ix)</button>
+									<button id='annotx' class="sbtnyellow">(x)</button>
+									<button id='extraannot4' class="sbtnyellow">(*)</button>
+								</div>
+								<div class="col-lg-2">
+									<button id='annotI*' class="sbtnviolet">(I)</button>
+									<button id='annotII' class="sbtnviolet">(II)</button>
+									<button id='annotIII' class="sbtnviolet">(III)</button>
+									<button id='annotIV' class="sbtnviolet">(IV)</button>
+									<button id='annotV' class="sbtnviolet">(V)</button>
+									<button id='annotVI' class="sbtnviolet">(VI)</button>
+									<button id='annotVII' class="sbtnviolet">(VII)</button>
+									<button id='annotVIII' class="sbtnviolet">(VIII)</button>
+									<button id='annotIX' class="sbtnviolet">(IX)</button>
+									<button id='annotX' class="sbtnviolet">(X)</button>
+									<button id='extraannot5' class="sbtnviolet">(*)</button>
+								</div>
+							</div>
+						</div>
+						<div id="amendment-note-annotation-act-intro-second-set" class="collapse" data-parent="#amendment-note-annotation-act-intro-accordion">
+							<button class="cbtn" type="button" data-toggle="collapse" data-target="#amendment-note-annotation-act-intro-first-set" aria-expanded="true" aria-controls="amendment-note-annotation-act-intro-first-set">Hide Act Intro <i class="bi bi-chevron-up"></i></button>
+							<button class="nbtnblue" onclick="copyinput12();">Copy</button>
+							<button class="nbtnred" onclick="ClearFields12();">Clear</button>
+							<div class="card quick-search-section">
+								<div class="card-body card-bg side-tools-bg">
+									<h6 class="card-title font-weight-bold">Act Intro</h6>
+									<form autocomplete="off">
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="month" placeholder="Month" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="day" placeholder="Day" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="year" placeholder="Year" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl1" placeholder="117" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl2" placeholder="XXX" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="div" placeholder="Div" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title" placeholder="Title" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subtitle" placeholder="Subtitle" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="chapter" placeholder="Chapter" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subchapter" placeholder="Subchapter" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section" placeholder="Section" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="stat1" placeholder="136" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="stat2" placeholder="Page" />
+									</form>
+									<form class="mt-3" autocomplete="off">
+										<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="am-act-intro-result" placeholder="Result" />
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-5 noted-under-builder-container donothighlight">
+		<div class="collapse popup" id="anchor-noted-under-builder">
+			<div class="card border-0 side-tools-bg">
+				<nav class="navbar navbar-expand-sm navbar-dark navbar-bg">
+					<a class="window-close-btn" onclick="closeNotedUnderBuilder();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a>
+					<div class="collapse navbar-collapse">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-link dropdown-toggle" id="dropdownedit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Noted Under Builder</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownedit">
+									<a data-toggle="collapse" data-target="#noted-under-act-intro-second-set" aria-expanded="false" aria-controls="noted-under-act-intro-second-set" class="dropdown-item">Act Intro</a>
+									<a data-toggle="collapse" data-target="#noted-under-act-intro-first-set" aria-expanded="true" aria-controls="noted-under-act-intro-first-set" class="dropdown-item">Noted Under Builder 1.0</a>
+									<a data-toggle="collapse" data-target="#noted-under-act-intro-third-set" aria-expanded="false" aria-controls="noted-under-act-intro-third-set" class="dropdown-item">Noted Under Builder 2.0</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown popup-header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+						</ul>
+					</div>
+				</nav>
+
+				<div class="card-body card-bg rounded-bottom-corners">
+					<div class="accordion accordion-flush" id="noted-under-act-intro-accordion">
+						<div id="noted-under-act-intro-first-set" class="collapse show" data-parent="#noted-under-act-intro-accordion">
+							<button class="nbtngreen" onclick="fixtext();">Fixit</button>
+							<button class="nbtngreen" onclick="fixtext4()">Merge</button>
+							<button class="nbtnblue" onclick="copy1();">Copy</button>
+							<button class="nbtnred" onclick="javascript:eraseText1();">Clear</button>
+							<div class="accordion accordion-flush" id="noted-under-more-designators-accordion">
+								<div id="noted-under-designators-first-set" class="collapse show" data-parent="#noted-under-more-designators-accordion">
+									<button id='popening' class="cbtn">&#60;p&#62;</button>
+									<button id='pclosing' class="cbtn">&#60;/p&#62;</button>
+									<button id='pbothtags' class="cbtn">&#60;p&#62;&#60;/p&#62;</button>
+									<div class="row noted-under-builder-overflow">
+										<div class="col-lg-2">
+											<button id='nu-lower-alpha-0' class="sbtnred">(*)</button>
+											<button id='nu-lower-alpha-a' class="sbtnred">(a)</button>
+											<button id='nu-lower-alpha-b' class="sbtnred">(b)</button>
+											<button id='nu-lower-alpha-c' class="sbtnred">(c)</button>
+											<button id='nu-lower-alpha-d' class="sbtnred">(d)</button>
+											<button id='nu-lower-alpha-e' class="sbtnred">(e)</button>
+											<button id='nu-lower-alpha-f' class="sbtnred">(f)</button>
+											<button id='nu-lower-alpha-g' class="sbtnred">(g)</button>
+											<button id='nu-lower-alpha-h' class="sbtnred">(h)</button>
+											<button id='nu-lower-alpha-i' class="sbtnred">(i)</button>
+											<button id='nu-lower-alpha-j' class="sbtnred">(j)</button>
+											<button id='nu-lower-alpha-k' class="sbtnred">(k)</button>
+											<button id='nu-lower-alpha-l' class="sbtnred">(l)</button>
+											<button id='nu-lower-alpha-m' class="sbtnred">(m)</button>
+											<button id='nu-lower-alpha-n' class="sbtnred">(n)</button>
+											<button id='nu-lower-alpha-o' class="sbtnred">(o)</button>
+											<button id='nu-lower-alpha-p' class="sbtnred">(p)</button>
+											<button id='nu-lower-alpha-q' class="sbtnred">(q)</button>
+											<button id='nu-lower-alpha-r' class="sbtnred">(r)</button>
+											<button id='nu-lower-alpha-s' class="sbtnred">(s)</button>
+											<button id='nu-lower-alpha-t' class="sbtnred">(t)</button>
+											<button id='nu-lower-alpha-u' class="sbtnred">(u)</button>
+											<button id='nu-lower-alpha-v' class="sbtnred">(v)</button>
+											<button id='nu-lower-alpha-w' class="sbtnred">(w)</button>
+											<button id='nu-lower-alpha-x' class="sbtnred">(x)</button>
+											<button id='nu-lower-alpha-y' class="sbtnred">(y)</button>
+											<button id='nu-lower-alpha-z' class="sbtnred">(z)</button>
+											<button id='nu-lower-double-alpha-0' class="sbtnred">(*)</button>
+											<button id='nu-lower-double-alpha-aa' class="sbtnred">(aa)</button>
+											<button id='nu-lower-double-alpha-bb' class="sbtnred">(bb)</button>
+											<button id='nu-lower-double-alpha-cc' class="sbtnred">(cc)</button>
+											<button id='nu-lower-double-alpha-dd' class="sbtnred">(dd)</button>
+											<button id='nu-lower-double-alpha-ee' class="sbtnred">(ee)</button>
+											<button id='nu-lower-double-alpha-ff' class="sbtnred">(ff)</button>
+											<button id='nu-lower-double-alpha-gg' class="sbtnred">(gg)</button>
+											<button id='nu-lower-double-alpha-hh' class="sbtnred">(hh)</button>
+											<button id='nu-lower-double-alpha-ii' class="sbtnred">(ii)</button>
+											<button id='nu-lower-double-alpha-jj' class="sbtnred">(jj)</button>
+											<button id='nu-lower-double-alpha-kk' class="sbtnred">(kk)</button>
+											<button id='nu-lower-double-alpha-ll' class="sbtnred">(ll)</button>
+											<button id='nu-lower-double-alpha-mm' class="sbtnred">(mm)</button>
+											<button id='nu-lower-double-alpha-nn' class="sbtnred">(nn)</button>
+											<button id='nu-lower-double-alpha-oo' class="sbtnred">(oo)</button>
+											<button id='nu-lower-double-alpha-pp' class="sbtnred">(pp)</button>
+											<button id='nu-lower-double-alpha-qq' class="sbtnred">(qq)</button>
+											<button id='nu-lower-double-alpha-rr' class="sbtnred">(rr)</button>
+											<button id='nu-lower-double-alpha-ss' class="sbtnred">(ss)</button>
+											<button id='nu-lower-double-alpha-tt' class="sbtnred">(tt)</button>
+											<button id='nu-lower-double-alpha-uu' class="sbtnred">(uu)</button>
+											<button id='nu-lower-double-alpha-vv' class="sbtnred">(vv)</button>
+											<button id='nu-lower-double-alpha-ww' class="sbtnred">(ww)</button>
+											<button id='nu-lower-double-alpha-xx' class="sbtnred">(xx)</button>
+											<button id='nu-lower-double-alpha-yy' class="sbtnred">(yy)</button>
+											<button id='nu-lower-double-alpha-zz' class="sbtnred">(zz)</button>
+										</div>
+										<div class="col-lg-2">
+											<button id='nu-numerical-0' class="sbtngreen">(*)</button>
+											<button id='nu-numerical-1' class="sbtngreen">(1)</button>
+											<button id='nu-numerical-2' class="sbtngreen">(2)</button>
+											<button id='nu-numerical-3' class="sbtngreen">(3)</button>
+											<button id='nu-numerical-4' class="sbtngreen">(4)</button>
+											<button id='nu-numerical-5' class="sbtngreen">(5)</button>
+											<button id='nu-numerical-6' class="sbtngreen">(6)</button>
+											<button id='nu-numerical-7' class="sbtngreen">(7)</button>
+											<button id='nu-numerical-8' class="sbtngreen">(8)</button>
+											<button id='nu-numerical-9' class="sbtngreen">(9)</button>
+											<button id='nu-numerical-10' class="sbtngreen">(10)</button>
+											<button id='nu-numerical-11' class="sbtngreen">(11)</button>
+											<button id='nu-numerical-12' class="sbtngreen">(12)</button>
+											<button id='nu-numerical-13' class="sbtngreen">(13)</button>
+											<button id='nu-numerical-14' class="sbtngreen">(14)</button>
+											<button id='nu-numerical-15' class="sbtngreen">(15)</button>
+											<button id='nu-numerical-16' class="sbtngreen">(16)</button>
+											<button id='nu-numerical-17' class="sbtngreen">(17)</button>
+											<button id='nu-numerical-18' class="sbtngreen">(18)</button>
+											<button id='nu-numerical-19' class="sbtngreen">(19)</button>
+											<button id='nu-numerical-20' class="sbtngreen">(20)</button>
+											<button id='nu-numerical-21' class="sbtngreen">(21)</button>
+											<button id='nu-numerical-22' class="sbtngreen">(22)</button>
+											<button id='nu-numerical-23' class="sbtngreen">(23)</button>
+											<button id='nu-numerical-24' class="sbtngreen">(24)</button>
+											<button id='nu-numerical-25' class="sbtngreen">(25)</button>
+											<button id='nu-numerical-26' class="sbtngreen">(26)</button>
+											<button id='nu-upper-double-alpha-0' class="sbtngreen">(*)</button>
+											<button id='nu-upper-double-alpha-AA' class="sbtngreen">(AA)</button>
+											<button id='nu-upper-double-alpha-BB' class="sbtngreen">(BB)</button>
+											<button id='nu-upper-double-alpha-CC' class="sbtngreen">(CC)</button>
+											<button id='nu-upper-double-alpha-DD' class="sbtngreen">(DD)</button>
+											<button id='nu-upper-double-alpha-EE' class="sbtngreen">(EE)</button>
+											<button id='nu-upper-double-alpha-FF' class="sbtngreen">(FF)</button>
+											<button id='nu-upper-double-alpha-GG' class="sbtngreen">(GG)</button>
+											<button id='nu-upper-double-alpha-HH' class="sbtngreen">(HH)</button>
+											<button id='nu-upper-double-alpha-II' class="sbtngreen">(II)</button>
+											<button id='nu-upper-double-alpha-JJ' class="sbtngreen">(JJ)</button>
+											<button id='nu-upper-double-alpha-KK' class="sbtngreen">(KK)</button>
+											<button id='nu-upper-double-alpha-LL' class="sbtngreen">(LL)</button>
+											<button id='nu-upper-double-alpha-MM' class="sbtngreen">(MM)</button>
+											<button id='nu-upper-double-alpha-NN' class="sbtngreen">(NN)</button>
+											<button id='nu-upper-double-alpha-OO' class="sbtngreen">(OO)</button>
+											<button id='nu-upper-double-alpha-PP' class="sbtngreen">(PP)</button>
+											<button id='nu-upper-double-alpha-QQ' class="sbtngreen">(QQ)</button>
+											<button id='nu-upper-double-alpha-RR' class="sbtngreen">(RR)</button>
+											<button id='nu-upper-double-alpha-SS' class="sbtngreen">(SS)</button>
+											<button id='nu-upper-double-alpha-TT' class="sbtngreen">(TT)</button>
+											<button id='nu-upper-double-alpha-UU' class="sbtngreen">(UU)</button>
+											<button id='nu-upper-double-alpha-VV' class="sbtngreen">(VV)</button>
+											<button id='nu-upper-double-alpha-WW' class="sbtngreen">(WW)</button>
+											<button id='nu-upper-double-alpha-XX' class="sbtngreen">(XX)</button>
+											<button id='nu-upper-double-alpha-YY' class="sbtngreen">(YY)</button>
+											<button id='nu-upper-double-alpha-ZZ' class="sbtngreen">(ZZ)</button>
+										</div>
+										<div class="col-lg-2">
+											<button id='nu-upper-alpha-0' class="sbtnblue">(*)</button>
+											<button id='nu-upper-alpha-A' class="sbtnblue">(A)</button>
+											<button id='nu-upper-alpha-B' class="sbtnblue">(B)</button>
+											<button id='nu-upper-alpha-C' class="sbtnblue">(C)</button>
+											<button id='nu-upper-alpha-D' class="sbtnblue">(D)</button>
+											<button id='nu-upper-alpha-E' class="sbtnblue">(E)</button>
+											<button id='nu-upper-alpha-F' class="sbtnblue">(F)</button>
+											<button id='nu-upper-alpha-G' class="sbtnblue">(G)</button>
+											<button id='nu-upper-alpha-H' class="sbtnblue">(H)</button>
+											<button id='nu-upper-alpha-I' class="sbtnblue">(I)</button>
+											<button id='nu-upper-alpha-J' class="sbtnblue">(J)</button>
+											<button id='nu-upper-alpha-K' class="sbtnblue">(K)</button>
+											<button id='nu-upper-alpha-L' class="sbtnblue">(L)</button>
+											<button id='nu-upper-alpha-M' class="sbtnblue">(M)</button>
+											<button id='nu-upper-alpha-N' class="sbtnblue">(N)</button>
+											<button id='nu-upper-alpha-O' class="sbtnblue">(O)</button>
+											<button id='nu-upper-alpha-P' class="sbtnblue">(P)</button>
+											<button id='nu-upper-alpha-Q' class="sbtnblue">(Q)</button>
+											<button id='nu-upper-alpha-R' class="sbtnblue">(R)</button>
+											<button id='nu-upper-alpha-S' class="sbtnblue">(S)</button>
+											<button id='nu-upper-alpha-T' class="sbtnblue">(T)</button>
+											<button id='nu-upper-alpha-U' class="sbtnblue">(U)</button>
+											<button id='nu-upper-alpha-V' class="sbtnblue">(V)</button>
+											<button id='nu-upper-alpha-W' class="sbtnblue">(W)</button>
+											<button id='nu-upper-alpha-X' class="sbtnblue">(X)</button>
+											<button id='nu-upper-alpha-Y' class="sbtnblue">(Y)</button>
+											<button id='nu-upper-alpha-Z' class="sbtnblue">(Z)</button>
+										</div>
+										<div class="col-lg-2">
+											<button id='nu-lower-roman-numeral-0' class="sbtnyellow">(*)</button>
+											<button id='nu-lower-roman-numeral-i' class="sbtnyellow">(i)</button>
+											<button id='nu-lower-roman-numeral-ii' class="sbtnyellow">(ii)</button>
+											<button id='nu-lower-roman-numeral-iii' class="sbtnyellow">(iii)</button>
+											<button id='nu-lower-roman-numeral-iv' class="sbtnyellow">(iv)</button>
+											<button id='nu-lower-roman-numeral-v' class="sbtnyellow">(v)</button>
+											<button id='nu-lower-roman-numeral-vi' class="sbtnyellow">(vi)</button>
+											<button id='nu-lower-roman-numeral-vii' class="sbtnyellow">(vii)</button>
+											<button id='nu-lower-roman-numeral-viii' class="sbtnyellow">(viii)</button>
+											<button id='nu-lower-roman-numeral-ix' class="sbtnyellow">(ix)</button>
+											<button id='nu-lower-roman-numeral-x' class="sbtnyellow">(x)</button>
+											<button id='nu-lower-roman-numeral-xi' class="sbtnyellow">(xi)</button>
+											<button id='nu-lower-roman-numeral-xii' class="sbtnyellow">(xii)</button>
+											<button id='nu-lower-roman-numeral-xiii' class="sbtnyellow">(xiii)</button>
+											<button id='nu-lower-roman-numeral-xiv' class="sbtnyellow">(xiv)</button>
+											<button id='nu-lower-roman-numeral-xv' class="sbtnyellow">(xv)</button>
+											<button id='nu-lower-roman-numeral-xvi' class="sbtnyellow">(xvi)</button>
+											<button id='nu-lower-roman-numeral-xvii' class="sbtnyellow">(xvii)</button>
+											<button id='nu-lower-roman-numeral-xviii' class="sbtnyellow">(xviii)</button>
+											<button id='nu-lower-roman-numeral-xix' class="sbtnyellow">(xix)</button>
+											<button id='nu-lower-roman-numeral-xx' class="sbtnyellow">(xx)</button>
+											<button id='nu-lower-roman-numeral-xxi' class="sbtnyellow">(xxi)</button>
+											<button id='nu-lower-roman-numeral-xxii' class="sbtnyellow">(xxii)</button>
+											<button id='nu-lower-roman-numeral-xxiii' class="sbtnyellow">(xxiii)</button>
+											<button id='nu-lower-roman-numeral-xxiv' class="sbtnyellow">(xxiv)</button>
+											<button id='nu-lower-roman-numeral-xxv' class="sbtnyellow">(xxv)</button>
+											<button id='nu-lower-roman-numeral-xxvi' class="sbtnyellow">(xxvi)</button>
+										</div>
+										<div class="col-lg-2">
+											<button id='nu-upper-roman-numeral-0' class="sbtnviolet">(*)</button>
+											<button id='nu-upper-roman-numeral-I' class="sbtnviolet">(I)</button>
+											<button id='nu-upper-roman-numeral-II' class="sbtnviolet">(II)</button>
+											<button id='nu-upper-roman-numeral-III' class="sbtnviolet">(III)</button>
+											<button id='nu-upper-roman-numeral-IV' class="sbtnviolet">(IV)</button>
+											<button id='nu-upper-roman-numeral-V' class="sbtnviolet">(V)</button>
+											<button id='nu-upper-roman-numeral-VI' class="sbtnviolet">(VI)</button>
+											<button id='nu-upper-roman-numeral-VII' class="sbtnviolet">(VII)</button>
+											<button id='nu-upper-roman-numeral-VIII' class="sbtnviolet">(VIII)</button>
+											<button id='nu-upper-roman-numeral-IX' class="sbtnviolet">(IX)</button>
+											<button id='nu-upper-roman-numeral-X' class="sbtnviolet">(X)</button>
+											<button id='nu-upper-roman-numeral-XI' class="sbtnviolet">(XI)</button>
+											<button id='nu-upper-roman-numeral-XII' class="sbtnviolet">(XII)</button>
+											<button id='nu-upper-roman-numeral-XIII' class="sbtnviolet">(XIII)</button>
+											<button id='nu-upper-roman-numeral-XIV' class="sbtnviolet">(XIV)</button>
+											<button id='nu-upper-roman-numeral-XV' class="sbtnviolet">(XV)</button>
+											<button id='nu-upper-roman-numeral-XVI' class="sbtnviolet">(XVI)</button>
+											<button id='nu-upper-roman-numeral-XVII' class="sbtnviolet">(XVII)</button>
+											<button id='nu-upper-roman-numeral-XVIII' class="sbtnviolet">(XVIII)</button>
+											<button id='nu-upper-roman-numeral-XIX' class="sbtnviolet">(XIX)</button>
+											<button id='nu-upper-roman-numeral-XX' class="sbtnviolet">(XX)</button>
+											<button id='nu-upper-roman-numeral-XXI' class="sbtnviolet">(XXI)</button>
+											<button id='nu-upper-roman-numeral-XXII' class="sbtnviolet">(XXII)</button>
+											<button id='nu-upper-roman-numeral-XXIII' class="sbtnviolet">(XXIII)</button>
+											<button id='nu-upper-roman-numeral-XXIV' class="sbtnviolet">(XXIV)</button>
+											<button id='nu-upper-roman-numeral-XXV' class="sbtnviolet">(XXV)</button>
+											<button id='nu-upper-roman-numeral-XXVI' class="sbtnviolet">(XXVI)</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="noted-under-act-intro-second-set" class="collapse" data-parent="#noted-under-act-intro-accordion">
+							<div class="card noted-under-builder-act-intro-overflow">
+								<div class="card-body side-tools-bg card-bg">
+									<h6 class="card-title font-weight-bold">Act Intro</h6>
+									<form autocomplete="off">
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="month2" placeholder="Month" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="day2" placeholder="Day" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="year2" placeholder="Year" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl1a" placeholder="117" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="pl2a" placeholder="XXX" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="div2" placeholder="Div" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="title2" placeholder="Title" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subtitle2" placeholder="Subtitle" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="chapter2" placeholder="Chapter" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="subchapter2" placeholder="Subchapter" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="section2" placeholder="Section" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="stat1a" placeholder="136" />
+										<input class="form-control form-control-sm mt-1 no-enter textarea-bg" type="text" id="stat2a" placeholder="Page" />
+									</form>
+									<form class="mt-3" autocomplete="off">
+										<input class="form-control form-control-sm inputcopybtn no-enter textarea-bg" type="text" id="nu-act-intro-result" placeholder="Result" />
+									</form>
+									<div class="mt-3">
+										<button class="nbtnblue" onclick="copyinput13();">Copy</button>
+										<button class="nbtnred" onclick="ClearFields13();">Clear</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="noted-under-act-intro-third-set" class="collapse" data-parent="#noted-under-act-intro-accordion">
+							<button class="nbtngreen" onclick="fixtext();">Fixit</button>
+							<button class="nbtngreen" onclick="fixtext4()">Merge</button>
+							<button class="nbtnblue" onclick="copy1();">Copy</button>
+							<button class="nbtnred" onclick="javascript:eraseText1();">Clear</button>
+							<br>
+							<button id='[' class="cbtn">&nbsp;[&nbsp;</button>
+							<button id=']' class="cbtn">&nbsp;]&nbsp;</button>
+							<button id='[]' class="cbtn">&nbsp;[ ]&nbsp;</button>
+							<button id='{}' class="cbtn">&nbsp;{ }&nbsp;</button>
+							<button id='[{}]' class="cbtn">[{ }]</button>
+							<button id='-' class="cbtn">&nbsp; - &nbsp;</button>
+							<br>
+							<button class="nbtn" onclick="paragraphWrap();">P-Wrap</button>
+							<button class="nbtn" onclick="annotationWrap();">A-Wrap</button>
+							<button class="nbtn" onclick="fixtext981();fixtext982();fixtext983();">Generate XML</button>
+							<div class="card-bg">
+								<div class="card-bg side-tools-bg">
+									<div class="row noted-under-builder-simple-mode-overflow">
+										<div class="col-lg-2">
+											<button id='(*^1)' class="sbtnred">(*)</button>
+											<button id='(a.)' class="sbtnred">(a)</button>
+											<button id='(b.)' class="sbtnred">(b)</button>
+											<button id='(c.)' class="sbtnred">(c)</button>
+											<button id='(d.)' class="sbtnred">(d)</button>
+											<button id='(e.)' class="sbtnred">(e)</button>
+											<button id='(f.)' class="sbtnred">(f)</button>
+											<button id='(g.)' class="sbtnred">(g)</button>
+											<button id='(h.)' class="sbtnred">(h)</button>
+											<button id='(i.)' class="sbtnred">(i)</button>
+											<button id='(j.)' class="sbtnred">(j)</button>
+											<button id='(k.)' class="sbtnred">(k)</button>
+											<button id='(l.)' class="sbtnred">(l)</button>
+											<button id='(m.)' class="sbtnred">(m)</button>
+											<button id='(n.)' class="sbtnred">(n)</button>
+											<button id='(o.)' class="sbtnred">(o)</button>
+											<button id='(p.)' class="sbtnred">(p)</button>
+											<button id='(q.)' class="sbtnred">(q)</button>
+											<button id='(r.)' class="sbtnred">(r)</button>
+											<button id='(s.)' class="sbtnred">(s)</button>
+											<button id='(t.)' class="sbtnred">(t)</button>
+											<button id='(u.)' class="sbtnred">(u)</button>
+											<button id='(v.)' class="sbtnred">(v)</button>
+											<button id='(w.)' class="sbtnred">(w)</button>
+											<button id='(x.)' class="sbtnred">(x)</button>
+											<button id='(y.)' class="sbtnred">(y)</button>
+											<button id='(z.)' class="sbtnred">(z)</button>
+											<button id='(*^6)' class="sbtnred">(*)</button>
+											<button id='(aa.)' class="sbtnred">(aa)</button>
+											<button id='(bb.)' class="sbtnred">(bb)</button>
+											<button id='(cc.)' class="sbtnred">(cc)</button>
+											<button id='(dd.)' class="sbtnred">(dd)</button>
+											<button id='(ee.)' class="sbtnred">(ee)</button>
+											<button id='(ff.)' class="sbtnred">(ff)</button>
+											<button id='(gg.)' class="sbtnred">(gg)</button>
+											<button id='(hh.)' class="sbtnred">(hh)</button>
+											<button id='(ii*.)' class="sbtnred">(ii)</button>
+											<button id='(jj.)' class="sbtnred">(jj)</button>
+											<button id='(kk.)' class="sbtnred">(kk)</button>
+											<button id='(ll.)' class="sbtnred">(ll)</button>
+											<button id='(mm.)' class="sbtnred">(mm)</button>
+											<button id='(nn.)' class="sbtnred">(nn)</button>
+											<button id='(oo.)' class="sbtnred">(oo)</button>
+											<button id='(pp.)' class="sbtnred">(pp)</button>
+											<button id='(qq.)' class="sbtnred">(qq)</button>
+											<button id='(rr.)' class="sbtnred">(rr)</button>
+											<button id='(ss.)' class="sbtnred">(ss)</button>
+											<button id='(tt.)' class="sbtnred">(tt)</button>
+											<button id='(uu.)' class="sbtnred">(uu)</button>
+											<button id='(vv.)' class="sbtnred">(vv)</button>
+											<button id='(ww.)' class="sbtnred">(ww)</button>
+											<button id='(xx*.)' class="sbtnred">(xx)</button>
+											<button id='(yy.)' class="sbtnred">(yy)</button>
+											<button id='(zz.)' class="sbtnred">(zz)</button>
+										</div>
+										<div class="col-lg-2">
+											<button id='(*^2)' class="sbtngreen">(*)</button>
+											<button id='(1.)' class="sbtngreen">(1)</button>
+											<button id='(2.)' class="sbtngreen">(2)</button>
+											<button id='(3.)' class="sbtngreen">(3)</button>
+											<button id='(4.)' class="sbtngreen">(4)</button>
+											<button id='(5.)' class="sbtngreen">(5)</button>
+											<button id='(6.)' class="sbtngreen">(6)</button>
+											<button id='(7.)' class="sbtngreen">(7)</button>
+											<button id='(8.)' class="sbtngreen">(8)</button>
+											<button id='(9.)' class="sbtngreen">(9)</button>
+											<button id='(10.)' class="sbtngreen">(10)</button>
+											<button id='(11.)' class="sbtngreen">(11)</button>
+											<button id='(12.)' class="sbtngreen">(12)</button>
+											<button id='(13.)' class="sbtngreen">(13)</button>
+											<button id='(14.)' class="sbtngreen">(14)</button>
+											<button id='(15.)' class="sbtngreen">(15)</button>
+											<button id='(16.)' class="sbtngreen">(16)</button>
+											<button id='(17.)' class="sbtngreen">(17)</button>
+											<button id='(18.)' class="sbtngreen">(18)</button>
+											<button id='(19.)' class="sbtngreen">(19)</button>
+											<button id='(20.)' class="sbtngreen">(20)</button>
+											<button id='(21.)' class="sbtngreen">(21)</button>
+											<button id='(22.)' class="sbtngreen">(22)</button>
+											<button id='(23.)' class="sbtngreen">(23)</button>
+											<button id='(24.)' class="sbtngreen">(24)</button>
+											<button id='(25.)' class="sbtngreen">(25)</button>
+											<button id='(26.)' class="sbtngreen">(26)</button>
+											<button id='(*^7)' class="sbtngreen">(*)</button>
+											<button id='(AA.)' class="sbtngreen">(AA)</button>
+											<button id='(BB.)' class="sbtngreen">(BB)</button>
+											<button id='(CC.)' class="sbtngreen">(CC)</button>
+											<button id='(DD.)' class="sbtngreen">(DD)</button>
+											<button id='(EE.)' class="sbtngreen">(EE)</button>
+											<button id='(FF.)' class="sbtngreen">(FF)</button>
+											<button id='(GG.)' class="sbtngreen">(GG)</button>
+											<button id='(HH.)' class="sbtngreen">(HH)</button>
+											<button id='(II*.)' class="sbtngreen">(II)</button>
+											<button id='(JJ.)' class="sbtngreen">(JJ)</button>
+											<button id='(KK.)' class="sbtngreen">(KK)</button>
+											<button id='(LL.)' class="sbtngreen">(LL)</button>
+											<button id='(MM.)' class="sbtngreen">(MM)</button>
+											<button id='(NN.)' class="sbtngreen">(NN)</button>
+											<button id='(OO.)' class="sbtngreen">(OO)</button>
+											<button id='(PP.)' class="sbtngreen">(PP)</button>
+											<button id='(QQ.)' class="sbtngreen">(QQ)</button>
+											<button id='(RR.)' class="sbtngreen">(RR)</button>
+											<button id='(SS.)' class="sbtngreen">(SS)</button>
+											<button id='(TT.)' class="sbtngreen">(TT)</button>
+											<button id='(UU.)' class="sbtngreen">(UU)</button>
+											<button id='(VV.)' class="sbtngreen">(VV)</button>
+											<button id='(WW.)' class="sbtngreen">(WW)</button>
+											<button id='(XX*.)' class="sbtngreen">(XX)</button>
+											<button id='(YY.)' class="sbtngreen">(YY)</button>
+											<button id='(ZZ.)' class="sbtngreen">(ZZ)</button>
+										</div>
+										<div class="col-lg-2">
+											<button id='(*^3)' class="sbtnblue">(*)</button>
+											<button id='(A.)' class="sbtnblue">(A)</button>
+											<button id='(B.)' class="sbtnblue">(B)</button>
+											<button id='(C.)' class="sbtnblue">(C)</button>
+											<button id='(D.)' class="sbtnblue">(D)</button>
+											<button id='(E.)' class="sbtnblue">(E)</button>
+											<button id='(F.)' class="sbtnblue">(F)</button>
+											<button id='(G.)' class="sbtnblue">(G)</button>
+											<button id='(H.)' class="sbtnblue">(H)</button>
+											<button id='(I.)' class="sbtnblue">(I)</button>
+											<button id='(J.)' class="sbtnblue">(J)</button>
+											<button id='(K.)' class="sbtnblue">(K)</button>
+											<button id='(L.)' class="sbtnblue">(L)</button>
+											<button id='(M.)' class="sbtnblue">(M)</button>
+											<button id='(N.)' class="sbtnblue">(N)</button>
+											<button id='(O.)' class="sbtnblue">(O)</button>
+											<button id='(P.)' class="sbtnblue">(P)</button>
+											<button id='(Q.)' class="sbtnblue">(Q)</button>
+											<button id='(R.)' class="sbtnblue">(R)</button>
+											<button id='(S.)' class="sbtnblue">(S)</button>
+											<button id='(T.)' class="sbtnblue">(T)</button>
+											<button id='(U.)' class="sbtnblue">(U)</button>
+											<button id='(V.)' class="sbtnblue">(V)</button>
+											<button id='(W.)' class="sbtnblue">(W)</button>
+											<button id='(X.)' class="sbtnblue">(X)</button>
+											<button id='(Y.)' class="sbtnblue">(Y)</button>
+											<button id='(Z.)' class="sbtnblue">(Z)</button>
+										</div>
+										<div class="col-lg-2">
+											<button id='(*^4)' class="sbtnyellow">(*)</button>
+											<button id='(i*.)' class="sbtnyellow">(i)</button>
+											<button id='(ii.)' class="sbtnyellow">(ii)</button>
+											<button id='(iii.)' class="sbtnyellow">(iii)</button>
+											<button id='(iv.)' class="sbtnyellow">(iv)</button>
+											<button id='(v*.)' class="sbtnyellow">(v)</button>
+											<button id='(vi.)' class="sbtnyellow">(vi)</button>
+											<button id='(vii.)' class="sbtnyellow">(vii)</button>
+											<button id='(viii.)' class="sbtnyellow">(viii)</button>
+											<button id='(ix.)' class="sbtnyellow">(ix)</button>
+											<button id='(x*.)' class="sbtnyellow">(x)</button>
+											<button id='(xi.)' class="sbtnyellow">(xi)</button>
+											<button id='(xii.)' class="sbtnyellow">(xii)</button>
+											<button id='(xiii.)' class="sbtnyellow">(xiii)</button>
+											<button id='(xiv.)' class="sbtnyellow">(xiv)</button>
+											<button id='(xv.)' class="sbtnyellow">(xv)</button>
+											<button id='(xvi.)' class="sbtnyellow">(xvi)</button>
+											<button id='(xvii.)' class="sbtnyellow">(xvii)</button>
+											<button id='(xviii.)' class="sbtnyellow">(xviii)</button>
+											<button id='(xix.)' class="sbtnyellow">(xix)</button>
+											<button id='(xx.)' class="sbtnyellow">(xx)</button>
+											<button id='(xxi.)' class="sbtnyellow">(xxi)</button>
+											<button id='(xxii.)' class="sbtnyellow">(xxii)</button>
+											<button id='(xxiii.)' class="sbtnyellow">(xxiii)</button>
+											<button id='(xxiv.)' class="sbtnyellow">(xxiv)</button>
+											<button id='(xxv.)' class="sbtnyellow">(xxv)</button>
+											<button id='(xxvi.)' class="sbtnyellow">(xxvi)</button>
+										</div>
+										<div class="col-lg-2">
+											<button id='(*^5)' class="sbtnviolet">(*)</button>
+											<button id='(I*.)' class="sbtnviolet">(I)</button>
+											<button id='(II.)' class="sbtnviolet">(II)</button>
+											<button id='(III.)' class="sbtnviolet">(III)</button>
+											<button id='(IV.)' class="sbtnviolet">(IV)</button>
+											<button id='(V*.)' class="sbtnviolet">(V)</button>
+											<button id='(VI.)' class="sbtnviolet">(VI)</button>
+											<button id='(VII.)' class="sbtnviolet">(VII)</button>
+											<button id='(VIII.)' class="sbtnviolet">(VIII)</button>
+											<button id='(IX.)' class="sbtnviolet">(IX)</button>
+											<button id='(X*.)' class="sbtnviolet">(X)</button>
+											<button id='(XI.)' class="sbtnviolet">(XI)</button>
+											<button id='(XII.)' class="sbtnviolet">(XII)</button>
+											<button id='(XIII.)' class="sbtnviolet">(XIII)</button>
+											<button id='(XIV.)' class="sbtnviolet">(XIV)</button>
+											<button id='(XV.)' class="sbtnviolet">(XV)</button>
+											<button id='(XVI.)' class="sbtnviolet">(XVI)</button>
+											<button id='(XVII.)' class="sbtnviolet">(XVII)</button>
+											<button id='(XVIII.)' class="sbtnviolet">(XVIII)</button>
+											<button id='(XIX.)' class="sbtnviolet">(XIX)</button>
+											<button id='(XX.)' class="sbtnviolet">(XX)</button>
+											<button id='(XXI.)' class="sbtnviolet">(XXI)</button>
+											<button id='(XXII.)' class="sbtnviolet">(XXII)</button>
+											<button id='(XXIII.)' class="sbtnviolet">(XXIII)</button>
+											<button id='(XXIV.)' class="sbtnviolet">(XXIV)</button>
+											<button id='(XXV.)' class="sbtnviolet">(XXV)</button>
+											<button id='(XXVI.)' class="sbtnviolet">(XXVI)</button>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="_externals/scripts/core/z-us-schemeline-builder.js"></script>
+	<script src="_externals/scripts/core/z-us-section-builder.js"></script>
+
+	<div class="collapse donothighlight" id="anchor-stopwatch-container">
+		<div class="popup">
+			<nav class="navbar navbar-expand-sm popup-header navbar-bg"><a class="small-navbar-window-close-btn" onclick="closeStopwatch();" title="Close"><i class="bi bi-x-square" style="color: #c0c0c0;" onMouseOver="this.style.color='#f44336'" onMouseOut="this.style.color='#c0c0c0'"></i></a></nav>
+			<div class="timer" onclick="startTimer()">Start!</div>
+			<div class="startTimer reset" onclick="startTimer()"><i class="bi-play" style="font-size: 1.2rem; color: #fafafa"></i></div>
+			<div class="pauseTimer reset" onclick="pauseTimer()"> <i class="bi-pause" style="font-size: 1.2rem; color: #fafafa"></i></div>
+			<div class="resetTimer reset" onclick="resetTimer()"> <i class="bi-arrow-counterclockwise" style="font-size: 1.2rem; color: #fafafa"></i></div>
+		</div>
+	</div>
+
+	<script src="_global-externals/scripts/jquery-3.2.1.slim.min.js"></script>
+	<script src="_global-externals/scripts/1.12.9.popper.min.js"></script>
+	<script src="_global-externals/scripts/4.0.0.bootstrap.min.js"></script>
+	<script src="_global-externals/scripts/2.2.4.jquery.min.js"></script>
+	<script src="_global-externals/scripts/bootstrap4-toggle.min.js"></script>
+	<script src="_externals/scripts/core/_assist-main.js"></script>
+	<script src="_externals/scripts/core/US-amnotes.js"></script>
+	<script src="_externals/scripts/core/US-guided.js"></script>
+	<script src="_externals/scripts/core/z-US-2.js"></script>
+	<script src="_externals/scripts/core/US-simple-mode-1.js"></script>
+	<script src="_externals/scripts/core/US-simple-mode-1a.js"></script>
+	<script src="_externals/scripts/core/US-simple-mode-2.js"></script>
+	<script src="_externals/scripts/core/US-simple-mode-3.js"></script>
+	<script src="_externals/scripts/core/US-simple-mode-4.js"></script>
+	<script src="_externals/scripts/core/z-disables.js"></script>
+	<script src="_externals/scripts/core/z-sticky-note-1.js"></script>
+	<script src="_externals/scripts/core/z-sticky-note-2.js"></script>
+	<script src="_externals/scripts/core/z-sticky-note-3.js"></script>
+
+</body>
+
+</html>

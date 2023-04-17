@@ -1,0 +1,214 @@
+.inputcopybtn{
+	width: 150px !important;
+	transition: width 0.5s ease-in-out;
+	outline: none;
+	box-shadow:none !important;
+	border:1px solid #c0c0c0 !important;
+	font-family: Calibri;
+}
+#assistacts {
+	width: 50px !important;
+}
+#assistacts2 {
+	width: 102px !important;
+}
+#statewebacts {
+	width: 60px !important;
+}
+#statewebacts2 {
+	width: 112px !important;
+}
+#statewebactsa {
+	width: 60px !important;
+}
+#statewebacts2a {
+	width: 112px !important;
+}
+#sharepointacts {
+	width: 60px !important;
+}
+#sharepointacts2 {
+	width: 112px !important;
+}
+#statewebsections {
+	width: 60px !important;
+}
+#statewebsections2 {
+	width: 112px !important;
+}
+#posvnonposinput {
+	width: 176px !important;
+}
+#table3a {
+	width: 176px !important;
+}
+#table3b1 {
+	width: 86px !important;
+}
+#table3b2 {
+	width: 86px !important;
+}
+#actpart1 {
+	width: 65px !important;
+}
+#actpart2 {
+	width: 75px !important;
+}
+.amendment-note-descriptors-container {
+	position: absolute;
+	top: 2px;
+	left: -25px;
+	max-width: 302px;
+}
+.amendment-note-descriptors-container-overflow {
+	height: 762px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+.amendment-note-designators-container {
+	position: absolute;
+	bottom: 17rem;
+	left: 18.65rem;
+	max-width: 928px;
+	border-radius: 0 0 0.250rem 0.250rem;
+}
+.amendment-note-annotation-builder-container {
+	position: absolute;
+	top: 0.5rem;
+	right: 5rem;
+	max-width: 305px;
+}
+.amendment-note-annotation-builder-container-overflow {
+	height: 623px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+.noted-under-builder-container {
+	position: absolute;
+	top: 0.5rem;
+	right: 5rem;
+	max-width: 320px;
+}
+.noted-under-builder-overflow {
+	height: 490px;
+	overflow-y: scroll;
+	resize: vertical !important;
+}
+
+.noted-under-builder-act-intro-overflow {
+	height: 560px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+
+.noted-under-builder-simple-mode-overflow {
+	height: 520px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+
+
+.sectionbuildercontainer {
+	position: absolute;
+	top: 15.5rem;
+	right: 5rem;
+	max-width: 305px;
+}
+.sectionbuilderoverflow {
+	height: 536px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+.amendment-note-annotation-overflow {
+	height: 685px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+.reschemingbuildercontainer {
+	position: absolute;
+	top: 0.5rem;
+	right: 5rem;
+	max-width: 305px;
+}
+.rescheming-builder-1-overflow {
+	height: 490px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+
+.rescheming-builder-1-overflow::-webkit-scrollbar {
+	width: .600rem;
+	height: 0rem;
+}
+
+.rescheming-builder-1-overflow::-webkit-scrollbar-thumb {
+	height: 150px;
+}
+
+.rescheming-builder-2-overflow {
+	height: 490px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+
+.rescheming-builder-2-overflow::-webkit-scrollbar {
+	width: .600rem;
+	height: 0rem;
+}
+
+.rescheming-builder-2-overflow::-webkit-scrollbar-thumb {
+	height: 150px;
+}
+
+.quick-search-container {
+	position: absolute;
+	top: 120px;
+	right: 90px;
+	max-width: 320px;
+}
+
+.quick-search-container-overflow {
+	height: 325px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+
+.proof-error-counter-container {
+	position: absolute;
+	top: 20px;
+	left: 10px;
+	max-width: 320px;
+}
+
+.proof-error-counter-container-overflow {
+	height: 90vh;
+	overflow-y: scroll;
+	resize: vertical;
+}
+
+.bracketed-matter-builder-container {
+	position: absolute;
+	top: 400px;
+	left: 35px;
+	max-width: 320px;
+}
+.bracketed-matter-builder-overflow {
+	height: 470px;
+	overflow-y: scroll;
+	resize: vertical;
+}
+.bracketed-matter-builder-dropdown-overflow {
+	height: 300px;
+	overflow-y: scroll;
+}
+.history-citation-builder-container {
+	position: absolute;
+	top: 450px;
+	left: 85px;
+	max-width: 320px;
+}
+.history-citation-builder-overflow {
+	height: 470px;
+	overflow-y: scroll;
+	resize: vertical;
+}

@@ -1,0 +1,1024 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<title>STON Search and Replace Tool</title>
+
+	<link rel="stylesheet" href="../../_global-externals/stylesheets/bootstrap.min.css">
+
+	<link rel="stylesheet" href="../../_global-externals/icons/bootstrap/bootstrap-icons.css" />
+
+	<script src="_global-externals/scripts/jquery-3.5.1.min.js"></script>
+
+	<script src="_global-externals/scripts/2.2.4.jquery.min.js"></script>
+
+	<link rel="shortcut icon" type="image/png" href="_global-externals/favicons/builder-2.png" />
+
+	<script src="_global-externals/scripts/personalization.js"></script>
+
+
+
+
+
+
+	<script src="eden/_externals/scripts/core/z-text-fields-storage-session.js"></script>
+
+	<style>
+		body {
+			background-image: url("_global-externals/imgs/background-img1.png");
+			background-repeat: repeat;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		.donothighlight {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		}
+
+		a,
+		input,
+		button {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		}
+
+		.modal a {
+			font-size: 0.875rem;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		}
+
+		ul,
+		li {
+			font-size: 0.875rem;
+		}
+
+		a:hover,
+		a:visited,
+		a:link,
+		a:active {
+			text-decoration: none;
+			cursor: pointer;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		}
+
+		.maincard {
+			background: #fafafa;
+			border-radius: 0 0 0.250rem 0.250rem;
+			box-shadow: 0px 3px 15px 2px rgba(0, 0, 0, 0.1);
+		}
+
+		.navbar {
+			background: #654ea3;
+			background: -webkit-linear-gradient(to right, #654ea3, #eaafc8);
+			background: linear-gradient(to left, #141e30, #243b55);
+			border-radius: 0.250rem 0.250rem 0 0;
+			max-height: 45px;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		}
+
+		.wordandcharcount {
+			font-size: 0.8125rem;
+			pointer-events: none;
+		}
+
+		.btn:active,
+		a:active {
+			background-color: transparent;
+			outline: none;
+			box-shadow: 1px #666666;
+		}
+
+		textarea {
+			outline: none;
+			box-shadow: none !important;
+			border: 1px solid #c0c0c0 !important;
+			font-family: Calibri;
+			color: #222222 !important;
+		}
+
+		#textarea3 {
+			resize: vertical;
+			max-width: 100%;
+			height: 50vh;
+			font-size: 18px;
+		}
+
+		.modal-body {
+			border-radius: 0.275rem;
+		}
+
+		.modal-body a,
+		li {
+			color: #222222;
+		}
+
+		.modal-body a:hover {
+			color: #c0c0c0;
+		}
+
+		.modal-scrollbar-measure {
+			overflow: hidden !Important;
+		}
+
+		td {
+			font-weight: 600;
+		}
+
+		.card-header {
+			background: #654ea3;
+			background: -webkit-linear-gradient(to right, #654ea3, #eaafc8);
+			background: linear-gradient(to left, #141e30, #243b55);
+			border-radius: 0;
+			color: #fafafa;
+		}
+
+		.card-header:hover {
+			outline: 3px solid #8079b4;
+			color: #fafafa;
+			font-weight: bold;
+			cursor: pointer;
+			border-radius: 0;
+		}
+
+		::selection {
+			color: #000;
+			background: #90caf9;
+		}
+
+		.search-results {
+			font-size: 16px;
+			pointer-events: none;
+		}
+
+		.cbtn {
+			border: 1px solid;
+			border-color: #555;
+			border-radius: 3px;
+			padding: 7px 9px;
+			font-size: 13px;
+			text-align: center;
+			cursor: pointer;
+			color: #000;
+			background-color: #e0f2f1;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		.cbtn:hover {
+			-webkit-filter: brightness(103%);
+			filter: brightness(103%);
+		}
+
+		.cbtn:active {
+			background-color: #e0f7fa;
+			outline: none;
+			box-shadow: 1px #666;
+		}
+
+		.cbtngreen {
+			border: 1px solid;
+			border-color: #555;
+			border-radius: 3px;
+			padding: 7px 9px;
+			font-size: 13px;
+			text-align: center;
+			cursor: pointer;
+			color: #000;
+			background-color: #81c784;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		.cbtngreen:hover {
+			-webkit-filter: brightness(103%);
+			filter: brightness(103%);
+		}
+
+		.cbtngreen:active {
+			background-color: #81c784;
+			outline: none;
+			box-shadow: 1px #666;
+			-webkit-filter: brightness(103%);
+			filter: brightness(103%);
+		}
+
+		.cbtnred {
+			border: 1px solid;
+			border-color: #555;
+			border-radius: 3px;
+			padding: 7px 9px;
+			font-size: 13px;
+			text-align: center;
+			cursor: pointer;
+			color: #000;
+			background-color: #e57373;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		.cbtnred:hover {
+			-webkit-filter: brightness(105%);
+			filter: brightness(105%);
+		}
+
+		.cbtnred:active {
+			background-color: #e77e7e;
+			outline: none;
+			box-shadow: 1px #666;
+		}
+
+		.cbtnblue {
+			border: 1px solid;
+			border-color: #555;
+			border-radius: 3px;
+			padding: 7px 9px;
+			font-size: 13px;
+			text-align: center;
+			cursor: pointer;
+			color: #000;
+			background-color: #86c5f9;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		.cbtnblue:hover {
+			-webkit-filter: brightness(103%);
+			filter: brightness(103%);
+		}
+
+		.cbtnblue:active {
+			background-color: #85d5fa;
+			outline: none;
+			box-shadow: 1px #666;
+		}
+
+		.span-space {
+			font-style: italic;
+			color: #ff7f50;
+		}
+	</style>
+
+</head>
+
+<body class="body-bg">
+
+	<div class="container-fluid">
+
+		<div class="row mt-4">
+
+			<div class="col-lg-1 col-md-1"></div>
+
+			<div class="col-lg-3 col-md-3">
+				<div class="card border-0">
+					<div class="border border-dark" id="accordion">
+						<div class="card">
+							<div class="card-header navbar-bg collapsed card-link donothighlight" data-toggle="collapse" data-target="#TXREG">TXREG <i class="bi bi-caret-down-fill float-right"></i></div>
+							<div id="TXREG" class="collapse" data-parent="#accordion">
+								<div class="card-body text-center">
+									<div class="donothighlight">
+										<button class="cbtngreen change-color" id="txreg-delay" onclick="texasFixit();counting();" data-text-swap="Processing.." title="Applies necessary search-replace steps to fix data.">Fixit</button>
+										<button class="cbtn" onclick="counting();" title="Tallies the number of existing errors after fixing the data.">Update Count</button>
+									</div>
+									<table class="table table-sm text-center">
+										<thead class="thead-light donothighlight">
+											<tr>
+												<th scope="col">Items</th>
+												<th scope="col">Count</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>[A&gt;</td>
+												<td><a class="search-results text-dark" id="opening-added-bracket"></a></td>
+											</tr>
+											<tr>
+												<td>&lt;A]</td>
+												<td><a class="search-results text-dark" id="closing-added-bracket"></a></td>
+											</tr>
+											<tr>
+												<td>[D&gt;</td>
+												<td><a class="search-results text-dark" id="opening-deleted-bracket"></a></td>
+											</tr>
+											<tr>
+												<td>&lt;D]</td>
+												<td><a class="search-results text-dark" id="closing-deleted-bracket"></a></td>
+											</tr>
+											<tr>
+												<td>[</td>
+												<td><a class="search-results text-dark" id="opening-bracket"></a></td>
+											</tr>
+											<tr>
+												<td>]</td>
+												<td><a class="search-results text-dark" id="closing-bracket"></a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header navbar-bg collapsed card-link donothighlight" data-toggle="collapse" data-target="#NJADMC">NJADMC <i class="bi bi-caret-down-fill float-right"></i></div>
+							<div id="NJADMC" class="collapse" data-parent="#accordion">
+								<div class="card-body">
+									<div class="text-center donothighlight">
+										<button class="cbtngreen change-color" id="njadmc-delay" onclick="njadmcFixit();findWordsNJADMC();counting();" data-text-swap="Processing.." title="Applies necessary search-replace steps to fix data.">Fixit</button>
+										<button class="cbtn" onclick="findWordsNJADMC();counting();" title="Tallies the number of existing errors after fixing the data.">Update Count</button>
+									</div>
+									<table class="table table-sm text-center">
+										<thead class="thead-light donothighlight">
+											<tr>
+												<th scope="col">Items</th>
+												<th scope="col">Count</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><span class="span-space">ss</span></td>
+												<td><a class="search-results text-dark" id="njadmc-double-spaces"></a></td>
+											</tr>
+											<tr>
+												<td>(<span class="span-space">ss</span>&lt;emph typestyle="it"&gt;</td>
+												<td><a class="search-results text-dark" id="njadmc-extra-double-space-before-emph-italics"></a></td>
+											</tr>
+											<tr>
+												<td>(<span class="span-space">s</span>&lt;emph typestyle="it"&gt;</td>
+												<td><a class="search-results text-dark" id="njadmc-extra-space-before-emph-italics"></a></td>
+											</tr>
+											<tr>
+												<td>(&lt;emph typestyle="it"&gt;<span class="span-space">ss</span></td>
+												<td><a class="search-results text-dark" id="njadmc-extra-double-space-after-emph-italics"></a></td>
+											</tr>
+											<tr>
+												<td>(&lt;emph typestyle="it"&gt;<span class="span-space">s</span></td>
+												<td><a class="search-results text-dark" id="njadmc-extra-space-after-emph-italics"></a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header navbar-bg collapsed card-link donothighlight" data-toggle="collapse" data-target="#NJREG">NJREG <i class="bi bi-caret-down-fill float-right"></i></div>
+							<div id="NJREG" class="collapse" data-parent="#accordion">
+								<div class="card-body">
+									<div class="text-center donothighlight">
+										<button class="cbtngreen change-color" id="njreg-delay" onclick="njregFixit();counting();" data-text-swap="Processing.." title="Applies necessary search-replace steps to fix data.">Fixit</button>
+										<button class="cbtn" onclick="counting();" title="Tallies the number of existing errors after fixing the data.">Update Count</button>
+									</div>
+									<table class="table table-sm text-center">
+										<thead class="thead-light donothighlight">
+											<tr>
+												<th scope="col">Items</th>
+												<th scope="col">Count</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><span class="span-space">ss</span></td>
+												<td><a class="search-results text-dark" id="njreg-double-spaces"></a></td>
+											</tr>
+											<tr>
+												<td>(<span class="span-space">s</span>&lt;emph typestyle="it"&gt;<span class="span-space">s</span></td>
+												<td><a class="search-results text-dark" id="njreg-space-before-and-after-emph-italics"></a></td>
+											</tr>
+											<tr>
+												<td>(<span class="span-space">s</span>&lt;emph typestyle="it"&gt;</td>
+												<td><a class="search-results text-dark" id="njreg-space-before-emph-italics"></a></td>
+											</tr>
+											<tr>
+												<td>(&lt;emph typestyle="it"&gt;<span class="span-space">s</span></td>
+												<td><a class="search-results text-dark" id="njreg-space-after-emph-italics"></a></td>
+											</tr>
+											<tr>
+												<td>(<span class="span-space">s</span>&lt;emph typestyle="bf"&gt;<span class="span-space">s</span></td>
+												<td><a class="search-results text-dark" id="njreg-space-before-and-after-emph-bold"></a></td>
+											</tr>
+											<tr>
+												<td>(<span class="span-space">s</span>&lt;emph typestyle="bf"&gt;</td>
+												<td><a class="search-results text-dark" id="njreg-space-before-emph-bold"></a></td>
+											</tr>
+											<tr>
+												<td>(&lt;emph typestyle="bf"&gt;<span class="span-space">s</span></td>
+												<td><a class="search-results text-dark" id="njreg-space-after-emph-bold"></a></td>
+											</tr>
+											<tr>
+												<td><span class="span-space">s</span>&lt;emph typestyle="bf"&gt;<span class="span-space">s</span></td>
+												<td><a class="search-results text-dark" id="njreg-space-before-and-after-emph-bold-without-parens"></a></td>
+											</tr>
+											<tr>
+												<td><span class="span-space">s</span>&lt;emph typestyle="bf"&gt;.</td>
+												<td><a class="search-results text-dark" id="njreg-space-before-punc-period"></a></td>
+											</tr>
+											<tr>
+												<td><span class="span-space">s</span>&lt;emph typestyle="bf"&gt;,</td>
+												<td><a class="search-results text-dark" id="njreg-space-before-punc-comma"></a></td>
+											</tr>
+											<tr>
+												<td><span class="span-space">s</span>&lt;emph typestyle="bf"&gt;)</td>
+												<td><a class="search-results text-dark" id="njreg-space-before-punc-parenthesis"></a></td>
+											</tr>
+											<tr>
+												<td><span class="span-space">s</span>&lt;emph typestyle="bf"&gt;;</td>
+												<td><a class="search-results text-dark" id="njreg-space-before-punc-semicolon"></a></td>
+											</tr>
+											<tr>
+												<td><span class="span-space">s</span>&lt;emph typestyle="bf"&gt;:</td>
+												<td><a class="search-results text-dark" id="njreg-space-before-punc-colon"></a></td>
+											</tr>
+											<tr>
+												<td>(<span class="span-space">s</span></td>
+												<td><a class="search-results text-dark" id="njreg-space-after-opening-paren"></a></td>
+											</tr>
+											<tr>
+												<td><span class="span-space">s</span>)</td>
+												<td><a class="search-results text-dark" id="njreg-space-before-closing-paren"></a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header navbar-bg collapsed card-link donothighlight" data-toggle="collapse" data-target="#VAADMC">VAADMC <i class="bi bi-caret-down-fill float-right"></i></div>
+							<div id="VAADMC" class="collapse" data-parent="#accordion">
+								<div class="card-body">
+									<div class="text-center donothighlight">
+										<button class="cbtngreen change-color" id="vaadmc-delay" onclick="vaadmcFixit();counting();" data-text-swap="Processing.." title="Removes the uncoded website link in body text.">Fixit</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header navbar-bg collapsed card-link donothighlight" data-toggle="collapse" data-target="#CAADMC">CAADMC <i class="bi bi-caret-down-fill float-right"></i></div>
+							<div id="CAADMC" class="collapse" data-parent="#accordion">
+								<div class="card-body">
+									<div class="text-center donothighlight">
+										<button class="cbtngreen change-color" id="vaadmc-delay" onclick="caadmcFixit();counting();" data-text-swap="Processing.." title="Replaces all curly quotation marks into straight ones.">Fixit</button>
+										<button class="cbtn" onclick="counting();" title="Tallies the number of existing straight & curly quotations marks after fixing the data.">Update Count</button>
+										<button class="cbtn" data-toggle="modal" data-target="#TextCompare" title="Compare Two Versions of Text" title="Marks the differences between texts of a document from two sources.">Compare</button>
+									</div>
+									<table class="table table-sm text-center">
+										<thead class="thead-light">
+											<tr>
+												<th scope="col">Items</th>
+												<th scope="col">Count</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>"</td>
+												<td><a class="search-results text-dark" id="straight-double-open-quotes"></a></td>
+											</tr>
+											<tr>
+												<td>“</td>
+												<td><a class="search-results text-dark" id="curly-double-open-quotes"></a></td>
+											</tr>
+											<tr>
+												<td>”</td>
+												<td><a class="search-results text-dark" id="curly-double-close-quotes"></a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-lg-6">
+				<div class="bg-white shadow rounded collapse show main-textarea-container">
+					<nav class="navbar navbar-expand-sm navbar-dark navbar-bg">
+						<div class="collapse navbar-collapse">
+							<p class="navbar-brand mt-3">STON Search and Replace Tool</p>
+						</div>
+					</nav>
+					<div class="card border-0 maincard card-bg" id="maincard">
+						<div class="row no-gutters">
+							<div class="col-lg-12 mx-1 donothighlight">
+
+
+								<div class="float-right mt-2 mr-3">
+									<button class="cbtn mr-1" data-target="#anchor-full-screen-highlighter" data-toggle="modal" title="Highlighter">Highlighter</button>
+									<button class="cbtnblue mr-1" onclick="copy1();" title="Copy">Copy</button>
+									<button class="cbtnred" onclick="javascript:eraseText1();" title="Clear">Clear</button>
+								</div>
+
+
+								<form class="mr-2" name="editorial">
+									<textarea class="form-control styledTextarea mt-1 textarea-bg" id="textarea3" spellcheck="true" placeholder="Write something.."></textarea>
+									<input id="textarea-3-value" hidden />
+									<script>rescuefieldvalues3(['textarea-3-value', 'textarea3'])</script>
+								</form>
+								<div class="donothighlight">
+									<a class="wordandcharcount text-dark text-muted donothighlight" id="lines"></a>
+									<a class="wordandcharcount text-dark text-muted donothighlight" id="counteroutput"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-2"></div>
+
+		</div>
+	</div>
+
+	<!--===================================================================Modals===================================================================================-->
+
+	<div class="modal fade" id="TextCompare" tabindex="-1" role="dialog" aria-labelledby="TextCompareView" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group mx-3">
+						<iframe src="text-compare.html" loading="lazy" width="1080" height="750" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="anchor-full-screen-highlighter" tabindex="-1" role="dialog" aria-labelledby="HighlighterView" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group mx-3">
+						<div>
+							<iframe src="../highlighters/brackets-counter.html" loading="lazy" width="1080" height="750" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="_global-externals/scripts/jquery-3.2.1.slim.min.js"></script>
+	<script src="_global-externals/scripts/1.12.9.popper.min.js"></script>
+	<script src="_global-externals/scripts/4.0.0.bootstrap.min.js"></script>
+	<script src="_global-externals/scripts/2.2.4.jquery.min.js"></script>
+
+	<script>
+		//Change Button Text onclick
+		jQuery(document).ready(function ($) {
+
+			$("button").on("click", function () {
+				var el = $(this);
+				if (el.html() == el.data("text-swap")) {
+					el.html(el.data("text-original"));
+				} else {
+					el.data("text-original", el.html());
+					el.html(el.data("text-swap"));
+				}
+				setTimeout(function () {
+					el.html(el.data("text-original"));
+				}, 1000);
+			});
+
+		});
+	</script>
+
+	<script>
+		//Button txreg-delay
+		function delayTXREG() {
+			document.getElementById("txreg-delay").disabled = true;
+			setTimeout(function () {
+				document.getElementById("txreg-delay").disabled = false;
+			}, 1000);
+		}
+		document.getElementById("txreg-delay").addEventListener("click", delayTXREG);
+
+		//Button njadmc-delay
+		function delayNJADMC() {
+			document.getElementById("njadmc-delay").disabled = true;
+			setTimeout(function () {
+				document.getElementById("njadmc-delay").disabled = false;
+			}, 1000);
+		}
+		document.getElementById("njadmc-delay").addEventListener("click", delayNJADMC);
+
+		//Button njreg-delay
+		function delayNJREG() {
+			document.getElementById("njreg-delay").disabled = true;
+			setTimeout(function () {
+				document.getElementById("njreg-delay").disabled = false;
+			}, 1000);
+		}
+		document.getElementById("njreg-delay").addEventListener("click", delayNJREG);
+
+		//Button vaadmc-delay
+		function delayVAADMC() {
+			document.getElementById("vaadmc-delay").disabled = true;
+			setTimeout(function () {
+				document.getElementById("vaadmc-delay").disabled = false;
+			}, 1000);
+		}
+		document.getElementById("vaadmc-delay").addEventListener("click", delayVAADMC);
+	</script>
+
+	<script>
+		$('.change-color').click(function () {
+			var $elem = $(this);
+			var oldBG = $elem.css('background-color');
+			$elem.css('backgroundColor', '#c0c0c0');
+			setTimeout(function () {
+				$elem.css('background-color', oldBG);
+			}, 1000);
+		});
+	</script>
+
+	<script>
+		let textarea = $('#textarea3');
+		textarea.on('keyup', _ => counting());
+		function counting() {
+			var searchText = $('#textarea3').val();
+			let words = [];
+			words['['] = '#opening-bracket'; // TXREG
+			words[']'] = '#closing-bracket'; // TXREG
+			words['[A>'] = '#opening-added-bracket'; // TXREG
+			words['lt;A]'] = '#closing-added-bracket'; // TXREG
+			words['[D>'] = '#opening-deleted-bracket'; // TXREG
+			words['lt;D]'] = '#closing-deleted-bracket'; // TXREG
+
+			words['(  <emph typestyle="it">'] = '#njadmc-extra-double-space-before-emph-italics'; // NJADMC
+			words['(<emph typestyle="it">  '] = '#njadmc-extra-double-space-after-emph-italics'; // NJADMC
+
+			words['  '] = '#njreg-double-spaces'; // NJREG
+			words['( <emph typestyle="it"> '] = '#njreg-space-before-and-after-emph-italics'; // NJREG
+			words['( <emph typestyle="it">'] = '#njreg-space-before-emph-italics'; // NJREG
+			words['(<emph typestyle="it"> '] = '#njreg-space-after-emph-italics'; // NJREG
+			words['( <emph typestyle="bf"> '] = '#njreg-space-before-and-after-emph-bold'; // NJREG
+			words['( <emph typestyle="bf">'] = '#njreg-space-before-emph-bold'; // NJREG
+			words['(<emph typestyle="bf"> '] = '#njreg-space-after-emph-bold'; // NJREG
+			words[' <emph typestyle="bf"> '] = '#njreg-space-before-and-after-emph-bold-without-parens'; // NJREG
+			words[' <emph typestyle="bf">.'] = '#njreg-space-before-punc-period'; // NJREG
+			words[' <emph typestyle="bf">,'] = '#njreg-space-before-punc-comma'; // NJREG
+			words[' <emph typestyle="bf">)'] = '#njreg-space-before-punc-parenthesis'; // NJREG
+			words[' <emph typestyle="bf">;'] = '#njreg-space-before-punc-semicolon'; // NJREG
+			words[' <emph typestyle="bf">:'] = '#njreg-space-before-punc-colon'; // NJREG
+			words['( '] = '#njreg-space-after-opening-paren'; // NJREG
+			words[' )'] = '#njreg-space-before-closing-paren'; // NJREG
+
+			words['"'] = '#straight-double-open-quotes'; // CAADMC
+			words['“'] = '#curly-double-open-quotes'; // CAADMC
+			words['”'] = '#curly-double-close-quotes'; // CAADMC
+
+			for (const word in words) {
+				var outputDiv = $(words[word]);
+				outputDiv.empty();
+				let count = searchText.split(word).length - 1;
+				outputDiv.append('<a>' + count + '</a>');
+			}
+		}
+	</script>
+
+	<script>
+		//NJADMC workaround cause the above counter doesn't work with duplicate words
+		function findWordsNJADMC() {
+			findWord1();
+			findWord2();
+			findWord3();
+		}
+
+		document.getElementById('textarea3').addEventListener('input', findWordsNJADMC);
+
+		function findWord1() {
+			var outputDiv = $('#njadmc-double-spaces');
+			var searchText = $('#textarea3').val();
+			var wordMatch = "  ";
+
+			outputDiv.empty();
+
+			var m = searchText.match(new RegExp(wordMatch.toString().replace(/(?=[.\\+*?[^\]$(){ }\|])/g, "\\"), "ig"));
+			outputDiv.append('<a>' + (m ? m.length : 0) + '</a>');
+		}
+
+		function findWord2() {
+			var outputDiv = $('#njadmc-extra-space-before-emph-italics');
+			var searchText = $('#textarea3').val();
+			var wordMatch = '( <emph typestyle="it">';
+
+			outputDiv.empty();
+
+			var m = searchText.match(new RegExp(wordMatch.toString().replace(/(?=[.\\+*?[^\]$(){}\|])/g, "\\"), "ig"));
+			outputDiv.append('<a>' + (m ? m.length : 0) + '</a');
+		}
+
+		function findWord3() {
+			var outputDiv = $('#njadmc-extra-space-after-emph-italics');
+			var searchText = $('#textarea3').val();
+			var wordMatch = '(<emph typestyle="it"> ';
+
+			outputDiv.empty();
+
+			var m = searchText.match(new RegExp(wordMatch.toString().replace(/(?=[.\\+*?[^\]$(){}\|])/g, "\\"), "ig"));
+			outputDiv.append('<a>' + (m ? m.length : 0) + '</a');
+		}
+	</script>
+
+	<script>
+		//Prompt alert upon closing of browser
+		window.onbeforeunload = function (evt) {
+			var message = 'Changes you made may not be saved.';
+			if (typeof evt == 'undefined') {
+				evt = window.event;
+			}
+			if (evt) {
+				evt.returnValue = message;
+			}
+
+			return message;
+		}
+
+		//Tab key support for text area
+		function enableTab(id) {
+			var el = document.getElementById(id);
+			el.onkeydown = function (e) {
+				if (e.keyCode === 9) {
+
+					var val = this.value,
+						start = this.selectionStart,
+						end = this.selectionEnd;
+
+					this.value = val.substring(0, start) + '\t' + val.substring(end);
+
+					this.selectionStart = this.selectionEnd = start + 1;
+
+					return false;
+
+				}
+			};
+		}
+		enableTab('textarea3');
+	</script>
+
+	<script>
+		//Main textarea line height counter
+		var calculateContentHeight = function (textarea3, scanAmount) {
+			var origHeight = textarea3.style.height,
+				height = textarea3.offsetHeight,
+				scrollHeight = textarea3.scrollHeight,
+				overflow = textarea3.style.overflow;
+
+			if (height >= scrollHeight) {
+
+				textarea3.style.height = (height + scanAmount) + 'px';
+
+				textarea3.style.overflow = 'hidden';
+
+				if (scrollHeight < textarea3.scrollHeight) {
+
+					while (textarea3.offsetHeight >= textarea3.scrollHeight) {
+						textarea3.style.height = (height -= scanAmount) + 'px';
+					}
+
+					while (textarea3.offsetHeight < textarea3.scrollHeight) {
+						textarea3.style.height = (height++) + 'px';
+					}
+
+					textarea3.style.height = origHeight;
+
+					textarea3.style.overflow = overflow;
+					return height;
+				}
+			}
+			else {
+				return scrollHeight;
+			}
+		}
+
+		var calculateHeight = function () {
+			var textarea3 = document.getElementById("textarea3"),
+				style = (window.getComputedStyle) ?
+					window.getComputedStyle(textarea3) : textarea3.currentStyle,
+
+				textarea3LineHeight = parseInt(style.lineHeight, 10),
+
+				textarea3Height = calculateContentHeight(textarea3, textarea3LineHeight),
+
+				numberOfLines = Math.floor(textarea3Height / textarea3LineHeight);
+
+			document.getElementById("lines").innerHTML = "Lines: " +
+				numberOfLines;
+		};
+
+		calculateHeight();
+		if (textarea3.addEventListener) {
+			textarea3.addEventListener("mouseup", calculateHeight, false);
+			textarea3.addEventListener("keyup", calculateHeight, false);
+		} else if (textarea3.attachEvent) { // IE
+			textarea3.attachEvent("onmouseup", calculateHeight);
+			textarea3.attachEvent("onkeyup", calculateHeight);
+		}
+	</script>
+
+	<script>
+		//Boostrap sub menu drop down
+		$('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+			if (!$(this).next().hasClass('show')) {
+				$(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+			}
+			var $subMenu = $(this).next(".dropdown-menu");
+			$subMenu.toggleClass('show');
+
+
+			$(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+				$('.dropdown-submenu .show').removeClass("show");
+			});
+
+
+			return false;
+		});
+	</script>
+
+	<script>
+		//Prevent links from being dragged
+		$('a').mousedown(function (e) {
+			e.preventDefault();
+		});
+
+		//Copy Lower Textarea
+		function copy1() {
+			let textarea = document.getElementById("textarea3");
+			textarea.select();
+			document.execCommand("copy");
+		}
+
+		//Clear Lower Textarea
+		function eraseText1() {
+			document.getElementById("textarea3").value = "";
+		}
+
+		//Word counter for Lower Textarea
+		; (function () {
+			var textarea3 = document.getElementById('textarea3')
+			var counteroutput = document.getElementById('counteroutput')
+			var counteroutputFoot = document.getElementById('counteroutput-foot')
+			var words, chars
+
+			function countemwords() {
+				words = (textarea3.value == '') ? 0 : textarea3.value.split(' ').length
+				chars = textarea3.value.length
+				counteroutput.innerHTML = 'Words: <span class="outputval">' + words + '</span> Chars: <span class="outputval">' + chars + '</span>'
+				counteroutputFoot.innerHTML = '<strong>Words: </strong>' + words + '<strong>Chars: </strong>' + chars
+			}
+
+			textarea3.addEventListener('input', function (e) {
+				countemwords()
+			}, false)
+
+			document.addEventListener("DOMContentLoaded", function (event) {
+				countemwords()
+			}, false)
+
+			window.addEventListener("load", function (event) {
+				countemwords()
+			}, false)
+
+		})()
+
+		//Fixit TXREG
+		function fixTextarea(textarea) {
+			textarea.value = textarea.value
+				.replaceAll(`<emph typestyle="bf">&lt;D]</emph>]`, `<emph typestyle="bf">&lt;D]</emph>`)
+				.replaceAll("[ ", " ")
+				.replaceAll("[.", ".")
+				.replaceAll("[,", ",")
+				.replaceAll("[;", ";")
+				.replaceAll("[:", ":")
+				.replaceAll("] ", " ")
+				.replaceAll("].", ".")
+				.replaceAll("],", ",")
+				.replaceAll("];", ";")
+				.replaceAll("]:", ":")
+				.replaceAll("[(", "(")
+				.replaceAll(" ]", " ")
+		};
+
+		function texasFixit() {
+			let textarea = document.getElementById("textarea3");
+			textarea.select();
+			fixTextarea(textarea);
+		}
+
+		//Fixit NJADMC
+		function fixText1area(textarea) {
+			textarea.value = textarea.value
+				.replaceAll(`    `, ` `)
+				.replaceAll(`   `, ` `)
+				.replaceAll(`  `, ` `)
+				.replaceAll(` `, ` `)
+				.replaceAll(`( <emph typestyle="it">`, `(<emph typestyle="it">`)
+				.replaceAll(`(<emph typestyle="it"> `, `(<emph typestyle="it">`)
+		};
+
+		function njadmcFixit() {
+			let textarea = document.getElementById("textarea3");
+			textarea.select();
+			fixText1area(textarea);
+		}
+
+		//Fixit NJREG
+		function fixText2area(textarea) {
+			textarea.value = textarea.value
+				.replaceAll(`    `, ` `)
+				.replaceAll(`   `, ` `)
+				.replaceAll(`  `, ` `)
+				.replaceAll(` `, ` `)
+				.replaceAll(`( <emph typestyle="it"> `, `(<emph typestyle="it">`)
+				.replaceAll(`( <emph typestyle="it">`, `(<emph typestyle="it">`)
+				.replaceAll(`(<emph typestyle="it"> `, `(<emph typestyle="it">`)
+				.replaceAll(`( <emph typestyle="bf"> `, `(<emph typestyle="bf">`)
+				.replaceAll(`( <emph typestyle="bf">`, `(<emph typestyle="bf">`)
+				.replaceAll(`(<emph typestyle="bf"> `, `(<emph typestyle="bf">`)
+				.replaceAll(` <emph typestyle="bf"> `, ` <emph typestyle="bf">`)
+				.replaceAll(` <emph typestyle="bf">.`, `<emph typestyle="bf">.`)
+				.replaceAll(` <emph typestyle="bf">,`, `<emph typestyle="bf">,`)
+				.replaceAll(` <emph typestyle="bf">)`, `<emph typestyle="bf">)`)
+				.replaceAll(` <emph typestyle="bf">;`, `<emph typestyle="bf">;`)
+				.replaceAll(` <emph typestyle="bf">:`, `<emph typestyle="bf">:`)
+				.replaceAll(`( `, `(`)
+				.replaceAll(` )`, `)`)
+
+				.replaceAll(`<p><text> <emph typestyle="bf">Summary</emph></text></p>`, `<p align="center"><text> <emph typestyle="bf">Summary</emph></text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Social Impact</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Social Impact</emph> </text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Economic Impact</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Economic Impact</emph> </text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Federal Standards Statement</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Federal Standards Statement</emph> </text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Jobs Impact</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Jobs Impact</emph> </text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Agriculture Industry Impact</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Agriculture Industry Impact</emph> </text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Regulatory Flexibility Analysis</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Regulatory Flexibility Analysis</emph> </text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Housing Affordability Impact Analysis</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Housing Affordability Impact Analysis</emph> </text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Smart Growth Development Impact Analysis</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Smart Growth Development Impact Analysis</emph> </text></p>`)
+				.replaceAll(`<p><text> <emph typestyle="bf">Racial and Ethnic Community Criminal Justice and Public Safety Impact</emph> </text></p>`, `<p align="center"><text> <emph typestyle="bf">Racial and Ethnic Community Criminal Justice and Public Safety Impact</emph> </text></p>`)
+		};
+
+		function njregFixit() {
+			let textarea = document.getElementById("textarea3");
+			textarea.select();
+			fixText2area(textarea);
+		}
+
+		//Fixit VAADMC
+		function fixText3area(textarea) {
+			textarea.value = textarea.value
+				.replaceAll(`Website addresses provided in the Virginia Administrative Code to documents incorporated by reference are for the reader's convenience only, may not necessarily be active or current, and should not be relied upon. To ensure the information incorporated by reference is accurate, the reader is encouraged to use the source document described in the regulation.As a service to the public, the Virginia Administrative Code is provided online by the Virginia General Assembly. We are unable to answer legal questions or respond to requests for legal advice, including application of law to specific fact. To understand and protect your legal rights, you should consult an attorney. Section Code of VirginiaAdministrative CodeView by AgencyEmergency RegulationsVAC# Look UpGoConstitution of VirginiaChartersAuthoritiesCompactsUncodified Actsvar siteurl = '<url normval="https://law.lis.virginia.gov">https://law.lis.virginia.gov</url>'; ['document').ready(function () { ['#print').click(function () { ["#admin_code").printThis(); return (false); }); var val = parseInt($.browser.version); if ($.browser.msie || (val > 7 &amp;&amp; val '); //printWindow.document.write(''); printWindow.document.write('@media print{.no-print, .no-print *{display: none !important;}h6{display:none !important;}#printPages{display:none !important;}}#printDate {display:none !important;}'); printWindow.document.write('#printHeader{display:block;font-size:1em;line-height:1.3em;text-align:left;margin-bottom:.8em;}'); printWindow.document.write('body{color:#444;font-family:"PT Serif",Georgia,serif;line-height:1.3em;font-size: .95em;}h2{margin:0 0 .1em 0;font-weight:normal;line-height:1.2em;font-size:1.4em;letter-spacing:.01em;padding:0 .35em 0 0.25em;}'); printWindow.document.write('.hdr-read-text,.read-text,.rptCheckbox{display:none;}ul .outline{margin-bottom:1em;}ul{list-style:none;}.outline ul{margin-left:1em;}a, a:link{color:#1a73ae;text-decoration:none;}'); printWindow.document.write('b{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;}.number-descrip-list{line-height:1.55em;margin-bottom:1em;height:auto;}'); printWindow.document.write('.number-descrip-list dt {clear: left;float: left;display: table-cell;font-weight: bold;width: 6.75em;}.number-descrip-list dd {padding-bottom: .125em;display: table-cell;}'); printWindow.document.write('.number-descrip-list-outline{margin-left:1em;line-height:1.55em;}.number-descrip-list-outline dt{width:7em;font-weight:bold;}'); printWindow.document.write('.number-descrip-list-outline dd{display:table-cell;padding-bottom:0;}'); printWindow.document.write('h6 {font-family: "Lato", Helvetica, Arial, sans-serif;font-size: 14px;border-bottom: 1px solid #ddd;padding-bottom: 15px;}'); printWindow.document.write('table{border-collapse: collapse;border-spacing: 0;margin-bottom: 15px;}.printButtons {width: 100%;text-align: right;position: absolute;right: 10px;top: 28px;}'); printWindow.document.write('#printPages{position:absolute;left: 120px;top: 30px;}.hiddenTable {display: none !important;}'); printWindow.document.write(''); printWindow.document.write('Print Preview') printWindow.document.write(''); //Print and cancel button printWindow.document.write(''); printWindow.document.write(''); printWindow.document.write(''); //You can include any data this way. var _page = '' + ['#admincode').html() + ''; printWindow.document.write(_page); printWindow.document.write('var divHeight;var obj = document.getElementById("admincode");if(obj.offsetHeight){divHeight=obj.offsetHeight;}else if(obj.style.pixelHeight){divHeight=obj.style.pixelHeight;}document.getElementById("printPages").innerHTML="Approximate Number of Pages: " + Math.ceil(divHeight / 850);'); printWindow.document.write(''); printWindow.document.close(); printWindow.focus(); } (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//<url normval="http://www.google-analytics.com/analytics.js">www.google-analytics.com/analytics.js</url>', 'ga'); ga('create', 'UA-27589713-9', 'virginia.gov'); ga('send', 'pageview'); Sign InUsername: Password: CancelLIS HomeLobbyist-in-a-BoxWebsite Feedback? Copyright Commonwealth of Virginia, document.write(new Date().getFullYear()). All rights reserved. Site developed by the Division of Legislative Automated Systems (DLAS). Sign In`, ``)
+				.replaceAll(`Website addresses provided in the Virginia Administrative Code to documents incorporated by reference are for the reader's convenience only, may not necessarily be active or current, and should not be relied upon. To ensure the information incorporated by reference is accurate, the reader is encouraged to use the source document described in the regulation.As a service to the public, the Virginia Administrative Code is provided online by the Virginia General Assembly. We are unable to answer legal questions or respond to requests for legal advice, including application of law to specific fact. To understand and protect your legal rights, you should consult an attorney. Section Code of VirginiaAdministrative CodeView by AgencyEmergency RegulationsVAC# Look UpGoConstitution of VirginiaChartersAuthoritiesCompactsUncodified Actsvar siteurl = '<url normval=https://law.lis.virginia.gov>https://law.lis.virginia.gov</url>'; ['document').ready(function () { ['#print').click(function () { ["#admin_code").printThis(); return (false); }); var val = parseInt($.browser.version); if ($.browser.msie || (val > 7 && val '); //printWindow.document.write(''); printWindow.document.write('@media print{.no-print, .no-print *{display: none !important;}h6{display:none !important;}#printPages{display:none !important;}}#printDate {display:none !important;}'); printWindow.document.write('#printHeader{display:block;font-size:1em;line-height:1.3em;text-align:left;margin-bottom:.8em;}'); printWindow.document.write('body{color:#444;font-family:"PT Serif",Georgia,serif;line-height:1.3em;font-size: .95em;}h2{margin:0 0 .1em 0;font-weight:normal;line-height:1.2em;font-size:1.4em;letter-spacing:.01em;padding:0 .35em 0 0.25em;}'); printWindow.document.write('.hdr-read-text,.read-text,.rptCheckbox{display:none;}ul .outline{margin-bottom:1em;}ul{list-style:none;}.outline ul{margin-left:1em;}a, a:link{color:#1a73ae;text-decoration:none;}'); printWindow.document.write('b{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;}.number-descrip-list{line-height:1.55em;margin-bottom:1em;height:auto;}'); printWindow.document.write('.number-descrip-list dt {clear: left;float: left;display: table-cell;font-weight: bold;width: 6.75em;}.number-descrip-list dd {padding-bottom: .125em;display: table-cell;}'); printWindow.document.write('.number-descrip-list-outline{margin-left:1em;line-height:1.55em;}.number-descrip-list-outline dt{width:7em;font-weight:bold;}'); printWindow.document.write('.number-descrip-list-outline dd{display:table-cell;padding-bottom:0;}'); printWindow.document.write('h6 {font-family: "Lato", Helvetica, Arial, sans-serif;font-size: 14px;border-bottom: 1px solid #ddd;padding-bottom: 15px;}'); printWindow.document.write('table{border-collapse: collapse;border-spacing: 0;margin-bottom: 15px;}.printButtons {width: 100%;text-align: right;position: absolute;right: 10px;top: 28px;}'); printWindow.document.write('#printPages{position:absolute;left: 120px;top: 30px;}.hiddenTable {display: none !important;}'); printWindow.document.write(''); printWindow.document.write('Print Preview') printWindow.document.write(''); //Print and cancel button printWindow.document.write(''); printWindow.document.write(''); printWindow.document.write(''); //You can include any data this way. var _page = '' + ['#admincode').html() + ''; printWindow.document.write(_page); printWindow.document.write('var divHeight;var obj = document.getElementById("admincode");if(obj.offsetHeight){divHeight=obj.offsetHeight;}else if(obj.style.pixelHeight){divHeight=obj.style.pixelHeight;}document.getElementById("printPages").innerHTML="Approximate Number of Pages: " + Math.ceil(divHeight / 850);'); printWindow.document.write(''); printWindow.document.close(); printWindow.focus(); } (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//<url normval=http://www.google-analytics.com/analytics.js>www.google-analytics.com/analytics.js</url>', 'ga'); ga('create', 'UA-27589713-9', 'virginia.gov'); ga('send', 'pageview'); Sign InUsername: Password: CancelLIS HomeLobbyist-in-a-BoxWebsite Feedback? Copyright Commonwealth of Virginia, document.write(new Date().getFullYear()). All rights reserved. Site developed by the Division of Legislative Automated Systems (DLAS). Sign In`, ``)
+				.replaceAll(`Website addresses provided in the Virginia Administrative Code to documents incorporated by reference are for the reader's convenience only, may not necessarily be active or current, and should not be relied upon. To ensure the information incorporated by reference is accurate, the reader is encouraged to use the source document described in the regulation.As a service to the public, the Virginia Administrative Code is provided online by the Virginia General Assembly. We are unable to answer legal questions or respond to requests for legal advice, including application of law to specific fact. To understand and protect your legal rights, you should consult an attorney. Section Code of VirginiaAdministrative CodeView by AgencyEmergency RegulationsVAC# Look UpGoConstitution of VirginiaChartersAuthoritiesCompactsUncodified Actsvar siteurl = '<url normval="https://law.lis.virginia.gov">https://law.lis.virginia.gov</url>'; ['document').ready(function () { ['#print').click(function () { ["#admin_code").printThis(); return (false); }); var val = parseInt($.browser.version); if ($.browser.msie || (val > 7 && val '); //printWindow.document.write(''); printWindow.document.write('@media print{.no-print, .no-print *{display: none !important;}h6{display:none !important;}#printPages{display:none !important;}}#printDate {display:none !important;}'); printWindow.document.write('#printHeader{display:block;font-size:1em;line-height:1.3em;text-align:left;margin-bottom:.8em;}'); printWindow.document.write('body{color:#444;font-family:"PT Serif",Georgia,serif;line-height:1.3em;font-size: .95em;}h2{margin:0 0 .1em 0;font-weight:normal;line-height:1.2em;font-size:1.4em;letter-spacing:.01em;padding:0 .35em 0 0.25em;}'); printWindow.document.write('.hdr-read-text,.read-text,.rptCheckbox{display:none;}ul .outline{margin-bottom:1em;}ul{list-style:none;}.outline ul{margin-left:1em;}a, a:link{color:#1a73ae;text-decoration:none;}'); printWindow.document.write('b{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;}.number-descrip-list{line-height:1.55em;margin-bottom:1em;height:auto;}'); printWindow.document.write('.number-descrip-list dt {clear: left;float: left;display: table-cell;font-weight: bold;width: 6.75em;}.number-descrip-list dd {padding-bottom: .125em;display: table-cell;}'); printWindow.document.write('.number-descrip-list-outline{margin-left:1em;line-height:1.55em;}.number-descrip-list-outline dt{width:7em;font-weight:bold;}'); printWindow.document.write('.number-descrip-list-outline dd{display:table-cell;padding-bottom:0;}'); printWindow.document.write('h6 {font-family: "Lato", Helvetica, Arial, sans-serif;font-size: 14px;border-bottom: 1px solid #ddd;padding-bottom: 15px;}'); printWindow.document.write('table{border-collapse: collapse;border-spacing: 0;margin-bottom: 15px;}.printButtons {width: 100%;text-align: right;position: absolute;right: 10px;top: 28px;}'); printWindow.document.write('#printPages{position:absolute;left: 120px;top: 30px;}.hiddenTable {display: none !important;}'); printWindow.document.write(''); printWindow.document.write('Print Preview') printWindow.document.write(''); //Print and cancel button printWindow.document.write(''); printWindow.document.write(''); printWindow.document.write(''); //You can include any data this way. var _page = '' + ['#admincode').html() + ''; printWindow.document.write(_page); printWindow.document.write('var divHeight;var obj = document.getElementById("admincode");if(obj.offsetHeight){divHeight=obj.offsetHeight;}else if(obj.style.pixelHeight){divHeight=obj.style.pixelHeight;}document.getElementById("printPages").innerHTML="Approximate Number of Pages: " + Math.ceil(divHeight / 850);'); printWindow.document.write(''); printWindow.document.close(); printWindow.focus(); } (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//<url normval="http://www.google-analytics.com/analytics.js">www.google-analytics.com/analytics.js</url>', 'ga'); ga('create', 'UA-27589713-9', 'virginia.gov'); ga('send', 'pageview'); Sign InUsername: Password: CancelLIS HomeLobbyist-in-a-BoxWebsite Feedback? Copyright Commonwealth of Virginia, document.write(new Date().getFullYear()). All rights reserved. Site developed by the Division of Legislative Automated Systems (DLAS). Sign In`, ``)
+		};
+
+		function vaadmcFixit() {
+			let textarea = document.getElementById("textarea3");
+			textarea.select();
+			fixText3area(textarea);
+		}
+
+		//Fixit CAADMC
+		function fixText4area(textarea) {
+			textarea.value = textarea.value
+				.replaceAll(`“`, `"`)
+				.replaceAll(`”`, `"`)
+		};
+
+		function caadmcFixit() {
+			let textarea = document.getElementById("textarea3");
+			textarea.select();
+			fixText4area(textarea);
+		}
+	</script>
+
+</body>
+
+</html>
