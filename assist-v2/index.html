@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Editorial tools">
+  <meta name="author" content="Aldrin Cruz">
+  <title>Assist v.2.0</title>
+  <link rel="stylesheet" href="assets/css/@master.css">
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  <link rel="stylesheet" href="assets/icons/bootstrap/$bootstrap-icons.css">
+  <script src="assets/js/@header.js"></script>
+  <script src="assets/js/idle.js" defer></script>
+  <link rel="icon" href="assets/favicons/light.svg">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+
+  <noscript>
+    <meta http-equiv="refresh" content="0; URL=index.html">
+  </noscript>
+
+</head>
+
+<body>
+
+  <section class="navbar no-highlight">
+    <img src="assets/favicons/dark.svg" class="navbar-logo" width="20" height="20">
+    <div id="search-bar-main-container">
+      <i class="bi bi-search search-bar-icon"></i>
+      <input id="main-search-bar" spellcheck="false" placeholder="Search (Alt + S)" accesskey="s" type="search">
+      <div id="search-bar-data-container">
+        <span id="search-links-data"></span>
+      </div>
+      <div id="search-bar-footer">
+        <span id="tool-version-ui"></span>
+      </div>
+    </div>
+    <div class="stopwatch-container">
+      <span class="stopwatch stopwatch-timer" onclick="startTimer()">Start</span>
+      <span class="stopwatch stopwatch-start" onclick="startTimer()"><i class="bi-play"></i></span>
+      <span class="stopwatch stopwatch-pause" onclick="pauseTimer()"><i class="bi-pause"></i></span>
+      <span class="stopwatch stopwatch-reset" onclick="resetTimer()"><i class="bi-arrow-counterclockwise"></i></span>
+    </div>
+  </section>
+
+  <section class="sidebar no-highlight">
+    <div class="sidebar-tab-group">
+      <span class="sidebar-tabs" id="editor-tab-btn" data-tab="editor-tab" title="Editor"><i class="bi bi-file-earmark"></i></span>
+      <span class="sidebar-tabs loader-btn" data-tab="prod-calculator-tab" data-ifr-src="#prod-calculator-loader" title="Prod Calculator"><i class="bi bi-kanban"></i></span>
+      <span class="sidebar-tabs" data-tab="textarea-history-tab" title="Session Logs"><i class="bi bi-trash"></i></span>
+      <span class="ivma" id="dark-mode-btn" title="Light Mode"><i class="bi bi-moon-fill"></i></span>
+      <span class="sidebar-tabs" data-tab="settings-tab" id="settings-tab-btn" title="Settings"><i class="bi bi-gear"></i></span>
+    </div>
+  </section>
+
+  <section class="workspace">
+    <div class="sidebar-tab-content" id="editor-tab">
+
+      <div class="editor-card popup">
+        <div class="textarea-header no-highlight">
+          <span class="editor-card-drag-handle popup-header">:::::::::::::::</span>
+          <div class="editor-navbar-tab-group">
+            <div class="editor-navbar-dropdown">
+              <button class="editor-navbar-tabs" data-dropdown-id="dropdown-file" tabindex="-1">File</button>
+              <div class="editor-dropdown-content" id="dropdown-file">
+                <span>Open</span>
+                <span>Save As...</span>
+                <span>Select a Jurisdiction...</span>
+              </div>
+            </div>
+            <div class="editor-navbar-dropdown">
+              <button class="editor-navbar-tabs" data-dropdown-id="dropdown-edit" tabindex="-1">Edit</button>
+              <div class="editor-dropdown-content" id="dropdown-edit">
+                <span onclick="addToTextareaHistory(); cleartext('upper-textarea'); cleartext('lower-textarea'); cleartext('supp-inclusion-input'); cleartext('fetch-positive-or-non-positive'); cleartext('fetch-us-section-normcite'); toggleErrorContainer(this.value); wordCount();">Clear All</span>
+                <span onclick="addToTextareaHistory(); mergeTextFromAct();" accesskey="w">Merge Text from PDF <kbd>Alt + W</kbd></span>
+                <span onclick="addToTextareaHistory(); processLawTextComponentWrap();" accesskey="5">Auto-Subsection Tags <kbd>Alt + 5</kbd></span>
+                <span onclick="addToTextareaHistory(); cleanUps();" accesskey="6">Auto-Annotation Tags <kbd>Alt + 6</kbd></span>
+                <span onclick="addToTextareaHistory(); replaceXMLEntities(); wordCount();" accesskey="`">Replace XML Entities <kbd>Alt + `</kbd></span>
+                <span onclick="addToTextareaHistory(); removeBlankLines(); wordCount();">Remove Blank Lines</span>
+                <span onclick="addToTextareaHistory(); removeXMLTags(); wordCount();">Remove XML Tags</span>
+                <span onclick="addToTextareaHistory(); removeRefPageTags(); mergeLowerTextarea(); toggleErrorContainer(this.value); wordCount();">Remove All ref:page Tags</span>
+                <span onclick="addToTextareaHistory(); deleteAllBracketedMatter(); wordCount();">Remove All Bracketed Matter</span>
+              </div>
+            </div>
+            <div class="editor-navbar-dropdown">
+              <button class="editor-navbar-tabs" data-dropdown-id="dropdown-selection" tabindex="-1">Selection</button>
+              <div class="editor-dropdown-content" id="dropdown-selection">
+                <span onclick="addToTextareaHistory(); fixitSelectedText(); wordCount();" accesskey="f">Fixit <kbd>Alt + F</kbd></span>
+                <span onclick="addToTextareaHistory(); selectedTextParagraphWrap();" accesskey="e" title="Wrap selected text in Paragraph tags">Wrap in P Tags <kbd>Alt + E</kbd></span>
+                <span onclick="addToTextareaHistory(); selectedTextAnnotationWrap();" accesskey="r" title="Wrap selected text in Annotation tags">Wrap in Annotation Tags <kbd>Alt + R</kbd></span>
+                <span onclick="addToTextareaHistory(); selectedTextEmphasisItalicWrap();" title="Wrap selected text in emphasis:italic tags">Wrap in Emphasis:Italic Tags <kbd>Ctrl + I</kbd></span>
+                <span onclick="addToTextareaHistory(); selectedTextEmphasisBoldWrap();" title="Wrap selected text in emphasis:bold tags">Wrap in Emphasis:Bold Tags <kbd>Ctrl + B</kbd></span>
+                <span onclick="addToTextareaHistory(); processNotedUnderAnnot();" title="Remove Annotation tags on selected line" accesskey="7">Remove Annotation Tags<kbd>Alt + 7</kbd></span>
+                <span onclick="copySelectedLineUp();">Copy Line Up <kbd>Shift + Alt + UpArrow</kbd></span>
+                <span onclick="copySelectedLineDown();">Copy Line Down <kbd>Shift + Alt + DownArrow</kbd></span>
+                <span onclick="moveSelectedLineUp();">Move Line Up <kbd>Alt + UpArrow</kbd></span>
+                <span onclick="moveSelectedLineDown();">Move Line Down <kbd>Alt + DownArrow</kbd></span>
+                <hr>
+                <span onclick="return convertstring(stringbox, 'titlecase')" accesskey="1">Convert to Title Case <kbd>Alt + 1</kbd></span>
+                <span onclick="return convertstring(stringbox, 'sentencecase')" accesskey="2">Convert to Sentence case <kbd>Alt + 2</kbd></span>
+                <span onclick="return convertstring(stringbox, 'uppercase')" accesskey="3">Convert to UPPER CASE <kbd>Alt + 3</kbd></span>
+                <span onclick="return convertstring(stringbox, 'lowercase')" accesskey="4">Convert to LOWER CASE <kbd>Alt + 4</kbd></span>
+              </div>
+            </div>
+            <div class="editor-navbar-dropdown">
+              <button class="editor-navbar-tabs" data-dropdown-id="dropdown-insert" tabindex="-1">Insert</button>
+              <div class="editor-dropdown-content" id="dropdown-insert">
+                <span id="§" class="insert-btn">Section Symbol <kbd>§</kbd></span>
+                <span id="§§" class="insert-btn">Double Section Symbol <kbd>§§</kbd></span>
+                <span id="—" class="insert-btn">Em-dash <kbd>—</kbd></span>
+                <span id="–" class="insert-btn">En-dash <kbd>–</kbd></span>
+                <span id='‘' class="insert-btn">Single Open Quote <kbd>‘</kbd></span>
+                <span id='’' class="insert-btn">Single Close Quote <kbd>’</kbd></span>
+                <span id='‘’' class="insert-btn">Single Quotes <kbd>‘’</kbd></span>
+                <span id='“' class="insert-btn">Double Open Quote <kbd>“</kbd></span>
+                <span id='”' class="insert-btn">Double Close Quote <kbd>”</kbd></span>
+                <span id='“”' class="insert-btn">Double Quotes <kbd>“”</kbd></span>
+                <span id='”.' class="insert-btn">Double Close Quote & Period <kbd>”.</kbd></span>
+                <span id='’.”.' class="insert-btn">Single & Double Close Quote & Period<kbd>’.”.</kbd></span>
+                <hr>
+                <span id='Titleinsert' class="insert-btn" accesskey="t">title tags <kbd>Alt + T</kbd></span>
+                <span id='emphasisbold' class="insert-btn">emphasis tags: bold</span>
+                <span id='emphasisbolditalic' class="insert-btn">emphasis tags: bold-italic</span>
+                <span id='emphasisitalic' class="insert-btn">emphasis tags: italic</span>
+                <span id='emphasisunderline' class="insert-btn">emphasis tags: underline</span>
+              </div>
+            </div>
+            <div class="editor-navbar-dropdown">
+              <button class="editor-navbar-tabs" data-dropdown-id="dropdown-tools" tabindex="-1">Tools</button>
+              <div class="editor-dropdown-content" id="dropdown-tools">
+                <span onclick="show('uscs-builder-container')">USCS Builder</span>
+                <span onclick="show('page-viewer-container')">Page Viewer</span>
+                <span onclick="show('amendment-note-descriptors-container'); show('amendment-note-designators-container')">Amendment Note Builder</span>
+              </div>
+            </div>
+            <div class="editor-navbar-dropdown">
+              <button class="editor-navbar-tabs" data-dropdown-id="dropdown-misc" tabindex="-1">Misc</button>
+              <div class="editor-dropdown-content" id="dropdown-misc">
+                <span id="resources-window-trigger-span">Resources<kbd>F1</kbd></span>
+                <span onclick="lowerTextareaPreview();toggleTwoViews('textarea-content', 'preview-content'); showPreviewNotification();" accesskey="y">Preview <kbd>Alt + Y</kbd></span>
+                <span onclick="toggle('find-and-replace-container')">Find and Replace <kbd>Alt + H</kbd></span>
+                <span id="copy-logs-button" accesskey="c">Copy Tracker Logs <kbd>Alt + C</kbd></span>
+                <span id="add-new-note-button" accesskey="n">Create New Sticky Note <kbd>Alt + N</kbd></span>
+                <span onclick="addToTextareaHistory(); cleanupTasklistActSection(); wordCount();" accesskey="-">Clean Up Tasklist Act Section Data <kbd>Alt + -</kbd></span>
+                <span onclick="addToTextareaHistory(); tabularizeTasklist(); wordCount();" accesskey="=">Tabularize Tasklist Data <kbd>Alt + =</kbd></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="textarea-subheader no-highlight">
+          <button id="textarea-select-toggle-btn" onclick="toggleTextarea();  updateTextareaInsert();" accesskey="q" title="Toggle Selected Textarea (Alt + Q)"><i class="bi bi-textarea-t"></i> <span id="selected-textarea-toggle-span">Lower</span></button>
+          <button onclick="addToTextareaHistory(); mergeLowerTextarea(); wordCount();"><i class="bi bi-intersect"></i> Merge</button>
+          <button onclick="addToTextareaHistory(); fixLowerTextarea(); wordCount();"><i class="bi bi-magic"></i> Fixit</button>
+          <button onclick="lowerTextareaPreview(); toggleTwoViews('textarea-content', 'preview-content'); showPreviewNotification();"><i class=" bi bi-eye-fill"></i> Preview</button>
+          <button onclick="copytext();"><i class="bi bi-clipboard"></i> Copy</button>
+          <button class="clear-btn" onclick="addToTextareaHistory(); cleartextarea(); toggleErrorContainer(this.value); wordCount();"><i class="bi bi-trash"></i> Clear</button>
+          <button id="editor-mini-settings-trigger" style="float:right" onclick="toggle('editor-mini-settngs-container')"><i class="bi bi-three-dots-vertical"></i></button>
+          <button class="insert-btn collapse" id="popening">&lt;p&gt;</button>
+          <button class="insert-btn collapse" id="pclosing">&lt;/p&gt;</button>
+          <button class="insert-btn collapse" id="pbothtags">&lt;p&gt;&lt;/p&gt;</button>
+          <button class="insert-btn collapse" id="annotbasictags">annotation</button>
+          <button class="insert-btn collapse" id="adding">adding</button>
+          <button class="insert-btn collapse" id="amending">amending</button>
+          <button class="insert-btn collapse" id="deleting">deleting</button>
+        </div>
+        <div class="no-highlight" id="editor-mini-settngs-container">
+          <span onclick="toggle('upper-textarea')">Collapse Upper Textarea</span>
+          <span onclick="toggle('lower-textarea')">Collapse Lower Textarea</span>
+          <span onclick="toggleInline('popening'); toggleInline('pclosing'); toggleInline('pbothtags'); toggleInline('annotbasictags'); toggleInline('adding'); toggleInline('amending'); toggleInline('deleting');">Collapse Temporary Noted Under Builder</span>
+        </div>
+        <div class="textarea-container">
+          <div class="no-highlight" id="find-and-replace-container">
+            <input class="no-enter mt-3" id="snr-find" placeholder="Find" type="text">
+            <span class="find-and-replace-close-btn" onclick="hide('find-and-replace-container')" tabindex="-1"><i class="bi bi-x"></i></span><br>
+            <input class="no-enter mt-3" id="snr-replace" placeholder="Replace" type="text">
+            <button class="find-and-replace-utility-btn" id="find-and-replace-btn"><i class="bi bi-arrow-return-left"></i></button>
+          </div>
+          <div class="no-highlight" id="textarea-content">
+            <textarea id="upper-textarea" data-font-changeable="true" data-save-local="true" spellcheck="true" placeholder="Notes.."></textarea>
+            <textarea id="lower-textarea" data-font-changeable="true" data-save-local="true" spellcheck="true" placeholder="Write something.."></textarea>
+            <div class="no-highlight collapse" id="error-notification-container">ref:page tags found</div>
+          </div>
+          <span class="no-highlight" id="read-only-preview-notif-span"><em>Review-only</em></span>
+          <div id="preview-content" contenteditable="true" spellcheck="true"></div>
+          <div class="no-highlight" id="font-size-changer-container">
+            <label for="font-change-style">Font Style:</label>
+            <select class="mt-1" id="font-change-style">
+              <option value="Arial">Arial</option>
+              <option value="Baskerville">Baskerville</option>
+              <option value="Calibri" selected>Calibri</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Helvetica">Helvetica</option>
+              <option value="Impact">Impact</option>
+              <option value="Lucida">Lucida</option>
+              <option value="Monaco">Monaco</option>
+              <option value="Monospace">Monospace</option>
+              <option value="Palatino">Palatino</option>
+              <option value="Tahoma">Tahoma</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Trebuchet">Trebuchet</option>
+              <option value="Verdana">Verdana</option>
+            </select>
+            <label for="font-change-size">Font Size:</label>
+            <input class="mt-1" type="number" id="font-change-size" value="17">
+            <button id="font-change-btn" onclick="hide('font-size-changer-container')">Apply Changes</button>
+          </div>
+          <div class="editor-footer no-highlight">
+            <span id="idle-mode-status-ui">Idle</span>
+            <div class="textarea-font-word-count-status">
+              <span class="status-ui" id="word-count-ui"></span>
+              <span class="status-ui" id="font-style-ui" onclick="toggle('font-size-changer-container')"></span>
+              <span class="status-ui" id="font-size-ui" onclick="toggle('font-size-changer-container')"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uscs-builder popup" id="uscs-builder-container">
+        <div class="textarea-header no-highlight">
+          <span class="window-title">USCS Builder</span>
+          <span class="editor-card-drag-handle popup-header">:::::::::::::::</span>
+          <span class="window-header-misc-button" onclick="toggle('uscs-builder-filter-content');" title="Filter"><i class="bi bi-filter"></i></span>
+          <span class="window-close-btn" onclick="hide('uscs-builder-container');"><i class="bi bi-x"></i></span>
+          <div id="uscs-builder-filter-content">
+            <div>
+              <input id="uscs-builder-filter-select-all-checkbox" type="checkbox" checked>
+              <label for="uscs-builder-filter-select-all-checkbox">Check/Uncheck All</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="suppinclusion-checkbox" data-target="uscs-builder-content-suppinclusion" checked type="checkbox">
+              <label for="suppinclusion-checkbox">Insert suppInclusion tags</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="fetch-olrc-checkbox" data-target="uscs-builder-content-fetch-olrc" checked type="checkbox">
+              <label for="fetch-olrc-checkbox">Fetch from OLRC</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="positive-non-positive-checkbox" data-target="uscs-builder-content-positive-non-positive" checked type="checkbox">
+              <label for="positive-non-positive-checkbox">Positive or Non-positive?</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="bracketed-matter-checkbox-general" data-target="uscs-builder-content-bracketed-matter-general" checked type="checkbox">
+              <label for="bracketed-matter-checkbox-general">Bracketed Matter - General</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="bracketed-matter-checkbox-date-of-enactment" data-target="uscs-builder-content-bracketed-matter-date-of-enactment" checked type="checkbox">
+              <label for="bracketed-matter-checkbox-date-of-enactment">Bracketed Matter - Date of Enactment</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="bracketed-matter-checkbox-placeholders" data-target="uscs-builder-content-bracketed-matter-placeholders" checked type="checkbox">
+              <label for="bracketed-matter-checkbox-placeholders">Bracketed Matter - Placeholders</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="added-hc-positive-checkbox" data-target="uscs-builder-content-added-hc-positive" checked type="checkbox">
+              <label for="added-hc-positive-checkbox">Added HC - Positive</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="added-hc-non-positive-scenario-1-checkbox" data-target="uscs-builder-content-added-hc-non-positive-scenario-1" checked type="checkbox">
+              <label for="added-hc-non-positive-scenario-1-checkbox">Added HC - Non-positive scenario 1</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="added-hc-non-positive-scenario-2-checkbox" data-target="uscs-builder-content-added-hc-non-positive-scenario-2" checked type="checkbox">
+              <label for="added-hc-non-positive-scenario-2-checkbox">Added HC - Non-positive scenario 2</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="noted-under-act-intro-checkbox" data-target="uscs-builder-content-noted-under-act-intro" checked type="checkbox">
+              <label for="noted-under-act-intro-checkbox">Noted Under Act Intro</label>
+            </div>
+            <div>
+              <input class="uscs-builder-filter-checkboxes" id="noted-under-provision-checkbox" data-target="uscs-builder-content-noted-under-provision" checked type="checkbox">
+              <label for="noted-under-provision-checkbox">Noted Under Provision</label>
+            </div>
+          </div>
+        </div>
+        <div class="uscs-builder-content no-highlight">
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-suppinclusion">
+            <span class="uscs-builder-content-titles">Insert suppInclusion tags</span>
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="supp-inclusion-input" placeholder="Paste suppInclusion tag" type="text">
+            <button class="utility-btn" onclick="addToTextareaHistory(); addSuppInclusionTags();"><i class="bi bi-arrow-return-left"></i></button>
+            <span class="uscs-builder-content-footnotes mt-1">Automatically replaces all LTCs suppInclusion</span>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-fetch-olrc">
+            <span class="uscs-builder-content-titles">Find an act from <a href="https://uscode.house.gov/download/bills/117-2/index.html" rel="noopener noreferrer" target="_blank">OLRC</a></span>
+            <input class="no-enter uscs-builder-input-first-half" id="fetch-us-session-number" placeholder="117-2" value="117-2" type="text">
+            <input class="no-enter uscs-builder-input-second-half" id="fetch-us-bill-number" placeholder="e.g. 117-82" type="text">
+            <button class="utility-btn" id="fetch-us-acts-btn"><i class="bi bi-arrow-return-left"></i></button>
+            <span class="uscs-builder-content-titles mt-3">Find a section &nbsp;<i class="bi bi-info-circle" title="Format: 26 USCS § 1, 26 USCS 1, 26/1, 26 1"></i></span>
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="fetch-us-section-normcite" placeholder="Normcite" type="text">
+            <button class="utility-btn" id="fetch-us-section-btn"><i class="bi bi-arrow-return-left"></i></button>
+            <span class="uscs-builder-content-titles mt-3">Find enactment year (Table III)</span>
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="fetch-table-3-year" placeholder="Year" type="text">
+            <button class="utility-btn" id="fetch-table-3-year-btn"><i class="bi bi-arrow-return-left"></i></button>
+            <span class="uscs-builder-content-titles mt-3">Find Stat. Vols (P.L. 85 to 117)</span>
+            <input class="no-enter uscs-builder-input-first-half" id="fetch-table-3-stat-year" placeholder="116" type="text">
+            <input class="no-enter uscs-builder-input-second-half" id="fetch-table-3-stat-number" placeholder="214" type="text">
+            <button class="utility-btn" id="fetch-table-3-stat-btn"><i class="bi bi-arrow-return-left"></i></button>
+            <span class="uscs-builder-content-footnotes mt-1">For enactment years 1789 to 1956,<br> use format: <em>year</em>_<em>chapter</em></span>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-positive-non-positive">
+            <span class="uscs-builder-content-titles">Positive or Non-positive?</span>
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="fetch-positive-or-non-positive" placeholder="Title (e.g. 26)" type="text">
+            <button class="utility-btn" id="fetch-positive-or-non-positive-btn"><i class="bi bi-arrow-return-left"></i></button>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-bracketed-matter-general">
+            <span class="uscs-builder-content-titles">Bracketed Matter - General</span>
+            <select class="no-enter uscs-builder-input-full-width-w-button" id="bmb-type">
+              <option value="standard" selected>Standard</option>
+              <option value="etseq">Standard et seq.</option>
+              <option value="AND">AND</option>
+              <option value="ANDetseq">AND et seq.</option>
+              <option value="OR">OR</option>
+              <option value="ORetseq">OR et seq.</option>
+            </select>
+            <button class="utility-btn" onclick="clearMults('#bmb-title1, #bmb-section1, #bmb-section2, #bmb-section3, #bmb-result1')" tabindex="-1" type="button"><i class="bi bi-trash"></i></button>
+            <input class="no-enter uscs-builder-input-full-width" id="bmb-title1" placeholder="Title" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="bmb-section1" placeholder="Section 1" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="bmb-section2" placeholder="Section 2" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="bmb-section3" placeholder="Section 3" type="text">
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="bmb-result1" placeholder="Result" type="text">
+            <button class="utility-btn" onclick="copy('bmb-result1');"><i class="bi bi-clipboard"></i></button>
+            <span class="uscs-builder-content-footnotes mt-1">Follow comma placement from Act</span>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-bracketed-matter-date-of-enactment">
+            <span class="uscs-builder-content-titles">Bracketed Matter - Date of Enactment</span>
+            <select class="no-enter uscs-builder-input-full-width-w-button" id="bmb-month">
+              <option value="Jan." selected>Jan.</option>
+              <option value="Feb.">Feb.</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="Aug.">Aug.</option>
+              <option value="Sept.">Sept.</option>
+              <option value="Oct.">Oct.</option>
+              <option value="Nov.">Nov</option>
+              <option value="Dec.">Dec.</option>
+            </select>
+            <button class="utility-btn" onclick="clearMults('#bmb-month, #bmb-day, #bmb-year, #bmb-date-result')" tabindex="-1" type="button"><i class="bi bi-trash"></i></button>
+            <input class="no-enter uscs-builder-input-full-width" id="bmb-day" placeholder="Day (e.g. 1)" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="bmb-year" placeholder="Year (e.g. 2023)" type="text">
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="bmb-date-result" placeholder="Result" type="text">
+            <button class="utility-btn" onclick="copy('bmb-date-result');"><i class="bi bi-clipboard"></i></button>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-bracketed-matter-placeholders">
+            <span class="uscs-builder-content-titles">Bracketed Matter - Placeholders</span>
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="bmb-unclassified" value=" [unclassified]" type="text">
+            <button class="utility-btn" onclick="copy('bmb-unclassified');"><i class="bi bi-clipboard"></i></button>
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="bmb-deleted" value="[Deleted]" type="text">
+            <button class="utility-btn" onclick="copy('bmb-deleted');"><i class="bi bi-clipboard"></i></button>
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="bmb-repealed" value="[Repealed]" type="text">
+            <button class="utility-btn" onclick="copy('bmb-repealed');"><i class="bi bi-clipboard"></i></button>
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="bmb-redesignated" value="[Redesignated]" type="text">
+            <button class="utility-btn" onclick="copy('bmb-redesignated');"><i class="bi bi-clipboard"></i></button>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-added-hc-positive">
+            <span class="uscs-builder-content-titles">Added HC - Positive</span>
+            <select class="no-enter uscs-builder-input-full-width-w-button" id="month004">
+              <option value="Jan." selected>Jan.</option>
+              <option value="Feb.">Feb.</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="Aug.">Aug.</option>
+              <option value="Sept.">Sept.</option>
+              <option value="Oct.">Oct.</option>
+              <option value="Nov.">Nov</option>
+              <option value="Dec.">Dec.</option>
+            </select>
+            <button class="utility-btn" onclick="clearMults('#month004, #day004, #year004, #pl1004, #pl2004, #div004, #title004, #subtitle004, #part004, #chapter004, #subchapter004, #section004, #stat004, #page004,#added-hc-positive-result')" tabindex="-1"><i class="bi bi-trash"></i></button>
+            <input class="no-enter uscs-builder-input-full-width" id="day004" placeholder="Day" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="year004" placeholder="Year" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl1004" placeholder="117" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl2004" placeholder="XXX" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="div004" placeholder="Div" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="title004" placeholder="Title" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subtitle004" placeholder="Subtitle" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="part004" placeholder="Part" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="chapter004" placeholder="Chapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subchapter004" placeholder="Subchapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="section004" placeholder="Section" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="stat004" placeholder="136" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="page004" placeholder="Page" type="text">
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="added-hc-positive-result" placeholder="Result" type="text">
+            <button class="utility-btn" onclick="copy('added-hc-positive-result');"><i class="bi bi-clipboard"></i></button>
+            <span class="uscs-builder-content-footnotes mt-1">HC must be unchunked; do not add period at the end</span>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-added-hc-non-positive-scenario-1">
+            <span class="uscs-builder-content-titles">Added HC - Non-positive scenario 1</span>
+            <select class="no-enter uscs-builder-input-full-width-w-button" id="month005a">
+              <option value="Jan." selected>Jan.</option>
+              <option value="Feb.">Feb.</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="Aug.">Aug.</option>
+              <option value="Sept.">Sept.</option>
+              <option value="Oct.">Oct.</option>
+              <option value="Nov.">Nov</option>
+              <option value="Dec.">Dec.</option>
+            </select>
+            <button class="utility-btn" onclick="clearMults('#month005a, #day005a, #year005a, #pl1005a, #pl2005a, #div005a, #title005a, #subtitle005a, #part005a, #chapter005a, #subchapter005a, #section005a, #month005b, #day005b, #year005b, #pl1005b, #pl2005b, #div005b, #title005b, #subtitle005b, #part005b, #chapter005b, #subchapter005b, #section005b, #stat005b, #page005b, #added-hc-scenario-1-result')" tabindex="-1"><i class="bi bi-trash"></i></button>
+            <input class="no-enter uscs-builder-input-full-width" id="day005a" placeholder="Day (old)" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="year005a" placeholder="Year" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl1005a" placeholder="103" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl2005a" placeholder="XXX" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="div005a" placeholder="Div" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="title005a" placeholder="Title" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subtitle005a" placeholder="Subtitle" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="part005a" placeholder="Part" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="chapter005a" placeholder="Chapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subchapter005a" placeholder="Subchapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="section005a" placeholder="Section" type="text">
+            <select class="no-enter uscs-builder-input-full-width" id="month005b">
+              <option value="Jan." selected>Jan.</option>
+              <option value="Feb.">Feb.</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="Aug.">Aug.</option>
+              <option value="Sept.">Sept.</option>
+              <option value="Oct.">Oct.</option>
+              <option value="Nov.">Nov</option>
+              <option value="Dec.">Dec.</option>
+            </select>
+            <input class="no-enter uscs-builder-input-full-width" id="day005b" placeholder="Day (old)" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="year005b" placeholder="Year" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl1005b" placeholder="117" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl2005b" placeholder="XXX" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="div005b" placeholder="Div" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="title005b" placeholder="Title" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subtitle005b" placeholder="Subtitle" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="part005b" placeholder="Part" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="chapter005b" placeholder="Chapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subchapter005b" placeholder="Subchapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="section005b" placeholder="Section" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="stat005b" placeholder="136" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="page005b" placeholder="Page" type="text">
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="added-hc-scenario-1-result" placeholder="Result" type="text">
+            <button class="utility-btn" onclick="copy('added-hc-scenario-1-result');"><i class="bi bi-clipboard"></i></button>
+            <span class="uscs-builder-content-footnotes mt-1">HC must be unchunked; do not add period at the end</span>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-added-hc-non-positive-scenario-2">
+            <span class="uscs-builder-content-titles">Added HC - Non-positive scenario 2</span>
+            <select class="no-enter uscs-builder-input-full-width-w-button" id="month006">
+              <option value="Jan." selected>Jan.</option>
+              <option value="Feb.">Feb.</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="Aug.">Aug.</option>
+              <option value="Sept.">Sept.</option>
+              <option value="Oct.">Oct.</option>
+              <option value="Nov.">Nov</option>
+              <option value="Dec.">Dec.</option>
+            </select>
+            <button class="utility-btn" onclick="clearMults('#month006, #day006, #year006, #pl1006, #pl2006, #div006, #title006, #subtitle006, #part006, #chapter006, #subchapter006, #section006, #stat006, #page006, #added-hc-scenario-2-result')" tabindex="-1"><i class="bi bi-trash"></i></button>
+            <input class="no-enter uscs-builder-input-full-width" id="day006" placeholder="Day (new)" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="year006" placeholder="Year" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl1006" placeholder="117" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl2006" placeholder="XXX" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="div006" placeholder="Div" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="title006" placeholder="Title" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subtitle006" placeholder="Subtitle" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="part006" placeholder="Part" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="chapter006" placeholder="Chapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subchapter006" placeholder="Subchapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="section006" placeholder="Section" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="stat006" placeholder="136" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="page006" placeholder="Page" type="text">
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="added-hc-scenario-2-result" placeholder="Result" type="text">
+            <button class="utility-btn" onclick="copy('added-hc-scenario-2-result');"><i class="bi bi-clipboard"></i></button>
+            <span class="uscs-builder-content-footnotes mt-1">HC must be unchunked; do not add period at the end</span>
+          </div>
+          <div class="uscs-builder-card mt-3" id="uscs-builder-content-noted-under-act-intro">
+            <span class="uscs-builder-content-titles">Noted Under Act Intro</span>
+            <input type="radio" id="noted-under-act-intro-result-decision-added" name="act_status" value="added" checked>
+            <label for="noted-under-act-intro-result-decision-added"><small>Added</small></label>
+            <input type="radio" id="noted-under-act-intro-result-decision-amended" name="act_status" value="amended">
+            <label for="noted-under-act-intro-result-decision-amended"><small>Amended</small></label>
+            <select class="no-enter uscs-builder-input-full-width-w-button" id="month2">
+              <option value="Jan." selected>Jan.</option>
+              <option value="Feb.">Feb.</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="Aug.">Aug.</option>
+              <option value="Sept.">Sept.</option>
+              <option value="Oct.">Oct.</option>
+              <option value="Nov.">Nov</option>
+              <option value="Dec.">Dec.</option>
+            </select>
+            <button class="utility-btn" onclick="clearMults('#div2, #title2, #subtitle2, #chapter2, #subchapter2, #section2, #stat2a, #nu-act-intro-result, #nu-act-provision-result')" tabindex="-1"><i class="bi bi-trash"></i></button>
+            <input class="no-enter uscs-builder-input-full-width" id="day2" placeholder="Day" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="year2" placeholder="Year" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl1a" placeholder="117" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="pl2a" placeholder="XXX" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="div2" placeholder="Div">
+            <input class="no-enter uscs-builder-input-full-width" id="title2" placeholder="Title" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subtitle2" placeholder="Subtitle" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="chapter2" placeholder="Chapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="subchapter2" placeholder="Subchapter" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="section2" placeholder="Section" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="stat1a" placeholder="136" type="text">
+            <input class="no-enter uscs-builder-input-full-width" id="stat2a" placeholder="Page" type="text">
+            <input class="no-enter uscs-builder-input-full-width-w-button" id="nu-act-intro-result" placeholder="Result" type="text">
+            <button class="utility-btn" onclick="copy('nu-act-intro-result');"><i class="bi bi-clipboard"></i></button>
+            <div id="uscs-builder-content-noted-under-provision">
+              <br>
+              <span class="uscs-builder-content-titles">Noted Under Provision</span>
+              <select class="no-enter uscs-builder-input-full-width" id="noted-under-provision-select">
+                <option value="e1">Effective date of MM/DD/YY amendments.</option>
+                <option value="e2">Effective date of § X of Act MM/DD/YY.</option>
+                <option value="a1">Applicability of MM/DD/YY amendments.</option>
+                <option value="a2">Applicability of amendments made by § X of Act MM/DD/YY.</option>
+                <option value="ea">Effective date and applicability of amendments made by § X of Act MM/DD/YY.</option>
+              </select>
+              <input class="no-enter uscs-builder-input-full-width-w-button" id="nu-act-provision-result" placeholder="Result" type="text">
+              <button class="utility-btn" onclick="copy('nu-act-provision-result');"><i class="bi bi-clipboard"></i></button>
+              <span class="uscs-builder-content-footnotes mt-1">Use the Date and Act Section info in the Act Intro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup collapse" id="page-viewer-container">
+        <div class="textarea-header no-highlight">
+          <span class="editor-card-drag-handle popup-header">:::::::::::::::</span>
+          <span class="window-title">Page Viewer</span>
+          <span class="window-header-misc-button" onclick="toggleTwoViews('page-viewer-contenteditable', 'page-viewer-content');"><i class="bi bi-arrow-repeat"></i></span>
+          <span class="window-close-btn" onclick="hide('page-viewer-container');"><i class="bi bi-x"></i></span>
+        </div>
+        <div id="page-viewer-contenteditable" contenteditable="true" placeholder="Paste text from a website"></div>
+        <div id="page-viewer-content">
+          <input id="page-viewer-input" value="https://plus.lexis.com/" placeholder="Paste a URL" type="text">
+          <iframe id="page-viewer-iframe" src="" referrerpolicy="no-referrer" frameborder="0" style="height:96%; width:100%"></iframe>
+        </div>
+      </div>
+
+      <div class="no-highlight popup" id="amendment-note-descriptors-container">
+        <div class="textarea-header no-highlight popup-header">
+          <span class="window-title">Amendment Note Builder</span>
+          <span class="window-close-btn" onclick="hide('amendment-note-descriptors-container');"><i class="bi bi-x"></i></span>
+        </div>
+        <div class="amendment-note-descriptors-content">
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-100" id="usintro" title="The 2022 amendment by P. L. YYY-YYY">Amendment Note Intro Language</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-35" id="applicability" title="(applicable _____,">Applicable</button>
+            <button class="amendment-note-descriptors-btn btn-w-35" id="effectivity" title="(effective _____,">Effective</button>
+            <button class="amendment-note-descriptors-btn btn-w-30" id="effectivityandapplicability" title="(effective and applicable">E & A</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-60" id="providedbyPL" title="as provided by § __ of P.L. ___-___,">provided... of P.L.</button>
+            <button class="amendment-note-descriptors-btn btn-w-40" id="providedbysuchAct" title="as provided by § __ of such Act,">of such Act</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-50" id="tothissection" title="which appears as a note to this section),">to this section</button>
+            <button class="amendment-note-descriptors-btn btn-w-50" id="uscssectionnote" title="which appears as __ USCS § __ note),">USCS § note</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-100 btn-green" id='addedthe(*)designation' title="added the (*) designation">added the (*) designation</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-80 btn-green" id='added“”' title="added “”">added “ ”</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-green" id='“”**' title="double curly quotes">+</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-80" id='substituted“”for“”' title="substituted “” for “”">substituted “ ” for “ ”</button>
+            <button class="amendment-note-descriptors-btn btn-w-20" id='“”for“”' title="“” for “”">+</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-80 btn-red" id='deleted“”following“”' title="deleted “” following “”">deleted “ ” following “ ”</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-red" id='“”following“”' title="“” following “”">+</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-80 btn-red" id='deleted“”preceding“”' title="deleted “” preceding “”">deleted “ ” preceding “ ”</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-red" id='“”preceding“”' title="“” preceding “”">+</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-50 btn-red" id='deletedformer(*)' title="deleted former (*)">del former (*)</button>
+            <button class="amendment-note-descriptors-btn btn-w-50 btn-red" id='whichread:“”' title=", which read: “”">, which read: “ ”</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-40" id='redesignatedformer(*)as(*)' title="redesignated former (*) as (*)">redesignated</button>
+            <button class="amendment-note-descriptors-btn btn-w-20" id='redesignatedformer(*)and(*)as(*)and(*)' title="redesignated former (*) and (*) as (*) and (*)">and</button>
+            <button class="amendment-note-descriptors-btn btn-w-40" id='redesignatedformer(*)through(*)as(*)through(*)' title="redesignated former (*) through (*) as (*) through (*)">through</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-100" id='redesignatedandrewroteformer(*)as(*)' title="redesignated and rewrote former (*) as (*)">redesig and rewrote former (*) as (*)</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-30" id='rewrote' title="rewrote">rewrote</button>
+            <button class="amendment-note-descriptors-btn btn-w-70" id='whichformerlyread:“”' title=", which formerly read: “”">, which formerly read:“”</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-50 btn-blue" id='intheintroductorylanguage' title="in the introductory language">introductory</button>
+            <button class="amendment-note-descriptors-btn btn-w-50 btn-blue" id='intheconcludinglanguage' title="in the concluding language">concluding</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-50 btn-blue" id='atthebeginning' title="at the beginning">at the beginning</button>
+            <button class="amendment-note-descriptors-btn btn-w-50 btn-blue" id='attheend' title="at the end">at the end</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-25 btn-blue" id='twice' title="twice">twice</button>
+            <button class="amendment-note-descriptors-btn btn-w-40 btn-blue" id='throughout' title="throughout">throughout</button>
+            <button class="amendment-note-descriptors-btn btn-w-35 btn-blue" id='throughoutthesection' title="throughout the section">...section</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-blue" id='newfirst' title="first">first</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-blue" id='newsecond' title="second">2</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-blue" id='newthird' title="third">3</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-blue" id='newfourth' title="fourth">4</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-blue" id='newlast' title="last">last</button>
+          </div>
+          <div class="amendment-note-descriptors-row">
+            <button class="amendment-note-descriptors-btn btn-w-30 btn-blue" id='sentence' title="sentence">sentence</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-blue" id='newsentences' title="sentences">ss</button>
+            <button class="amendment-note-descriptors-btn btn-w-30 btn-blue" id='paragraph' title="paragraph">para</button>
+            <button class="amendment-note-descriptors-btn btn-w-20 btn-blue" id='newparagraphs' title="paragraphs">ps</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-highlight popup" id="amendment-note-designators-container">
+        <div class="textarea-header no-highlight popup-header">
+          <span class="window-close-btn" onclick="hide('amendment-note-designators-container');"><i class="bi bi-x"></i></span>
+        </div>
+        <div class="amendment-note-designators-content">
+          <div>
+            <button id='sectionheading' class="amendment-note-designators-btn" title="section heading">section heading</button>
+            <button id='subsectionheading' class="amendment-note-designators-btn" title="subsection heading">subsection heading</button>
+            <button id='subparagraphheading' class="amendment-note-designators-btn" title="subparagraph heading">subparagraph heading</button>
+            <button id='concludingcomma' class="amendment-note-designators-btn" title="and">comma</button>
+            <button id=';and' class="amendment-note-designators-btn" title="and">; and</button>
+            <button id='concludingsemicolon' class="amendment-note-designators-btn" title="concluding semicolon">conc. ;</button>
+            <button id='concludingperiod' class="amendment-note-designators-btn" title="concluding period">conc. .</button>
+          </div>
+          <div>
+            <button id='added' class="amendment-note-designators-btn btn-green" title="added">added</button>
+            <button id='deleted' class="amendment-note-designators-btn btn-red" title="deleted">deleted</button>
+            <button id='and' class="amendment-note-designators-btn btn-blue" title="and">and</button>
+            <button id='in' class="amendment-note-designators-btn btn-blue" title="in">in</button>
+            <button id='of' class="amendment-note-designators-btn btn-blue" title="of">of</button>
+            <button id='articlea' class="amendment-note-designators-btn btn-blue" title="a">a</button>
+            <button id='the' class="amendment-note-designators-btn btn-blue" title="the">the</button>
+            <button id='through' class="amendment-note-designators-btn btn-blue" title="through">through</button>
+            <button id='former' class="amendment-note-designators-btn btn-blue" title="former">former</button>
+            <button id='designation' class="amendment-note-designators-btn btn-blue" title="designation">designation</button>
+            &nbsp;
+            <button id=';' class="amendment-note-designators-btn" title="semicolon">&nbsp;&nbsp;;&nbsp;&nbsp;</button>
+            <button id=',' class="amendment-note-designators-btn" title="comma">&nbsp;&nbsp;,&nbsp;&nbsp;</button>
+            <button id='.' class="amendment-note-designators-btn" title="period">&nbsp;&nbsp;.&nbsp;&nbsp;</button>
+            <button id='“”' class="amendment-note-designators-btn" title="double curly quotes">“”</button>
+            <button id='‘' class="amendment-note-designators-btn" title="single curly open quote">&nbsp;‘&nbsp;</button>
+            <button id='’' class="amendment-note-designators-btn" title="single curly close quote">&nbsp;’&nbsp;</button>
+            <button id='§' class="amendment-note-designators-btn" title="section symbol">§</button>
+            &nbsp;
+          </div>
+          <div>
+            <button id='(a)' class="amendment-note-designators-btn">(a)</button>
+            <button id='(b)' class="amendment-note-designators-btn">(b)</button>
+            <button id='(c)' class="amendment-note-designators-btn">(c)</button>
+            <button id='(d)' class="amendment-note-designators-btn">(d)</button>
+            <button id='(e)' class="amendment-note-designators-btn">(e)</button>
+            <button id='(f)' class="amendment-note-designators-btn">(f)</button>
+            <button id='(g)' class="amendment-note-designators-btn">(g)</button>
+            <button id='(h)' class="amendment-note-designators-btn">(h)</button>
+            <button id='*(i)' class="amendment-note-designators-btn">(i)</button>
+            <button id='(j)' class="amendment-note-designators-btn">(j)</button>
+            <button id='(k)' class="amendment-note-designators-btn">(k)</button>
+            <button id='(l)' class="amendment-note-designators-btn">(l)</button>
+            <button id='(m)' class="amendment-note-designators-btn">(m)</button>
+            <button id='(n)' class="amendment-note-designators-btn">(n)</button>
+            <button id='(o)' class="amendment-note-designators-btn">(o)</button>
+            <button id='(p)' class="amendment-note-designators-btn">(p)</button>
+            <button id='(q)' class="amendment-note-designators-btn">(q)</button>
+            <button id='(r)' class="amendment-note-designators-btn">(r)</button>
+            <button id='(s)' class="amendment-note-designators-btn">(s)</button>
+            <button id='(t)' class="amendment-note-designators-btn">(t)</button>
+            <button id='(u)' class="amendment-note-designators-btn">(u)</button>
+          </div>
+          <div>
+            <button id='(1)' class="amendment-note-designators-btn">(1)</button>
+            <button id='(2)' class="amendment-note-designators-btn">(2)</button>
+            <button id='(3)' class="amendment-note-designators-btn">(3)</button>
+            <button id='(4)' class="amendment-note-designators-btn">(4)</button>
+            <button id='(5)' class="amendment-note-designators-btn">(5)</button>
+            <button id='(6)' class="amendment-note-designators-btn">(6)</button>
+            <button id='(7)' class="amendment-note-designators-btn">(7)</button>
+            <button id='(8)' class="amendment-note-designators-btn">(8)</button>
+            <button id='(9)' class="amendment-note-designators-btn">(9)</button>
+            <button id='(10)' class="amendment-note-designators-btn">(10)</button>
+            <button id='(11)' class="amendment-note-designators-btn">(11)</button>
+            <button id='(12)' class="amendment-note-designators-btn">(12)</button>
+            <button id='(13)' class="amendment-note-designators-btn">(13)</button>
+            <button id='(14)' class="amendment-note-designators-btn">(14)</button>
+            <button id='(15)' class="amendment-note-designators-btn">(15)</button>
+            <button id='(16)' class="amendment-note-designators-btn">(16)</button>
+            <button id='(17)' class="amendment-note-designators-btn">(17)</button>
+            <button id='(18)' class="amendment-note-designators-btn">(18)</button>
+            <button id='(19)' class="amendment-note-designators-btn">(19)</button>
+          </div>
+          <div>
+            <button id='(A)' class="amendment-note-designators-btn">(A)</button>
+            <button id='(B)' class="amendment-note-designators-btn">(B)</button>
+            <button id='(C)' class="amendment-note-designators-btn">(C)</button>
+            <button id='(D)' class="amendment-note-designators-btn">(D)</button>
+            <button id='(E)' class="amendment-note-designators-btn">(E)</button>
+            <button id='(F)' class="amendment-note-designators-btn">(F)</button>
+            <button id='(G)' class="amendment-note-designators-btn">(G)</button>
+            <button id='(H)' class="amendment-note-designators-btn">(H)</button>
+            <button id='(I)' class="amendment-note-designators-btn">(I)</button>
+            <button id='(J)' class="amendment-note-designators-btn">(J)</button>
+            &nbsp;
+            <button id='(i)' class="amendment-note-designators-btn">(i)</button>
+            <button id='(ii)' class="amendment-note-designators-btn">(ii)</button>
+            <button id='(iii)' class="amendment-note-designators-btn">(iii)</button>
+            <button id='(iv)' class="amendment-note-designators-btn">(iv)</button>
+            <button id='(v)' class="amendment-note-designators-btn">(v)</button>
+            &nbsp;
+            <button id='(I)**' class="amendment-note-designators-btn">(I)</button>
+            <button id='(II)' class="amendment-note-designators-btn">(II)</button>
+            <button id='(III)' class="amendment-note-designators-btn">(III)</button>
+            <button id='(IV)' class="amendment-note-designators-btn">(IV)</button>
+            <button id='(V)' class="amendment-note-designators-btn">(V)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-tab-content" id="prod-calculator-tab">
+      <span class="refresh-iframe-btn" data-ifr-src="#prod-calculator-loader" title="Refresh Page Data"><i class="bi bi-arrow-clockwise"></i></span>
+      <div class="frame-header">
+        <input class="iframe-source-link-input" value="eden/tools/prod-calculator" disabled type="text">
+      </div>
+      <iframe class="frame-container" id="prod-calculator-loader" data-src="eden/tools/prod-calculator.html" src="" referrerpolicy="no-referrer" frameborder="0" style="width: 97%; height: 98%; position: relative;"></iframe>
+    </div>
+
+    <div class="sidebar-tab-content" id="textarea-history-tab">
+      <h3 class="no-highlight">Session Logs</h3>
+      <h4 class="mb-1 no-highlight">Upper Textarea</h4>
+      <textarea id="history-tab-upper-textarea" data-font-changeable="true" readonly></textarea>
+      <h4 class="mb-1 no-highlight">Lower Textarea</h4>
+      <textarea id="history-tab-lower-textarea" data-font-changeable="true" readonly></textarea>
+    </div>
+
+    <div class="sidebar-tab-content" id="settings-tab">
+      <div class="settings-header">
+        <div>Prompt</div>
+        <input id="closing-window-prompt-checkbox" type="checkbox">
+        <label for="closing-window-prompt-checkbox">Enable Closing Window Prompt</label>
+        <hr>
+        <span id="storage-info"></span>
+        <hr>
+        <input class="no-enter" id="tracker-logs-date" type="date">
+        <input class="no-enter" id="tracker-logs-initials" data-save-local="true" placeholder="legal ID" type="text">
+        <button id="tracker-logs-switch-btn">Switch Order</button>
+        <hr>
+        <button onclick="deleteLocalLinks()">Delete Local Links</button>
+        <hr>
+        <button onclick="systemLogout();">Log out</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="resources-window collapse popup" id="resources-container">
+    <div class="textarea-header no-highlight">
+      <span class="window-title">Resources</span>
+      <span class="window-close-btn" onclick="hide('resources-container');"><i class="bi bi-x"></i></span>
+    </div>
+    <div class="resources-window-content">
+    </div>
+  </section>
+
+  <section class="collapse" id="command-line-container">
+    <div id="assist-terminal">
+      <div id="command-output"></div>
+      <input id="command-input" spellcheck="false" type="text">
+    </div>
+  </section>
+
+  <section id="window-spinner">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </section>
+
+  <div id="sticky-note-container"></div>
+  <template id="sticky-note-template">
+    <div class="sticky-note-content popup">
+      <div class="popup-header sticky-note-drag"></div>
+      <div class="sticky-note">
+        <i class="delete-note-button bi bi-trash-fill" title="Delete note"></i>
+        <textarea class="note-text" data-font-changeable="true" placeholder="Write something..."></textarea>
+      </div>
+    </div>
+  </template>
+
+  <script src="assets/js/links-json-data.js"></script>
+  <script src="assets/js/build-json-data.js"></script>
+  <script src="assets/js/dark-mode.js"></script>
+  <script src="assets/js/terminal.js"></script>
+  <script src="assets/js/us-main.js"></script>
+  <script src="assets/js/us-main-insert.js"></script>
+  <script src="assets/js/@master.js"></script>
+
+</body>
+
+</html>

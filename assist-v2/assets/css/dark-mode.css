@@ -1,0 +1,81 @@
+#editor-tab.dark-mode {
+  background-color: #252526;
+}
+
+.editor-card.dark-mode {
+  background-color: #3e3e42;
+  border: 1px solid #1e1e1e;
+  box-shadow: 0px 5px 15px -3px #333;
+}
+
+.textarea-header.dark-mode {
+  border-bottom: 1px solid #252528;
+}
+
+.editor-navbar-tabs.dark-mode:hover,
+.editor-navbar-tabs.dark-mode:active,
+.editor-navbar-tabs.dark-mode:focus,
+.editor-navbar-dropdown.dark-mode:hover .editor-navbar-tabs.dark-mode {
+  color: #ddd;
+  background-color: #2e2e30;
+}
+
+#upper-textarea.dark-mode, #lower-textarea.dark-mode {
+  background-color: #252526;
+  border-left: none;
+  border-right: none;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+#upper-textarea.dark-mode {
+  border-top: 1px solid #4f4f51;
+  border-bottom: 1px solid #4f4f51;
+}
+
+#lower-textarea.dark-mode {
+  border-top: 1px solid #4f4f51;
+  border-bottom: none
+}
+
+#upper-textarea.dark-mode::placeholder, #lower-textarea.dark-mode::placeholder {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+.uscs-builder.dark-mode {
+  background-color: #3e3e42;
+  border: 1px solid #1e1e1e;
+  box-shadow: 0px 5px 15px -3px #333;
+}
+
+.uscs-builder-card.dark-mode {
+  border: 1px solid #555;
+}
+
+.uscs-builder-content.dark-mode {
+  color: rgba(255, 255, 255, 0.70);
+}
+
+.uscs-builder-content.dark-mode a {
+  color: #4b6e91;
+}
+
+.uscs-builder-content.dark-mode button {
+  background-color: #4b6e91;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.uscs-builder-content.dark-mode select {
+  border: 1px solid #4f4f51;
+  background-color: #252526;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.uscs-builder-content.dark-mode input {
+  border: 1px solid #4f4f51;
+  background-color: #252526;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.uscs-builder-content.dark-mode input::placeholder {
+  color: rgba(255, 255, 255, 0.60);
+}
